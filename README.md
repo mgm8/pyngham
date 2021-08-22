@@ -1,14 +1,18 @@
 # PyNGHam
 
-<p align="center">
-    <a href="https://github.com/mgm8/pyngham/actions">
-        <img src="https://img.shields.io/github/workflow/status/mgm8/pyngham/Test?style=for-the-badge">
-    </a>
-</p>
+<a href="https://pypi.org/project/pyngham/">
+    <img src="https://img.shields.io/pypi/v/pyngham?style=for-the-badge">
+</a>
+<a href="https://pypi.org/project/pyngham/">
+    <img src="https://img.shields.io/pypi/pyversions/pyngham?style=for-the-badge">
+</a>
+<a href="https://github.com/mgm8/pyngham/actions">
+    <img src="https://img.shields.io/github/workflow/status/mgm8/pyngham/Test?style=for-the-badge">
+</a>
 
 ## Overview
 
-The PyNGHAm library is a Python version of the original NGHam protocol library written in C by Jon Petter Skagmo (LA3JPA).
+The PyNGHam library is a Python version of the original NGHam protocol library written in C by Jon Petter Skagmo (LA3JPA).
 
 The original implementation and a further description of the protocol can be found [here](https://github.com/skagmo/ngham).
 
