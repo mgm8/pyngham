@@ -1,5 +1,11 @@
 # PyNGHam
 
+<p align="center">
+    <a href="https://github.com/mgm8/pyngham/actions">
+        <img src="https://img.shields.io/github/workflow/status/mgm8/pyngham/Test?style=for-the-badge">
+    </a>
+</p>
+
 ## Overview
 
 The PyNGHAm library is a Python version of the original NGHam protocol library written in C by Jon Petter Skagmo (LA3JPA).
