@@ -3,10 +3,10 @@
 <a href="https://pypi.org/project/pyngham/">
     <img src="https://img.shields.io/pypi/v/pyngham?style=for-the-badge">
 </a>
-<a href="https://github.com/mgm8/pyngham/actions">
+<a href="https://pypi.org/project/pyngham/">
     <img src="https://img.shields.io/pypi/pyversions/pyngham?style=for-the-badge">
 </a>
-<a href="https://pypi.org/project/pyngham/">
+<a href="https://github.com/mgm8/pyngham/actions">
     <img src="https://img.shields.io/github/workflow/status/mgm8/pyngham/Test?style=for-the-badge">
 </a>
 
