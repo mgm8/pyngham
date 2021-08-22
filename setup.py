@@ -7,7 +7,7 @@
 # 
 # This file is part of PyNGHam library.
 # 
-# PyNGHamlibrary is free software: you can redistribute it and/or modify
+# PyNGHam library is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Lesser General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
@@ -47,7 +47,7 @@ setuptools.setup(
     long_description_content_type   = "text/markdown",
     platforms                       = ["Linux"],
     classifiers                     = [
-        "Development Status :: 1 - Planning",
+        "Development Status :: 5 - Production/Stable",
         "Environment :: Console",
         "Intended Audience :: Developers",
         "Intended Audience :: Education",
@@ -56,9 +56,7 @@ setuptools.setup(
         "Intended Audience :: Telecommunications Industry",
         "License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)",
         "Natural Language :: English",
-        "Operating System :: MacOS",
-        "Operating System :: POSIX :: Linux",
-        "Operating System :: Microsoft :: Windows",
+        "Operating System :: OS Independent",
         "Programming Language :: Python :: 3",
         "Topic :: Communications :: Ham Radio",
         "Topic :: Education",
@@ -68,6 +66,6 @@ setuptools.setup(
         ],
     download_url                    = "https://github.com/mgm8/pyngham/releases",
     packages                        = setuptools.find_packages(),
-    install_requires                = ['reedsolo'],
+    install_requires                = ['crc','reedsolo'],
     cmdclass                        = {'build_sphinx': BuildDoc},
 )
