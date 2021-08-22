@@ -1,10 +1,8 @@
 # PyNGHam
 
-<p align="center">
-    <a href="https://github.com/mgm8/pyngham/actions">
-        <img src="https://img.shields.io/github/workflow/status/mgm8/pyngham/Test?style=for-the-badge">
-    </a>
-</p>
+<a href="https://github.com/mgm8/pyngham/actions">
+    <img src="https://img.shields.io/github/workflow/status/mgm8/pyngham/Test?style=for-the-badge">
+</a>
 
 ## Overview
 

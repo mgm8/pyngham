@@ -51,7 +51,6 @@ setuptools.setup(
         "Environment :: Console",
         "Intended Audience :: Developers",
         "Intended Audience :: Education",
-        "Intended Audience :: Information Industry",
         "Intended Audience :: Science/Research",
         "Intended Audience :: Telecommunications Industry",
         "License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)",
