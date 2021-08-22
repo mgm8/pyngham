@@ -45,6 +45,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Install dependencies
+        run: sudo apt install -y sphinx-common sphinx-rtd-theme-common
+
       - name: Install PyNGHam
         run: sudo python setup.py install
 
