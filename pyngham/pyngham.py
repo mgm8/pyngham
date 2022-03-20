@@ -1,7 +1,7 @@
 #
 # pyngham.py
 # 
-# Copyright (C) 2021, Gabriel Mariano Marcelino - PU5GMA <gabriel.mm8@gmail.com>
+# Copyright (C) 2022, Gabriel Mariano Marcelino - PU5GMA <gabriel.mm8@gmail.com>
 # 
 # This file is part of PyNGHam library.
 # 
@@ -22,7 +22,7 @@
 
 
 from crc import CrcCalculator, Configuration
-from reedsolo import RSCodec
+from pyngham.rs import RS
 
 # There are seven different sizes
 # Each size has a correlation tag for size, a total size, a maximum payload size and a parity data size
@@ -95,8 +95,14 @@ class PyNGHam:
         self._decoder_state = _PYNGHAM_STATE_SIZE_TAG
         self._decoder_buf = list()
 
-        self._rsc_16 = RSCodec(16)
-        self._rsc_32 = RSCodec(32)
+        self._rsc = list()
+        self._rsc.append(RS(8, 0x187, 112, 11, 16, _PYNGHAM_PL_PAR_SIZES[-1] - _PYNGHAM_PL_PAR_SIZES[0]))
+        self._rsc.append(RS(8, 0x187, 112, 11, 16, _PYNGHAM_PL_PAR_SIZES[-1] - _PYNGHAM_PL_PAR_SIZES[1]))
+        self._rsc.append(RS(8, 0x187, 112, 11, 16, _PYNGHAM_PL_PAR_SIZES[-1] - _PYNGHAM_PL_PAR_SIZES[2]))
+        self._rsc.append(RS(8, 0x187, 112, 11, 32, _PYNGHAM_PL_PAR_SIZES[-1] - _PYNGHAM_PL_PAR_SIZES[3]))
+        self._rsc.append(RS(8, 0x187, 112, 11, 32, _PYNGHAM_PL_PAR_SIZES[-1] - _PYNGHAM_PL_PAR_SIZES[4]))
+        self._rsc.append(RS(8, 0x187, 112, 11, 32, _PYNGHAM_PL_PAR_SIZES[-1] - _PYNGHAM_PL_PAR_SIZES[5]))
+        self._rsc.append(RS(8, 0x187, 112, 11, 32, _PYNGHAM_PL_PAR_SIZES[-1] - _PYNGHAM_PL_PAR_SIZES[6]))
 
     def __str__(self):
         return 'NGHam Protocol Handler'
@@ -159,12 +165,7 @@ class PyNGHam:
         pkt = pkt + (_PYNGHAM_PL_SIZES_FULL[size_nr]-len(pl)-3)*[0x00]
 
         # Insert parity data
-        if _PYNGHAM_PAR_SIZES[size_nr] == 16:
-            pkt = pkt + list(self._rsc_16.encode(pkt[codeword_start:]))[len(pkt)-11:]
-        elif _PYNGHAM_PAR_SIZES[size_nr] == 32:
-            pkt = pkt + list(self._rsc_32.encode(pkt[codeword_start:]))[len(pkt)-11:]
-        else:
-            pkt = pkt + list(self._rsc_16.encode(pkt[codeword_start:]))[len(pkt)-11:]
+        pkt = pkt + self._rsc[size_nr].encode(pkt[codeword_start:])
 
         # Scramble
         for i in range(_PYNGHAM_PL_PAR_SIZES[size_nr]):
@@ -227,23 +228,17 @@ class PyNGHam:
             if len(self._decoder_buf) == _PYNGHAM_PL_PAR_SIZES[self._decoder_size_nr]:
                 self._decoder_state = _PYNGHAM_STATE_SIZE_TAG
 
-                pl = list()
-                pl_par = list()
                 errors = list()
+                pl = list()
 
-                if _PYNGHAM_PAR_SIZES[self._decoder_size_nr] == 16:
-                    pl, pl_par, errors = self._rsc_16.decode(self._decoder_buf)
-                elif _PYNGHAM_PAR_SIZES[self._decoder_size_nr] == 32:
-                    pl, pl_par, errors = self._rsc_32.decode(self._decoder_buf)
-                else:
-                    pl, pl_par, errors = self._rsc_16.decode(self._decoder_buf)
+                errors, pl = self._rsc[self._decoder_size_nr].decode(self._decoder_buf, [0], 0)
 
                 pl = list(pl[1:])
                 pl = pl[:_PYNGHAM_PL_SIZES[self._decoder_size_nr] - (self._decoder_buf[0] & _PYNGHAM_PADDING_BM)]
 
                 # Check if the packet is decodeable and then if CRC is OK
                 if CrcCalculator(Configuration(16, 0x1021, 0xFFFF, 0xFFFF, True, True)).verify_checksum(self._decoder_buf[:len(pl)+1], (self._decoder_buf[len(pl)+1] << 8) | self._decoder_buf[len(pl)+2]):
-                    return pl, len(errors)
+                    return pl, errors
                 else:
                     return list(), -1
 
