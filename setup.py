@@ -45,7 +45,7 @@ setuptools.setup(
     description                     = "PyNGHam library",
     long_description                = long_description,
     long_description_content_type   = "text/markdown",
-    platforms                       = ["Linux"],
+    platforms                       = ["Linux", "Windows", "Solaris", "Mac OS-X", "Unix"],
     classifiers                     = [
         "Development Status :: 5 - Production/Stable",
         "Environment :: Console",
