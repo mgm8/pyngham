@@ -85,10 +85,10 @@ class RS:
         # Find prim-th root of 1, used in decoding
         iprim = 1
         while(1):
-            if iprim % prim != 0:
+            if (iprim % prim == 0):
                 break
             iprim = iprim + self._nn
-        self._iprim = math.floor(iprim / prim)
+        self._iprim = int(iprim / prim)
 
         self._genpoly[0] = 1
         root = fcr * prim
@@ -170,7 +170,7 @@ class RS:
                 if (s[i] == 0):
                     s[i] = data[j]
                 else:
-                    s[i] = data[j] ^ self._alpha_to[self._modnn(self._index_of[s[i]] + (self._fcr + i) * self._prim)];
+                    s[i] = data[j] ^ self._alpha_to[self._modnn(self._index_of[s[i]] + (self._fcr + i) * self._prim)]
 
         # Convert syndromes to index form, checking for nonzero condition
         syn_error = 0
@@ -229,7 +229,7 @@ class RS:
                         # 2 lines below: B(x) <-- x*B(x)
                         b.insert(0, self._nn)
                     _lambda = t[:self._nroots + 1]
-                r += 1
+                r = r + 1
 
             # Convert lambda to index form and compute deg(lambda(x))
             deg_lambda = 0
@@ -254,7 +254,8 @@ class RS:
                 root[count] = i
                 loc[count] = k
                 # If we've already found max possible roots, abort the search to save time
-                if (++count == deg_lambda):
+                count = count + 1
+                if (count == deg_lambda):
                     break
                 k = self._modnn(k + self._iprim)
             if (deg_lambda != count):
@@ -288,8 +289,9 @@ class RS:
                         data[loc[j] - self._pad] = data[loc[j] - self._pad] ^ self._alpha_to[self._modnn(self._index_of[num1] + self._index_of[num2] + self._nn - self._index_of[den])]
 
         if (eras_pos != None):
+            eras_pos = [0] * count
             for i in range(count):
                 eras_pos[i] = loc[i]
         retval = count
 
-        return retval, data
+        return data, retval, eras_pos
