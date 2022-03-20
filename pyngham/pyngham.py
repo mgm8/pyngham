@@ -181,11 +181,11 @@ class PyNGHam:
             pkt = pkt[16:]
 
         for byte in pkt:
-            pl, errors = self.decode_byte(byte)
+            pl, errors, err_pos = self.decode_byte(byte)
             if len(pl) > 0:
-                return pl, errors
+                return pl, errors, err_pos
 
-        return list(), -1   # -1 = Error! Impossible to decode the packet!
+        return list(), -1, list()   # -1 = Error! Impossible to decode the packet!
 
     def decode_byte(self, byte):
         if self._decoder_state == _PYNGHAM_STATE_SIZE_TAG:
@@ -193,13 +193,13 @@ class PyNGHam:
 
             self._decoder_state = self._decoder_state + 1
 
-            return list(), 0
+            return list(), 0, list()
         elif self._decoder_state == _PYNGHAM_STATE_SIZE_TAG_2:
             self._decoder_size_tag = self._decoder_size_tag << 8
             self._decoder_size_tag = self._decoder_size_tag | byte
             self._decoder_state = self._decoder_state + 1
 
-            return list(), 0
+            return list(), 0, list()
         elif self._decoder_state == _PYNGHAM_STATE_SIZE_TAG_3:
             self._decoder_size_tag = self._decoder_size_tag << 8
             self._decoder_size_tag = self._decoder_size_tag | byte
@@ -217,9 +217,9 @@ class PyNGHam:
             if self._decoder_state != _PYNGHAM_STATE_SIZE_KNOWN:
                 self._decoder_state = _PYNGHAM_STATE_SIZE_TAG
 
-                return list(), 0
+                return list(), 0, list()
 
-            return list(), 0
+            return list(), 0, list()
         elif self._decoder_state == _PYNGHAM_STATE_SIZE_KNOWN:
             # De-scramble
             self._decoder_buf.append(byte ^ _PYNGHAM_CCSDS_POLY[len(self._decoder_buf)])
@@ -230,16 +230,17 @@ class PyNGHam:
 
                 errors = list()
                 pl = list()
+                err_pos = list()
 
-                errors, pl = self._rsc[self._decoder_size_nr].decode(self._decoder_buf, [0], 0)
+                pl, errors, err_pos = self._rsc[self._decoder_size_nr].decode(self._decoder_buf, [0], 0)
 
                 pl = list(pl[1:])
                 pl = pl[:_PYNGHAM_PL_SIZES[self._decoder_size_nr] - (self._decoder_buf[0] & _PYNGHAM_PADDING_BM)]
 
                 # Check if the packet is decodeable and then if CRC is OK
                 if CrcCalculator(Configuration(16, 0x1021, 0xFFFF, 0xFFFF, True, True)).verify_checksum(self._decoder_buf[:len(pl)+1], (self._decoder_buf[len(pl)+1] << 8) | self._decoder_buf[len(pl)+2]):
-                    return pl, errors
+                    return pl, errors, err_pos
                 else:
-                    return list(), -1
+                    return list(), -1, list()
 
-            return list(), 0
+            return list(), 0, list()
