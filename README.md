@@ -16,12 +16,9 @@ The PyNGHam library is a Python version of the original NGHam protocol library w
 
 The original implementation and a further description of the protocol can be found [here](https://github.com/skagmo/ngham).
 
-> NOTE: For now, this implementation uses a different Reed Solomon configuration from the original library.
-
 ## Dependencies
 
 * crc
-* reedsolo
 
 ## Installing
 
