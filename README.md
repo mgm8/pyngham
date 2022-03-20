@@ -6,6 +6,9 @@
 <a href="https://pypi.org/project/pyngham/">
     <img src="https://img.shields.io/pypi/pyversions/pyngham?style=for-the-badge">
 </a>
+<a href="https://github.com/mgm8/pyngham/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/mgm8/pyngham?style=for-the-badge">
+</a>
 <a href="https://github.com/mgm8/pyngham/actions">
     <img src="https://img.shields.io/github/workflow/status/mgm8/pyngham/Test?style=for-the-badge">
 </a>
@@ -18,7 +21,7 @@ The original implementation and a further description of the protocol can be fou
 
 ## Dependencies
 
-* crc
+* [crc](https://pypi.org/project/crc/)
 
 ## Installing
 
