@@ -1,7 +1,7 @@
 #
 # conf.py
 # 
-# Copyright (C) 2021, Gabriel Mariano Marcelino - PU5GMA <gabriel.mm8@gmail.com>
+# Copyright (C) 2022, Gabriel Mariano Marcelino - PU5GMA <gabriel.mm8@gmail.com>
 # 
 # This file is part of PyNGHam library.
 # 
@@ -32,18 +32,14 @@ import sys
 
 import sphinx_rtd_theme
 
-from pyngham.version import __version__
-
-sys.path.insert(0, os.path.abspath('../pyngham'))
-
 # -- Project information -----------------------------------------------------
 
 project = 'pyngham'
-copyright = '2021, Gabriel Mariano Marcelino - PU5GMA'
+copyright = '2022, Gabriel Mariano Marcelino - PU5GMA'
 author = 'Gabriel Mariano Marcelino'
 
 # The full version, including alpha/beta/rc tags
-release = __version__
+release = "0.2"
 
 
 # -- General configuration ---------------------------------------------------
