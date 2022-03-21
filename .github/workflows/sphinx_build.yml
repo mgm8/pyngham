@@ -1,4 +1,4 @@
-name: Sphinx documentation build
+name: Pull Request Docs Check
 
 on: [pull_request]
 
