@@ -12,9 +12,9 @@ jobs:
     # Standard drop-in approach that should work for most people.
     - uses: ammaraskar/sphinx-action@master
       with:
-        doc-folder: "doc/"
+        docs-folder: "docs/"
     # Create an artifact of the html output.
     - uses: actions/upload-artifact@v1
       with:
         name: DocumentationHTML
-        path: doc/_build/html/
+        path: docs/_build/html/
