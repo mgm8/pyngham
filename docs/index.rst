@@ -11,5 +11,10 @@ Overview
 ========
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
 
+   overview
+   protocol
+   install
+   usage
+   packaging

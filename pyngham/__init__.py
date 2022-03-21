@@ -1,7 +1,7 @@
 #
 # __init__.py
 # 
-# Copyright (C) 2021, Gabriel Mariano Marcelino - PU5GMA <gabriel.mm8@gmail.com>
+# Copyright (C) 2022, Gabriel Mariano Marcelino - PU5GMA <gabriel.mm8@gmail.com>
 # 
 # This file is part of PyNGHam library.
 # 
@@ -22,4 +22,5 @@
 
 
 from pyngham.pyngham import PyNGHam
+from pyngham.rs import RS
 from pyngham.version import __version__

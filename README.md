@@ -6,6 +6,9 @@
 <a href="https://pypi.org/project/pyngham/">
     <img src="https://img.shields.io/pypi/pyversions/pyngham?style=for-the-badge">
 </a>
+<a href="https://github.com/mgm8/pyngham/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/mgm8/pyngham?style=for-the-badge">
+</a>
 <a href="https://github.com/mgm8/pyngham/actions">
     <img src="https://img.shields.io/github/workflow/status/mgm8/pyngham/Test?style=for-the-badge">
 </a>
@@ -16,12 +19,9 @@ The PyNGHam library is a Python version of the original NGHam protocol library w
 
 The original implementation and a further description of the protocol can be found [here](https://github.com/skagmo/ngham).
 
-> NOTE: For now, this implementation uses a different Reed Solomon configuration from the original library.
-
 ## Dependencies
 
-* crc
-* reedsolo
+* [crc](https://pypi.org/project/crc/)
 
 ## Installing
 
@@ -32,6 +32,8 @@ Or, from the source files:
 * ```python setup.py install```
 
 ## Documentation
+
+The documentation page is available [here](https://mgm8.github.io/pyngham/). Instructions to build the documentation page are described below.
 
 ### Dependencies
 

@@ -3,7 +3,7 @@
 #
 # setup.py
 # 
-# Copyright (C) 2021, Gabriel Mariano Marcelino - PU5GMA <gabriel.mm8@gmail.com>
+# Copyright (C) 2022, Gabriel Mariano Marcelino - PU5GMA <gabriel.mm8@gmail.com>
 # 
 # This file is part of PyNGHam library.
 # 
@@ -45,7 +45,7 @@ setuptools.setup(
     description                     = "PyNGHam library",
     long_description                = long_description,
     long_description_content_type   = "text/markdown",
-    platforms                       = ["Linux"],
+    platforms                       = ["Linux", "Windows", "Solaris", "Mac OS-X", "Unix"],
     classifiers                     = [
         "Development Status :: 5 - Production/Stable",
         "Environment :: Console",
@@ -65,6 +65,6 @@ setuptools.setup(
         ],
     download_url                    = "https://github.com/mgm8/pyngham/releases",
     packages                        = setuptools.find_packages(),
-    install_requires                = ['crc','reedsolo'],
+    install_requires                = ['crc'],
     cmdclass                        = {'build_sphinx': BuildDoc},
 )

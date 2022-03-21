@@ -1,7 +1,7 @@
 #
 # test.py
 # 
-# Copyright (C) 2021, Gabriel Mariano Marcelino - PU5GMA <gabriel.mm8@gmail.com>
+# Copyright (C) 2022, Gabriel Mariano Marcelino - PU5GMA <gabriel.mm8@gmail.com>
 # 
 # This file is part of PyNGHam library.
 # 
@@ -30,14 +30,31 @@ def main(args):
     pngh = PyNGHam()
 
     for i in range(1, 220+1):
+        # Generating random packet payload
         pl = list()
         for j in range(i):
             pl.append(randrange(256))
-    
+
+        # Encoding the packet
         pkt = pngh.encode(pl)
 
-        dec_pl, errors = pngh.decode(pkt)
-    
+        # Maximum allowed number of errors
+        num_err = int()
+        if (i < (159 + 8 + 3)):
+            num_err = int(16/2) - 1
+        else:
+            num_err = int(32/2) - 1
+
+        # Randomly adding error bits
+        for j in range(num_err):
+            err_byte = randrange(8 + 3, 8 + 3 + i)
+            err_bit = randrange(8)
+            byte_with_err = 1 << err_bit
+            pkt[err_byte] = pkt[err_byte] ^ byte_with_err
+
+        # Trying to decode the packet with errors
+        dec_pl, errors, err_loc = pngh.decode(pkt)
+
         if (pl != dec_pl):
             print("FAILURE!")
             print("Error encoding/decoding a packet!")
