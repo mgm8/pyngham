@@ -33,6 +33,8 @@ Or, from the source files:
 
 ## Documentation
 
+The documentation page is available [here](https://mgm8.github.io/pyngham/). Instructions to build the documentation page are described below.
+
 ### Dependencies
 
 * sphinx-rtd-theme
