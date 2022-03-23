@@ -165,7 +165,7 @@ class RS:
         for i in range(self._nroots):
             s[i] = data[0]
 
-        for j in range(self._nn - self._pad):
+        for j in range(1, self._nn - self._pad):
             for i in range(self._nroots):
                 if (s[i] == 0):
                     s[i] = data[j]
@@ -178,7 +178,7 @@ class RS:
             syn_error = syn_error | s[i]
             s[i] = self._index_of[s[i]]
 
-        if (syn_error == 0):
+        if (not syn_error):
             # if syndrome is zero, data[] is a codeword and there are no errors to correct. So return data[] unmodified
             count = 0;
         else:

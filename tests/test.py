@@ -41,9 +41,9 @@ def main(args):
         # Maximum allowed number of errors
         num_err = int()
         if (i < (159 + 8 + 3)):
-            num_err = int(16/2) - 1
+            num_err = int(16/2)
         else:
-            num_err = int(32/2) - 1
+            num_err = int(32/2)
 
         # Randomly adding error bits
         for j in range(num_err):

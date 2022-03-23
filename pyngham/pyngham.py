@@ -228,8 +228,8 @@ class PyNGHam:
             if len(self._decoder_buf) == _PYNGHAM_PL_PAR_SIZES[self._decoder_size_nr]:
                 self._decoder_state = _PYNGHAM_STATE_SIZE_TAG
 
-                errors = list()
                 pl = list()
+                errors = int()
                 err_pos = list()
 
                 pl, errors, err_pos = self._rsc[self._decoder_size_nr].decode(self._decoder_buf, [0], 0)
