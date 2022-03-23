@@ -7,7 +7,9 @@
 PyNGHam Library Documentation
 =============================
 
-Overview
+The PyNGHam library is a Python version of the original NGHam protocol library written in C by Jon Petter Skagmo (LA3JPA).
+
+Contents
 ========
 
 .. toctree::

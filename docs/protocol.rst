@@ -133,6 +133,14 @@ This field is reserved for the computed parity bytes of the Reed-Solomon coding 
 | 7             | RS(255, 233)             | 32               |
 +---------------+--------------------------+------------------+
 
+For the Reed-Solomon framing, the following configuration is used:
+
+* **Symbol size**: 8
+* **GF polynomial**: 0x187 (coefficients form)
+* **First root of RS code generator polynomial**: 112 (index form)
+* **Primitive element**: 11
+* **Number of roots**: 16 or 32 (table above)
+
 Scrambling
 ==========
 
@@ -141,6 +149,9 @@ Before transmitting a packet, the RS code block is scrambled by making a byte xo
 When the receiver received a packet, it also perform the same operation to de-scramble the RS code block and get the original content of the RS part of the packet.
 
 By scrambling the packets, long sequence of ones or zeros are avoided, by guarantying a good bit transition along the whole packet. More information about packet scrambling (or randomization) can be found in [7]_ (section 8.3).
+
+References
+==========
 
 .. [1] https://github.com/skagmo/ngham/blob/master/documentation/ngham_manual.pdf
 .. [2] http://www.ax25.net/
