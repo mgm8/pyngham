@@ -25,9 +25,11 @@ The original implementation and a further description of the protocol can be fou
 
 ## Installing
 
+This library is available in the PyPI repository, and can be installed with the following command:
+
 * ```pip3 install pyngham```
 
-Or, from the source files:
+Or, directly from the source files:
 
 * ```python setup.py install```
 
@@ -37,9 +39,11 @@ The documentation page is available [here](https://mgm8.github.io/pyngham/). Ins
 
 ### Dependencies
 
-* sphinx-rtd-theme
+* [sphinx-rtd-theme](https://pypi.org/project/sphinx-rtd-theme/)
 
 ### Building the Documentation
+
+The documentation pages can be built with Sphinx:
 
 * ```python setup.py build_sphinx```
 
@@ -50,13 +54,19 @@ The usage of the library is pretty straightforward, after the initialization, th
 ```
 from pyngham import PyNGHam
 
+pngh = PyNGHam()
+
 data = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
-pkt = PyNGHam().encode(data)
+pkt = pngh.encode(data)
 
-pl, errors = PyNGHam().decode(pkt)
+print("Encoded packet:", pkt)
 
-print(pl)
+pl, errors, errors_pos = pngh.decode(pkt)
+
+print("Decoded data:", pl)
+print("Number of errors:", errors)
+print("Errors positions:", errors_pos)
 ```
 
 ## License
