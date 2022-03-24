@@ -51,7 +51,7 @@ The documentation pages can be built with Sphinx:
 
 The usage of the library is pretty straightforward, after the initialization, there are two methods: one to encode a list of bytes, and other to decode a packet. Below there is a basic usage example:
 
-```
+```python
 from pyngham import PyNGHam
 
 pngh = PyNGHam()
