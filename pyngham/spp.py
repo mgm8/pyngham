@@ -1,5 +1,5 @@
 #
-# version.py
+# spp.py
 # 
 # Copyright (C) 2022, Gabriel Mariano Marcelino - PU5GMA <gabriel.mm8@gmail.com>
 # 
@@ -21,11 +21,31 @@
 #
 
 
-__author__      = "Gabriel Mariano Marcelino - PU5GMA"
-__copyright__   = "Copyright (C) 2022, Gabriel Mariano Marcelino"
-__credits__     = ["Gabriel Mariano Marcelino - PU5GMA"]
-__license__     = "LGPLv3"
-__version__     = "0.3.1"
-__maintainer__  = "Gabriel Mariano Marcelino - PU5GMA"
-__email__       = "gabriel.mm8@gmail.com"
-__status__      = "Production"
+# Seria Port Protocol packets types
+_PYNGHAM_SPP_TYPE_RX            = 0
+_PYNGHAM_SPP_TYPE_TX            = 1
+_PYNGHAM_SPP_TYPE_LOCAL         = 2
+_PYNGHAM_SPP_TYPE_CMD           = 3
+
+# Packet start byte definition
+_PYNGHAM_SPP_START              = 0x24
+
+# States
+_PYNGHAM_SPP_STATE_START        = 0
+_PYNGHAM_SPP_STATE_HEADER       = 1
+_PYNGHAM_SPP_STATE_PAYLOAD      = 2
+
+
+class PyNGHamSPP:
+
+    def __init__(self):
+        pass
+
+    def encode(self, pl, pkt_type, flags):
+        pass
+
+    def decode(self, pkt):
+        pass
+
+    def decode_byte(self, c):
+        pass
