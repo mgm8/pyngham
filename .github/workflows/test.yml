@@ -29,13 +29,12 @@ on:
   pull_request:
     branches: [ master, dev ]
 
-  # 'workflow_dispatch' allows manual execution
-  # of this workflow under the repository's 'Actions' tab
+  # 'workflow_dispatch' allows manual execution of this workflow under the repository's 'Actions' tab
   workflow_dispatch:
 
 jobs:
 
-  test:
+  rf-pkt-test:
     name: RF packet encoding/decoding test
     runs-on: ubuntu-latest
 
@@ -51,7 +50,7 @@ jobs:
       - name: Execute the test
         run: python tests/test.py
 
-  test:
+  spp-pkt-test:
     name: SPP packet encoding/decoding test
     runs-on: ubuntu-latest
 
