@@ -25,10 +25,10 @@ import time
 from crc import CrcCalculator, Configuration
 
 # Seria Port Protocol packets types
-_PYNGHAM_SPP_TYPE_RX            = 0     # RF RX packet
-_PYNGHAM_SPP_TYPE_TX            = 1     # RF TX packet
-_PYNGHAM_SPP_TYPE_LOCAL         = 2     # Local packet
-_PYNGHAM_SPP_TYPE_CMD           = 3     # Command packet
+PYNGHAM_SPP_TYPE_RX             = 0     # RF RX packet
+PYNGHAM_SPP_TYPE_TX             = 1     # RF TX packet
+PYNGHAM_SPP_TYPE_LOCAL          = 2     # Local packet
+PYNGHAM_SPP_TYPE_CMD            = 3     # Command packet
 
 # Packet start byte definition
 _PYNGHAM_SPP_START              = 0x24  # '$' in ASCII
@@ -130,7 +130,7 @@ class PyNGHamSPP:
         pl.append(symbol_errors)        # Number of corrected Reed Solomon symbols
         pl.append(flags)                # Bit 0: NGHam extension enabled. If this bit is set, the data field is a valid NGHam extension packet
 
-        return self.encode(_PYNGHAM_SPP_TYPE_RX, pl + data)
+        return self.encode(PYNGHAM_SPP_TYPE_RX, pl + data)
 
     def encode_tx_pkt(self, flags, data):
         """
@@ -146,7 +146,7 @@ class PyNGHamSPP:
         +----------+-----------------+--------------------------------------+
         """
 
-        return self.encode(_PYNGHAM_SPP_TYPE_TX, [flags] + data)
+        return self.encode(PYNGHAM_SPP_TYPE_TX, [flags] + data)
 
     def encode_cmd_pkt(self, cmd):
         """
@@ -161,7 +161,7 @@ class PyNGHamSPP:
         +----------+-----------------+-------------------------------------+
         """
 
-        return self.encode(_PYNGHAM_SPP_TYPE_CMD, cmd)
+        return self.encode(PYNGHAM_SPP_TYPE_CMD, cmd)
 
     def encode_local_pkt(self, flags, data):
         """
@@ -177,15 +177,15 @@ below describes what is put into the payload of the general packet format.
         +----------+-----------------+--------------------------------------+
         """
 
-        return self.encode(_PYNGHAM_SPP_TYPE_LOCAL, [flags] + data)
+        return self.encode(PYNGHAM_SPP_TYPE_LOCAL, [flags] + data)
 
     def decode(self, pkt):
         for byte in pkt:
-            pkt_type, pkt_pl = self.decode_byte(byte)
-            if len(pkt_pl) > 0:
-                return pkt_type, pkt_pl
+            dec_pkt = self.decode_byte(byte)
+            if dec_pkt:
+                return dec_pkt
 
-        return -1, list()   # -1 = Error! Impossible to decode the packet!
+        return dict()   # Error! Impossible to decode the packet!
 
     def decode_byte(self, c):
         if self._state == _PYNGHAM_SPP_STATE_START:
@@ -210,11 +210,44 @@ below describes what is put into the payload of the general packet format.
 
                 self._state = _PYNGHAM_SPP_STATE_START
 
+                pkt = dict()
+
                 if ((crc_val >> 8) == self._rx_buffer[0]) and ((crc_val & 0xFF) == self._rx_buffer[1]):
-                    return self._rx_buffer[2], self._rx_buffer[4:]
-                else:
-                    return -1, list()
+                    if self._rx_buffer[2] == PYNGHAM_SPP_TYPE_RX:
+                        pkt = {
+                            "type" :            self._rx_buffer[2],
+                            "timestamp" :       (self._rx_buffer[4] << 24) | (self._rx_buffer[5] << 16) | (self._rx_buffer[6] << 8) | self._rx_buffer[7],
+                            "noise_floor" :     self._rx_buffer[8] - 200,
+                            "rssi" :            self._rx_buffer[9] - 200,
+                            "symbol_errors" :   self._rx_buffer[10],
+                            "flags" :           self._rx_buffer[11],
+                            "payload" :         self._rx_buffer[12:]
+                        }
+                    elif self._rx_buffer[2] == PYNGHAM_SPP_TYPE_TX:
+                        pkt = {
+                            "type" :            self._rx_buffer[2],
+                            "flags" :           self._rx_buffer[4],
+                            "payload" :         self._rx_buffer[5:]
+                        }
+                    elif self._rx_buffer[2] == PYNGHAM_SPP_TYPE_LOCAL:
+                        pkt = {
+                            "type" :            self._rx_buffer[2],
+                            "flags" :           self._rx_buffer[4],
+                            "payload" :         self._rx_buffer[5:]
+                        }
+                    elif self._rx_buffer[2] == PYNGHAM_SPP_TYPE_CMD:
+                        pkt = {
+                            "type" :            self._rx_buffer[2],
+                            "payload" :         self._rx_buffer[4:]
+                        }
+                    else:
+                        pkt = {
+                            "type" :            self._rx_buffer[2],
+                            "payload" :         self._rx_buffer[4:]
+                        }
+
+                return pkt
         else:
             self._state = _PYNGHAM_SPP_STATE_START  # Unexpected, return to start state
 
-        return -1, list()
+        return dict()
