@@ -34,9 +34,11 @@ _PYNGHAM_SPP_TYPE_CMD           = 3     # Command packet
 _PYNGHAM_SPP_START              = 0x24  # '$' in ASCII
 
 # States
-_PYNGHAM_SPP_STATE_START        = 0
-_PYNGHAM_SPP_STATE_HEADER       = 1
-_PYNGHAM_SPP_STATE_PAYLOAD      = 2
+_PYNGHAM_SPP_STATE_START        = 0     # Decoder in start flag field
+_PYNGHAM_SPP_STATE_HEADER       = 1     # Decoder in header field
+_PYNGHAM_SPP_STATE_PAYLOAD      = 2     # Decoder in payload field
+
+_PYNGHAM_SPP_RX_BUFFER_MAX_SIZE = 1024
 
 
 class PyNGHamSPP:
@@ -46,6 +48,7 @@ class PyNGHamSPP:
 
     def __init__(self):
         self._state = _PYNGHAM_SPP_STATE_START
+        self._rx_buffer = list()
 
     def encode(self, pkt_type, pl):
         """
@@ -177,7 +180,41 @@ below describes what is put into the payload of the general packet format.
         return self.encode(_PYNGHAM_SPP_TYPE_LOCAL, [flags] + data)
 
     def decode(self, pkt):
-        pass
+        for byte in pkt:
+            pkt_type, pkt_pl = self.decode_byte(byte)
+            if len(pkt_pl) > 0:
+                return pkt_type, pkt_pl
+
+        return -1, list()   # -1 = Error! Impossible to decode the packet!
 
     def decode_byte(self, c):
-        pass
+        if self._state == _PYNGHAM_SPP_STATE_START:
+            if c == _PYNGHAM_SPP_START:
+                self._state = _PYNGHAM_SPP_STATE_HEADER
+            self._rx_buffer = []
+        elif self._state == _PYNGHAM_SPP_STATE_HEADER:
+			# Fill RX buffer with header. No check for size, as buffer is much larger than header (5B)
+            self._rx_buffer.append(c)
+
+            if len(self._rx_buffer) >= 5:
+                self._state = _PYNGHAM_SPP_STATE_PAYLOAD
+        elif self._state == _PYNGHAM_SPP_STATE_PAYLOAD:
+			# Fill RX buffer with payload
+            if len(self._rx_buffer) < _PYNGHAM_SPP_RX_BUFFER_MAX_SIZE:
+                self._rx_buffer.append(c)
+
+			# If received length has met target length (set in STATE_HEADER)
+            if len(self._rx_buffer) == (2 + 1 + 1 + self._rx_buffer[3]):
+                # Check checksum
+                crc_val = CrcCalculator(Configuration(16, 0x1021, 0xFFFF, 0xFFFF, True, True)).calculate_checksum(self._rx_buffer[2:])
+
+                self._state = _PYNGHAM_SPP_STATE_START
+
+                if ((crc_val >> 8) == self._rx_buffer[0]) and ((crc_val & 0xFF) == self._rx_buffer[1]):
+                    return self._rx_buffer[2], self._rx_buffer[4:]
+                else:
+                    return -1, list()
+        else:
+            self._state = _PYNGHAM_SPP_STATE_START  # Unexpected, return to start state
+
+        return -1, list()
