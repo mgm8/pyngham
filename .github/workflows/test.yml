@@ -51,4 +51,4 @@ jobs:
         run: sudo python setup.py install
 
       - name: Execute the test
-        run: pytest tests/
+        run: pytest-3 tests/
