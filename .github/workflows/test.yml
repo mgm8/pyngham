@@ -34,8 +34,8 @@ on:
 
 jobs:
 
-  rf-pkt-test:
-    name: RF packet encoding/decoding test
+  unit-tests:
+    name: Unit tests
     runs-on: ubuntu-latest
 
     strategy:
@@ -45,29 +45,10 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Install dependencies
-        run: sudo apt install -y sphinx-common sphinx-rtd-theme-common
+        run: sudo apt install -y sphinx-common sphinx-rtd-theme-common python3-pytest
 
       - name: Install PyNGHam
         run: sudo python setup.py install
 
       - name: Execute the test
-        run: python tests/test.py
-
-  spp-pkt-test:
-    name: SPP packet encoding/decoding test
-    runs-on: ubuntu-latest
-
-    strategy:
-      fail-fast: false
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Install dependencies
-        run: sudo apt install -y sphinx-common sphinx-rtd-theme-common
-
-      - name: Install PyNGHam
-        run: sudo python setup.py install
-
-      - name: Execute the test
-        run: python tests/spp_test.py
+        run: pytest tests/

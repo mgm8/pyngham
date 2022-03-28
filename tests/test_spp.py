@@ -1,5 +1,5 @@
 #
-# spp_test.py
+# test_spp.py
 # 
 # Copyright (C) 2022, Gabriel Mariano Marcelino - PU5GMA <gabriel.mm8@gmail.com>
 # 
@@ -24,9 +24,7 @@
 import pyngham
 from random import randrange
 
-def main(args):
-    print("Testing the SPP of the PyNGHam library...")
-
+def test_spp_pkt():
     spp = pyngham.PyNGHamSPP()
 
     pl = list()
@@ -34,7 +32,6 @@ def main(args):
         pl.append(randrange(256))
 
     # RX SPP packet
-    print("Encoding/Decoding a RX packet...", end='')
     noise_floor = randrange(-50, 0)
     rssi = randrange(-100, 30)
     errors = randrange(16)
@@ -43,56 +40,37 @@ def main(args):
 
     data = spp.decode(rx_pkt)
 
-    if (data["type"] == pyngham.PYNGHAM_SPP_TYPE_RX) and (data["noise_floor"] == noise_floor) and (data["rssi"] == rssi) and (data["symbol_errors"] == errors) and (data["flags"] == flags) and (data["payload"] == pl):
-        print("SUCCESS!")
-    else:
-        print("FAILURE!")
-
-        return -1
+    assert data["type"] == pyngham.PYNGHAM_SPP_TYPE_RX
+    assert data["noise_floor"] == noise_floor
+    assert data["rssi"] == rssi
+    assert data["symbol_errors"] == errors
+    assert data["flags"] == flags
+    assert data["payload"] == pl
 
     # TX packet
-    print("Encoding/Decoding a TX packet...", end='')
     flags = 0
     tx_pkt = spp.encode_tx_pkt(flags, pl)
 
     data = spp.decode(tx_pkt)
 
-    if (data["type"] == pyngham.PYNGHAM_SPP_TYPE_TX) and (data["flags"] == flags) and (data["payload"] == pl):
-        print("SUCCESS!")
-    else:
-        print("FAILURE!")
-
-        return -1
+    assert data["type"] == pyngham.PYNGHAM_SPP_TYPE_TX
+    assert data["flags"] == flags
+    assert data["payload"] == pl
 
     # CMD packet
-    print("Encoding/Decoding a CMD packet...", end='')
     cmd_pkt = spp.encode_cmd_pkt(pl)
 
     data = spp.decode(cmd_pkt)
 
-    if (data["type"] == pyngham.PYNGHAM_SPP_TYPE_CMD) and (data["payload"] == pl):
-        print("SUCCESS!")
-    else:
-        print("FAILURE!")
-
-        return -1
+    assert data["type"] == pyngham.PYNGHAM_SPP_TYPE_CMD
+    assert data["payload"] == pl
 
     # Local packet
-    print("Encoding/Decoding a local packet...", end='')
     flags = 0
     local_pkt = spp.encode_local_pkt(flags, pl)
 
     data = spp.decode(local_pkt)
 
-    if (data["type"] == pyngham.PYNGHAM_SPP_TYPE_LOCAL) and (data["flags"] == flags) and (data["payload"] == pl):
-        print("SUCCESS!")
-    else:
-        print("FAILURE!")
-
-        return -1
-
-    return 0
-
-if __name__ == '__main__':
-    import sys
-    sys.exit(main(sys.argv))
+    assert data["type"] == pyngham.PYNGHAM_SPP_TYPE_LOCAL
+    assert data["flags"] == flags
+    assert data["payload"] == pl
