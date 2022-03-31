@@ -17,6 +17,7 @@ Contents
 
    overview
    protocol
+   spp
    install
    usage
    packaging
