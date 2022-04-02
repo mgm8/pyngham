@@ -12,7 +12,12 @@ Overview
 Packet Fields
 =============
 
-.
+.. figure:: ngham-spp-pkt.png
+      :width: 100%
+      :align: center
+      :alt: NGHam SPP packet format
+
+      Fig. Format of a NGHam SPP packet.
 
 References
 ==========
