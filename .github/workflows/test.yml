@@ -1,7 +1,7 @@
 #
 # test.yml
 # 
-# Copyright (C) 2021, Gabriel Mariano Marcelino - PU5GMA <gabriel.mm8@gmail.com>
+# Copyright (C) 2022, Gabriel Mariano Marcelino - PU5GMA <gabriel.mm8@gmail.com>
 # 
 # This file is part of PyNGHam library.
 # 
@@ -25,9 +25,9 @@ name: Unit tests
 
 on:
   push:
-    branches: [ dev ]
+    branches: [dev]
   pull_request:
-    branches: [ master, dev ]
+    branches: [main, dev]
 
   # 'workflow_dispatch' allows manual execution of this workflow under the repository's 'Actions' tab
   workflow_dispatch:
