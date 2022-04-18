@@ -26,8 +26,6 @@
 import setuptools
 import os
 
-from sphinx.setup_command import BuildDoc
-
 exec(open('pyngham/version.py').read())
 
 with open("README.md", "r") as fh:
@@ -66,5 +64,4 @@ setuptools.setup(
     download_url                    = "https://github.com/mgm8/pyngham/releases",
     packages                        = setuptools.find_packages(),
     install_requires                = ['crc'],
-    cmdclass                        = {'build_sphinx': BuildDoc},
 )
