@@ -39,13 +39,14 @@ The documentation page is available [here](https://mgm8.github.io/pyngham/). Ins
 
 ### Dependencies
 
+* [Sphinx](https://pypi.org/project/Sphinx/)
 * [sphinx-rtd-theme](https://pypi.org/project/sphinx-rtd-theme/)
 
 ### Building the Documentation
 
-The documentation pages can be built with Sphinx:
+The documentation pages can be built with Sphinx by running the following command inside the ``docs`` folder:
 
-* ```python setup.py build_sphinx```
+* ```make html```
 
 ## Usage Example
 
