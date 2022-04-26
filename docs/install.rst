@@ -6,7 +6,7 @@ The simplest way to install the PyNGHam library is doing it from the PyPI reposi
 
 ::
 
-    pip3 install pyngham
+    pip install pyngham
 
 It is also possible to install directly from source files available in the git repository [2]_:
 

@@ -1,5 +1,13 @@
 ===========================================
 
+v0.4 - 2022/04/26
+
+- Added support to the SPP
+- Using PyTest to execute the unit tests
+- General fixes and improvements
+
+===========================================
+
 v0.3 - 2022/03/23
 
 - Fixing the outputs of the decoder method

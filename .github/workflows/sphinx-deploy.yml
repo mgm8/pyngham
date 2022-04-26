@@ -2,9 +2,9 @@ name: Documentation deployment
 
 on:
   push:
-    branches: [master]
+    branches: [main]
   pull_request:
-    branches: [master]
+    branches: [main]
 
   # 'workflow_dispatch' allows manual execution of this workflow under the repository's 'Actions' tab
   workflow_dispatch:
@@ -23,7 +23,7 @@ jobs:
     # Create an artifact of the html output
     - uses: actions/upload-artifact@v1
       with:
-        name: DocumentationHTML
+        name: documentation_html
         path: docs/_build/html/
     # Publish built docs to gh-pages branch
     - name: Commit documentation changes

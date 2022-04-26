@@ -1,5 +1,5 @@
 #
-# test.py
+# test_rf.py
 # 
 # Copyright (C) 2022, Gabriel Mariano Marcelino - PU5GMA <gabriel.mm8@gmail.com>
 # 
@@ -24,9 +24,7 @@
 from pyngham import PyNGHam
 from random import randrange
 
-def main(args):
-    print("Testing the PyNGHam library...", end='')
-
+def test_rf_pkt():
     pngh = PyNGHam()
 
     for i in range(1, 220+1):
@@ -55,16 +53,6 @@ def main(args):
         # Trying to decode the packet with errors
         dec_pl, errors, err_loc = pngh.decode(pkt)
 
-        if (pl != dec_pl):
-            print("FAILURE!")
-            print("Error encoding/decoding a packet!")
-
-            return -1
-
-    print("SUCCESS!")
-
-    return 0
-
-if __name__ == '__main__':
-    import sys
-    sys.exit(main(sys.argv))
+        assert pl == dec_pl
+        assert errors > 0
+        assert len(err_loc) > 0
