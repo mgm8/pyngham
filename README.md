@@ -27,7 +27,7 @@ The original implementation and a further description of the protocol can be fou
 
 This library is available in the PyPI repository, and can be installed with the following command:
 
-* ```pip3 install pyngham```
+* ```pip install pyngham```
 
 Or, directly from the source files:
 
