@@ -17,7 +17,7 @@ bibliography: paper.bib
 
 # Summary
 
-The PyNGHam library is a Python version of the original NGHam protocol library written in C by Jon Petter Skagmo (LA3JPA).
+The PyNGHam library is a Python version of the original NGHam protocol library written in C by Jon Petter Skagmo (LA3JPA) [@ngham].
 
 # NGHam Protocol
 
@@ -46,11 +46,17 @@ The size tag field have seven different options, indicating seven different pack
 Size Num.   Tag             Reed-Solomon Config.    Max. Data Size
 ----------  --------------  ---------------------   ------------------------
 1           59, 73, 205     RS(47, 31)              up to 28 bytes of data
+
 2           77, 218, 87     RS(79, 63)              up to 60 bytes of data
+
 3           118, 147, 154   RS(111, 95)             up to 92 bytes of data
+
 4           155, 180, 174   RS(159, 127)            up to 124 bytes of data
+
 5           160, 253, 99    RS(191, 159)            up to 156 bytes of data
+
 6           214, 110, 249   RS(223, 191)            up to 188 bytes of data
+
 7           237, 39, 52     RS(255, 223)            up to 220 bytes of data
 ----------------------------------------------------------------------------
 
