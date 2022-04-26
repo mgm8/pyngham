@@ -39,8 +39,12 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="protocol.html">Protocol Description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spp.html">Serial Port Protocol</a></li>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Usage</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#serial-port-protocol-spp">Serial Port Protocol (SPP)</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="packaging.html">Packaging the Project</a></li>
 </ul>
 
@@ -139,6 +143,81 @@
 </pre></div>
 </div>
 <p>As can be seen from the final output, one error was detected on position 227, and the original message was fully restored.</p>
+<div class="section" id="serial-port-protocol-spp">
+<h2>Serial Port Protocol (SPP)<a class="headerlink" href="#serial-port-protocol-spp" title="Permalink to this headline"></a></h2>
+<p>To handle serial port packets, the procedure is very similar, as can be seen below:</p>
+<ol class="arabic simple">
+<li><p>Import the library:</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyngham</span>
+</pre></div>
+</div>
+<p>Or import only the SPP class:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyngham</span> <span class="kn">import</span> <span class="n">PyNGHamSPP</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>SPP initialization:</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">PyNGHamSPP</span><span class="p">()</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>To encode data, there is a command for each type of SPP packet. For example, a RX packet can be generated with the following command:</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">.</span><span class="n">encode_rx_pkt</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Generating a TX SPP packet:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">.</span><span class="n">encode_tx_pkt</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Generating a command SPP packet:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">.</span><span class="n">encode_cmd_pkt</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Generating a local SPP packet:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">.</span><span class="n">encode_local_pkt</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>The encode commands will return a list with the byte sequence of the desired packet.</p>
+<ol class="arabic simple" start="4">
+<li><p>To decode an SPP packet, the following command can be used:</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">pkt</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Or to decode byte by byte:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">.</span><span class="n">decode_byte</span><span class="p">(</span><span class="n">byte</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If successful, the decode command will return a dictionary with the decoded fields of the given packet.</p>
+<p>The sequence below exemplifies all the presented methods above:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pyngham</span> <span class="kn">import</span> <span class="n">PyNGHam</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">PyNGHamSPP</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rx_pkt</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">encode_rx_pkt</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">rx_pkt</span><span class="p">)</span>
+<span class="go">[36, 173, 98, 0, 13, 98, 73, 83, 25, 150, 190, 4, 0, 0, 1, 2, 3, 4]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">rx_pkt</span><span class="p">)</span>
+<span class="go">{&#39;type&#39;: 0, &#39;timestamp&#39;: 1648972569, &#39;noise_floor&#39;: -50, &#39;rssi&#39;: -10, &#39;symbol_errors&#39;: 4, &#39;flags&#39;: 0, &#39;payload&#39;: [0, 1, 2, 3, 4]}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tx_pkt</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">encode_tx_pkt</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">tx_pkt</span><span class="p">)</span>
+<span class="go">[36, 159, 78, 1, 6, 0, 0, 1, 2, 3, 4]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">tx_pkt</span><span class="p">)</span>
+<span class="go">{&#39;type&#39;: 1, &#39;flags&#39;: 0, &#39;payload&#39;: [0, 1, 2, 3, 4]}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cmd_pkt</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">encode_cmd_pkt</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">cmd_pkt</span><span class="p">)</span>
+<span class="go">[36, 245, 214, 3, 5, 0, 1, 2, 3, 4]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">cmd_pkt</span><span class="p">)</span>
+<span class="go">{&#39;type&#39;: 3, &#39;payload&#39;: [0, 1, 2, 3, 4]}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">local_pkt</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">encode_local_pkt</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">local_pkt</span><span class="p">)</span>
+<span class="go">[36, 21, 158, 2, 6, 0, 0, 1, 2, 3, 4]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">local_pkt</span><span class="p">)</span>
+<span class="go">{&#39;type&#39;: 2, &#39;flags&#39;: 0, &#39;payload&#39;: [0, 1, 2, 3, 4]}</span>
+</pre></div>
+</div>
+</div>
 </div>
 
 

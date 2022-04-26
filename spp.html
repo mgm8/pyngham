@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Serial Port Protocol &mdash; pyngham 0.3 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation" href="install.html" />
+    <link rel="prev" title="Protocol Description" href="protocol.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> pyngham
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="protocol.html">Protocol Description</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Serial Port Protocol</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#packet-fields">Packet Fields</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rf-rx-packet">RF RX Packet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rf-tx-packet">RF TX Packet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#local-packet">Local Packet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#command-cmd-packet">Command (CMD) Packet</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="packaging.html">Packaging the Project</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">pyngham</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Serial Port Protocol</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/spp.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="serial-port-protocol">
+<h1>Serial Port Protocol<a class="headerlink" href="#serial-port-protocol" title="Permalink to this headline"></a></h1>
+<p>This section presents the Serial Port Protocol (SPP) of the NGHam <a class="footnote-reference brackets" href="#id2" id="id1">1</a>. It is a variation intended to be used over serial communications between radio and computer.</p>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h2>
+<p>This chapter describes the protocol used to transfer data and commands between the transceiver and the serial port host.</p>
+</div>
+<div class="section" id="packet-fields">
+<h2>Packet Fields<a class="headerlink" href="#packet-fields" title="Permalink to this headline"></a></h2>
+<p>In the diagram below, the fields of the SPP packets are illustrated.</p>
+<div class="figure align-center" id="id3">
+<a class="reference internal image-reference" href="_images/ngham-spp-pkt.png"><img alt="NGHam SPP packet format" src="_images/ngham-spp-pkt.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-text">Fig. Format of a NGHam SPP packet.</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
+</div>
+<p>The packet fields are better described in the table below.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 18%" />
+<col style="width: 65%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Name</strong></p></th>
+<th class="head"><p><strong>Size (Byte)</strong></p></th>
+<th class="head"><p><strong>Notes</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Star tag</p></td>
+<td><p>1</p></td>
+<td><p>Fixed as ‘$’.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CRC Size</p></td>
+<td><p>2</p></td>
+<td><p>16-bit CRC-CCITT (start=0xFFFF, polynomial=0x1021 reversed,
+Xorout=0xFFFF). Notice the use of little endian, as
+everything on this layer and up use little endian. CRC is
+calculated of everything except start tag and CRC itself.</p></td>
+</tr>
+<tr class="row-even"><td><p>Payload type</p></td>
+<td><p>1</p></td>
+<td><p>0x00=RF receive packet, 0x01=RF transmit packet,
+0x02=Local packet, 0x03=Command.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Payload length</p></td>
+<td><p>1</p></td>
+<td><p>Length of payload field.</p></td>
+</tr>
+<tr class="row-even"><td><p>Payload</p></td>
+<td><p>n</p></td>
+<td><p>This is the actual payload specified by the payload type.</p></td>
+</tr>
+</tbody>
+</table>
+<p>Next, there is a description of the fields of each SPP type of packet.</p>
+<div class="section" id="rf-rx-packet">
+<h3>RF RX Packet<a class="headerlink" href="#rf-rx-packet" title="Permalink to this headline"></a></h3>
+<p>Data received from RF link (from radio to host). Length from 4 to 223. The table below describes what is put into the payload of the general packet format.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 28%" />
+<col style="width: 16%" />
+<col style="width: 56%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Name</strong></p></th>
+<th class="head"><p><strong>Size (Byte)</strong></p></th>
+<th class="head"><p><strong>Notes</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Time of hour in microseconds</p></td>
+<td><p>4</p></td>
+<td><p>Local time of hour timestamp of the incoming packet.
+Wraps from 3599999999 (one step before 3600 seconds)
+to 0. N/A-value is 0xFFFFFFFF.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Noise floor</p></td>
+<td><p>1</p></td>
+<td><p>Subtract 200 to get dBm. Eg. 0x50 = -120 dBm. N/A is 0xFF.</p></td>
+</tr>
+<tr class="row-even"><td><p>RSSI</p></td>
+<td><p>1</p></td>
+<td><p>Same as above.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Symbol errors</p></td>
+<td><p>1</p></td>
+<td><p>Number of corrected Reed Solomon symbols.</p></td>
+</tr>
+<tr class="row-even"><td><p>Flags</p></td>
+<td><p>1</p></td>
+<td><p>Bit 0: NGHam extension enabled. If this bit is set, the
+data field is a valid NGHam extension packet.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Data</p></td>
+<td><p>n-8</p></td>
+<td><p>BReceived data.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="rf-tx-packet">
+<h3>RF TX Packet<a class="headerlink" href="#rf-tx-packet" title="Permalink to this headline"></a></h3>
+<p>Data to be transmitted on RF link (from host to radio). Length from 1 to 220. The table below describes what is put into the payload of the general packet format.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 26%" />
+<col style="width: 58%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Name</strong></p></th>
+<th class="head"><p><strong>Size (Byte)</strong></p></th>
+<th class="head"><p><strong>Notes</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Flags</p></td>
+<td><p>1</p></td>
+<td><p>Bit 0: NGHam extension enabled flag.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Data</p></td>
+<td><p>n-1 B</p></td>
+<td><p>Data to be transmitted.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="local-packet">
+<h3>Local Packet<a class="headerlink" href="#local-packet" title="Permalink to this headline"></a></h3>
+<p>Packet generated by the radio (not received over the air, from radio to host). For example a status report. The table below describes what is put into the payload of the general packet format.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 26%" />
+<col style="width: 58%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Name</strong></p></th>
+<th class="head"><p><strong>Size (Byte)</strong></p></th>
+<th class="head"><p><strong>Notes</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Flags</p></td>
+<td><p>1</p></td>
+<td><p>Bit 0: NGHam extension enabled flag.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Data</p></td>
+<td><p>n-1 B</p></td>
+<td><p>Data to be transmitted.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="command-cmd-packet">
+<h3>Command (CMD) Packet<a class="headerlink" href="#command-cmd-packet" title="Permalink to this headline"></a></h3>
+<p>This type of packet is used to enter commands. On the Owl VHF, this command will do the same as typing into the command-line interpreter, except the commands and replies are not terminated by LF/CR/CRLF. The table below describes what is put into the payload of the general packet format.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 20%" />
+<col style="width: 68%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Name</strong></p></th>
+<th class="head"><p><strong>Size (Byte)</strong></p></th>
+<th class="head"><p><strong>Notes</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Command</p></td>
+<td><p>n B</p></td>
+<td><p>Non-terminated command, as for example “FREQ 144800000”.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline"></a></h2>
+<dl class="footnote brackets">
+<dt class="label" id="id2"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p><a class="reference external" href="https://github.com/skagmo/ngham">https://github.com/skagmo/ngham</a></p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="protocol.html" class="btn btn-neutral float-left" title="Protocol Description" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="install.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Gabriel Mariano Marcelino - PU5GMA.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
