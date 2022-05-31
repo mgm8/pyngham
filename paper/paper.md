@@ -2,16 +2,19 @@
 title: 'PyNGHam: A Python library of the NGHam protocol'
 tags:
   - Python
+  - Telecommunications
   - Protocols
   - Ham Radio
 authors:
   - name: Gabriel Mariano Marcelino
     orcid: 0000-0003-4889-6021
-    affiliation: 1
+    affiliation: "1, 2"
 affiliations:
  - name: Space Technology Research Laboratory (SpaceLab), Universidade Federal de Santa Catarina
    index: 1
-date: 25 March 2022
+ - name: Senai Institute for Innovation in Embedded Systems (ISI-SE)
+   index: 2
+date: 30 May 2022
 bibliography: paper.bib
 ---
 
@@ -25,7 +28,7 @@ The NGHam protocol is a link protocol partly inspired by AX.25 [@ax25], with the
 
 A list of known satellites that used or plan to use the NGHam protocol are presented below:
 
-* **FloripaSat-1**
+* **FloripaSat-1** [@marcelino2020]
 * **GOLDS-UFSC (a.k.a. FloripaSat-2)**
 * **Catarina-A1**
 * **PION-BR1**
@@ -36,7 +39,7 @@ The top three satellites of the list above, are satellites developed (or in deve
 
 Figure \ref{fig:ngham-pkt} presents a diagram with the fields of a NGHam packet.
 
-![Fields of a NGHam packet.\label{fig:ngham-pkt}](docs/ngham-pkt.png)
+![Fields of a NGHam packet.\label{fig:ngham-pkt}](../docs/ngham-pkt.png)
 
 For a GMSK modulation at 9600 bps, a typical preamble sequenc would be 0xAAAAAAAA (a simple alternance of ones and zeros).
 
@@ -72,7 +75,7 @@ Inside de code block, there are two types of fields: the packet data and the par
 
 # Conclusion
 
-The objective of this library is to offer an alternative purely written Python for the original NGHam library. This way, this can be used in simulations, packet decoding and encoding software, telecommunication classes, and so far.
+The objective of this library is to offer an alternative purely written in Python for the original NGHam library. This way, this can be easily used in simulations, packet decoding and encoding software, telecommunication classes, and so on. Being useful especially for satellite communication and experiments running on space, and in general for the amateur radio community.
 
 # Acknowledgement
 
