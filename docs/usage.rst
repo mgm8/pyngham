@@ -152,7 +152,7 @@ The sequence below exemplifies all the presented methods above:
 
 .. code-block:: python
 
-    >>> from pyngham import PyNGHam
+    >>> from pyngham import PyNGHamSPP
     >>> x = PyNGHamSPP()
     >>> rx_pkt = x.encode_rx_pkt(-50, -10, 4, 0, [0, 1, 2, 3, 4])
     >>> print(rx_pkt)
