@@ -96,7 +96,7 @@ class PyNGHam:
 
         self._decoder_size_nr = int()
         self._decoder_size_tag = int()
-        self._decoder_state = State.SIZE_TAG
+        self._decoder_state = State.SIZE_TAG.value
         self._decoder_buf = list()
 
         self._rsc = list()
@@ -192,19 +192,19 @@ class PyNGHam:
         return list(), -1, list()   # -1 = Error! Impossible to decode the packet!
 
     def decode_byte(self, byte):
-        if self._decoder_state == State.SIZE_TAG:
+        if self._decoder_state == State.SIZE_TAG.value:
             self._decoder_size_tag = byte
 
             self._decoder_state = self._decoder_state + 1
 
             return list(), 0, list()
-        elif self._decoder_state == State.SIZE_TAG_2:
+        elif self._decoder_state == State.SIZE_TAG_2.value:
             self._decoder_size_tag = self._decoder_size_tag << 8
             self._decoder_size_tag = self._decoder_size_tag | byte
             self._decoder_state = self._decoder_state + 1
 
             return list(), 0, list()
-        elif self._decoder_state == State.SIZE_TAG_3:
+        elif self._decoder_state == State.SIZE_TAG_3.value:
             self._decoder_size_tag = self._decoder_size_tag << 8
             self._decoder_size_tag = self._decoder_size_tag | byte
 
@@ -213,24 +213,24 @@ class PyNGHam:
                 # If tag is intact, set known size
                 size_tag = (_PYNGHAM_SIZE_TAGS[self._decoder_size_nr][0] << 16) | (_PYNGHAM_SIZE_TAGS[self._decoder_size_nr][1] << 8) | _PYNGHAM_SIZE_TAGS[self._decoder_size_nr][2]
                 if self._tag_check(self._decoder_size_tag, size_tag):
-                    self._decoder_state = State.SIZE_KNOWN
+                    self._decoder_state = State.SIZE_KNOWN.value
                     self._decoder_buf = []
                     break
 
             # If size tag is not found, every size can theoretically be attempted
-            if self._decoder_state != State.SIZE_KNOWN:
-                self._decoder_state = State.SIZE_TAG
+            if self._decoder_state != State.SIZE_KNOWN.value:
+                self._decoder_state = State.SIZE_TAG.value
 
                 return list(), 0, list()
 
             return list(), 0, list()
-        elif self._decoder_state == State.SIZE_KNOWN:
+        elif self._decoder_state == State.SIZE_KNOWN.value:
             # De-scramble
             self._decoder_buf.append(byte ^ _PYNGHAM_CCSDS_POLY[len(self._decoder_buf)])
 
             # Run Reed Solomon decoding, calculate packet length
             if len(self._decoder_buf) == _PYNGHAM_PL_PAR_SIZES[self._decoder_size_nr]:
-                self._decoder_state = State.SIZE_TAG
+                self._decoder_state = State.SIZE_TAG.value
 
                 pl = list()
                 errors = int()
