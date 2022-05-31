@@ -40,7 +40,7 @@ def test_spp_pkt():
 
     data = spp.decode(rx_pkt)
 
-    assert data["type"] == pyngham.PYNGHAM_SPP_TYPE_RX
+    assert data["type"] == pyngham.SPPType.RX.value
     assert data["noise_floor"] == noise_floor
     assert data["rssi"] == rssi
     assert data["symbol_errors"] == errors
@@ -53,7 +53,7 @@ def test_spp_pkt():
 
     data = spp.decode(tx_pkt)
 
-    assert data["type"] == pyngham.PYNGHAM_SPP_TYPE_TX
+    assert data["type"] == pyngham.SPPType.TX.value
     assert data["flags"] == flags
     assert data["payload"] == pl
 
@@ -62,7 +62,7 @@ def test_spp_pkt():
 
     data = spp.decode(cmd_pkt)
 
-    assert data["type"] == pyngham.PYNGHAM_SPP_TYPE_CMD
+    assert data["type"] == pyngham.SPPType.CMD.value
     assert data["payload"] == pl
 
     # Local packet
@@ -71,6 +71,6 @@ def test_spp_pkt():
 
     data = spp.decode(local_pkt)
 
-    assert data["type"] == pyngham.PYNGHAM_SPP_TYPE_LOCAL
+    assert data["type"] == pyngham.SPPType.LOCAL.value
     assert data["flags"] == flags
     assert data["payload"] == pl
