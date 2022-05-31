@@ -21,6 +21,7 @@
 #
 
 
+from enum import Enum
 from crc import CrcCalculator, Configuration
 from pyngham.rs import RS
 
@@ -32,13 +33,16 @@ _PYNGHAM_PL_SIZES_FULL          = [31, 63, 95,  127, 159, 191, 223]
 _PYNGHAM_PL_PAR_SIZES           = [47, 79, 111, 159, 191, 223, 255]
 _PYNGHAM_PAR_SIZES              = [16, 16, 16,  32,  32,  32,  32]
 
-# Decoder states
-_PYNGHAM_STATE_SIZE_TAG         = 0
-_PYNGHAM_STATE_SIZE_TAG_2       = 1
-_PYNGHAM_STATE_SIZE_TAG_3       = 2
-_PYNGHAM_STATE_SIZE_KNOWN       = 3
-_PYNGHAM_STATE_STATUS           = 4
-_PYNGHAM_STATE_STATUS_2         = 5
+class State(Enum):
+    """
+    Decoder states.
+    """
+    SIZE_TAG         = 0
+    SIZE_TAG_2       = 1
+    SIZE_TAG_3       = 2
+    SIZE_KNOWN       = 3
+    STATUS           = 4
+    STATUS_2         = 5
 
 # The seven different size tag vectors
 _PYNGHAM_SIZE_TAGS              = [[0x3B, 0x49, 0xCD],
@@ -92,7 +96,7 @@ class PyNGHam:
 
         self._decoder_size_nr = int()
         self._decoder_size_tag = int()
-        self._decoder_state = _PYNGHAM_STATE_SIZE_TAG
+        self._decoder_state = State.SIZE_TAG
         self._decoder_buf = list()
 
         self._rsc = list()
@@ -188,19 +192,19 @@ class PyNGHam:
         return list(), -1, list()   # -1 = Error! Impossible to decode the packet!
 
     def decode_byte(self, byte):
-        if self._decoder_state == _PYNGHAM_STATE_SIZE_TAG:
+        if self._decoder_state == State.SIZE_TAG:
             self._decoder_size_tag = byte
 
             self._decoder_state = self._decoder_state + 1
 
             return list(), 0, list()
-        elif self._decoder_state == _PYNGHAM_STATE_SIZE_TAG_2:
+        elif self._decoder_state == State.SIZE_TAG_2:
             self._decoder_size_tag = self._decoder_size_tag << 8
             self._decoder_size_tag = self._decoder_size_tag | byte
             self._decoder_state = self._decoder_state + 1
 
             return list(), 0, list()
-        elif self._decoder_state == _PYNGHAM_STATE_SIZE_TAG_3:
+        elif self._decoder_state == State.SIZE_TAG_3:
             self._decoder_size_tag = self._decoder_size_tag << 8
             self._decoder_size_tag = self._decoder_size_tag | byte
 
@@ -209,24 +213,24 @@ class PyNGHam:
                 # If tag is intact, set known size
                 size_tag = (_PYNGHAM_SIZE_TAGS[self._decoder_size_nr][0] << 16) | (_PYNGHAM_SIZE_TAGS[self._decoder_size_nr][1] << 8) | _PYNGHAM_SIZE_TAGS[self._decoder_size_nr][2]
                 if self._tag_check(self._decoder_size_tag, size_tag):
-                    self._decoder_state = _PYNGHAM_STATE_SIZE_KNOWN
+                    self._decoder_state = State.SIZE_KNOWN
                     self._decoder_buf = []
                     break
 
             # If size tag is not found, every size can theoretically be attempted
-            if self._decoder_state != _PYNGHAM_STATE_SIZE_KNOWN:
-                self._decoder_state = _PYNGHAM_STATE_SIZE_TAG
+            if self._decoder_state != State.SIZE_KNOWN:
+                self._decoder_state = State.SIZE_TAG
 
                 return list(), 0, list()
 
             return list(), 0, list()
-        elif self._decoder_state == _PYNGHAM_STATE_SIZE_KNOWN:
+        elif self._decoder_state == State.SIZE_KNOWN:
             # De-scramble
             self._decoder_buf.append(byte ^ _PYNGHAM_CCSDS_POLY[len(self._decoder_buf)])
 
             # Run Reed Solomon decoding, calculate packet length
             if len(self._decoder_buf) == _PYNGHAM_PL_PAR_SIZES[self._decoder_size_nr]:
-                self._decoder_state = _PYNGHAM_STATE_SIZE_TAG
+                self._decoder_state = State.SIZE_TAG
 
                 pl = list()
                 errors = int()

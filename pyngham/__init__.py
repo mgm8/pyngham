@@ -23,5 +23,6 @@
 
 from pyngham.pyngham import PyNGHam
 from pyngham.rs import RS
-from pyngham.spp import PyNGHamSPP, PYNGHAM_SPP_TYPE_RX, PYNGHAM_SPP_TYPE_TX, PYNGHAM_SPP_TYPE_LOCAL, PYNGHAM_SPP_TYPE_CMD
+from pyngham.spp import PyNGHamSPP, SPPType
+#from pyngham.spp import PyNGHamSPP, PYNGHAM_SPP_TYPE_RX, PYNGHAM_SPP_TYPE_TX, PYNGHAM_SPP_TYPE_LOCAL, PYNGHAM_SPP_TYPE_CMD
 from pyngham.version import __version__
