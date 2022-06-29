@@ -20,7 +20,7 @@ bibliography: paper.bib
 
 # Summary
 
-The PyNGHam library is a Python version of the original NGHam protocol library written in C by Jon Petter Skagmo (LA3JPA) [@ngham].
+The PyNGHam library is a Python version of the original NGHam protocol library written in C by Jon Petter Skagmo (LA3JPA) [@ngham]. The NGHam protocol is amateur radio protocol developed to be a modern version of the AX.25 protocol, with the main improvement being the addition of a forward error correction (FEC) algorithm, which improves considerably the robustness of a communication link. Nowadays, one of the main usage of this protocol is on small satellites projects (specifically in CubeSats), as the protocol of the radio links between stations on Earth and a satellite. This Python implementation allows an easier integration and use of this protocol in computers and embedded devices.
 
 # NGHam Protocol
 
@@ -75,7 +75,7 @@ Inside de code block, there are two types of fields: the packet data and the par
 
 # Conclusion
 
-The objective of this library is to offer an alternative purely written in Python for the original NGHam library. This way, this can be easily used in simulations, packet decoding and encoding software, telecommunication classes, and so on. Being useful especially for satellite communication and experiments running on space, and in general for the amateur radio community.
+The objective of this library is to offer an alternative purely written in Python for the original NGHam library. This way, this can be easily used in simulations, packet decoding and encoding software, telecommunication classes, and so on. Being useful especially for satellite communication and experiments running on space, and in general for the amateur radio community. This library is already being used in the development of the satellites of the SpaceLab, specifically in the ground station software, that send telecommand and receives data to/from the satellites.
 
 # Acknowledgement
 
