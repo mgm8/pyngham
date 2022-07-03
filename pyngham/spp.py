@@ -27,7 +27,7 @@ from crc import CrcCalculator, Configuration
 
 class SPPType(Enum):
     """
-    Seria Port Protocol packets types.
+    Serial Port Protocol packets types.
     """
     RX      = 0             # RF RX packet
     TX      = 1             # RF TX packet

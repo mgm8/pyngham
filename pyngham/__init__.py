@@ -24,4 +24,5 @@
 from pyngham.pyngham import PyNGHam
 from pyngham.rs import RS
 from pyngham.spp import PyNGHamSPP, SPPType
+from pyngham.extension import PyNGHamExtension
 from pyngham.version import __version__
