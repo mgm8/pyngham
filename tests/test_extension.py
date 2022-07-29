@@ -89,13 +89,77 @@ def test_extension_stat_pkt():
     assert pl == exp_pl
 
 def test_extension_pos_pkt():
-    pass
+    ext = pyngham.PyNGHamExtension()
+
+    latitude    = randrange(2**31 - 1)
+    longitude   = randrange(2**31 - 1)
+    altitude    = randrange(2**31 - 1)
+    sog         = randrange(2**16 - 1)
+    cog         = randrange(2**16 - 1)
+    hdop        = randrange(2**8 - 1)
+
+    pl = list()
+
+    pl = ext.append_pos_pkt(pl, latitude, longitude, altitude, sog, cog, hdop)
+
+    exp_pl = list()
+
+    exp_pl.append(4)
+    exp_pl.append(17)
+    exp_pl.append((latitude >> 24) & 0xFF)
+    exp_pl.append((latitude >> 16) & 0xFF)
+    exp_pl.append((latitude >> 8) & 0xFF)
+    exp_pl.append(latitude & 0xFF)
+    exp_pl.append((longitude >> 24) & 0xFF)
+    exp_pl.append((longitude >> 16) & 0xFF)
+    exp_pl.append((longitude >> 8) & 0xFF)
+    exp_pl.append(longitude & 0xFF)
+    exp_pl.append((altitude >> 24) & 0xFF)
+    exp_pl.append((altitude >> 16) & 0xFF)
+    exp_pl.append((altitude >> 8) & 0xFF)
+    exp_pl.append(altitude & 0xFF)
+    exp_pl.append((sog >> 8) & 0xFF)
+    exp_pl.append(sog & 0xFF)
+    exp_pl.append((cog >> 8) & 0xFF)
+    exp_pl.append(cog & 0xFF)
+    exp_pl.append(hdop)
+
+    assert pl == exp_pl
 
 def test_extension_id_pkt():
-    pass
+    ext = pyngham.PyNGHamExtension()
+
+    call_ssid = list()
+    call_ssid.append(randrange(2**8 - 1))
+    call_ssid.append(randrange(2**8 - 1))
+    call_ssid.append(randrange(2**8 - 1))
+    call_ssid.append(randrange(2**8 - 1))
+    call_ssid.append(randrange(2**8 - 1))
+    call_ssid.append(randrange(2**8 - 1))
+    sequence = randrange(2**8 - 1)
+
+    pl = list()
+
+    pl = ext.append_id_pkt(pl, call_ssid, sequence)
+
+    assert pl == [1, 7] + call_ssid + [sequence]
 
 def test_extension_dest_pkt():
-    pass
+    ext = pyngham.PyNGHamExtension()
+
+    call_ssid = list()
+    call_ssid.append(randrange(2**8 - 1))
+    call_ssid.append(randrange(2**8 - 1))
+    call_ssid.append(randrange(2**8 - 1))
+    call_ssid.append(randrange(2**8 - 1))
+    call_ssid.append(randrange(2**8 - 1))
+    call_ssid.append(randrange(2**8 - 1))
+
+    pl = list()
+
+    pl = ext.append_dest_pkt(pl, call_ssid)
+
+    assert pl == [6, 6] + call_ssid
 
 def test_extension_encode_callsign():
     pass
