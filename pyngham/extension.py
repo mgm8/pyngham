@@ -29,29 +29,20 @@ class ExtPktType(Enum):
     """
     Extension packets types.
     """
-    DATA          = 0
-    ID            = 1
-    STAT          = 2
-    SIMPLEDIGI    = 3
-    POS           = 4
-    TOH           = 5
-    DEST          = 6     # Destination/receiver callsign
-    CMD_REQ       = 7     # Command packet
-    CMD_REPLY     = 8     # Command packet
-    REQUEST       = 9
+    DATA          = 0       # Generic data packet
+    ID            = 1       # ID packet
+    STAT          = 2       # Status packet
+    SIMPLEDIGI    = 3       # Simple digi packet
+    POS           = 4       # Position data packet
+    TOH           = 5       # Time info packet
+    DEST          = 6       # Destination/receiver callsign
+    CMD_REQ       = 7       # Command request packet
+    CMD_REPLY     = 8       # Command reply packet
+    REQUEST       = 9       # Request packet
 
 _PYNGHAM_EXT_PKT_TYPES              = 10
 _PYNGHAM_EXT_PKT_SIZE_VARIABLE      = 0xFFFF
-_PYNGHAM_EXT_PKT_TYPE_SIZES         = [_PYNGHAM_EXT_PKT_SIZE_VARIABLE,
-                                       7,   # ID
-                                       22,  # Stat
-                                       1,
-                                       17,  # Pos
-                                       5,   # Toh
-                                       6,   # Dest
-                                       _PYNGHAM_EXT_PKT_SIZE_VARIABLE,
-                                       _PYNGHAM_EXT_PKT_SIZE_VARIABLE,
-                                       1]
+_PYNGHAM_EXT_PKT_TYPE_SIZES         = [_PYNGHAM_EXT_PKT_SIZE_VARIABLE, 7, 22, 1, 17, 5, 6, _PYNGHAM_EXT_PKT_SIZE_VARIABLE, _PYNGHAM_EXT_PKT_SIZE_VARIABLE, 1]
 
 class PyNGHamExtension:
     """
@@ -68,7 +59,7 @@ class PyNGHamExtension:
         """
         Gets the number of extension packets in a NGHam packet.
 
-        :param d: is the packet payload with extension packet.
+        :param d: is the packet payload with extension packet(s).
 
         :return The detected number of extension packets.
         """
@@ -248,6 +239,138 @@ class PyNGHamExtension:
 
         :return All found extension packets as a list of dictionaries.
         """
+        for i in range(len(pl)):
+            if pl[i] == ExtPktType.DATA.value:
+                self._decode_data_pkt(pl[i + 2:i + pl[i+1]])
+            elif pl[i] == ExtPktType.ID.value:
+                self._decode_id_pkt()
+            elif pl[i] == ExtPktType.STAT.value:
+                self._decode_data_pkt()
+            elif pl[i] == ExtPktType.SIMPLEDIGI.value:
+                self._decode_id_pkt()
+            elif pl[i] == ExtPktType.POS.value:
+                self._decode_stat_pkt()
+            elif pl[i] == ExtPktType.TOH.value:
+                self._decode_digi_pkt()
+            elif pl[i] == ExtPktType.DEST.value:
+                self._decode_pos_pkt()
+            elif pl[i] == ExtPktType.CMD_REQ.value:
+                self._decode_cmd_req_pkt()
+            elif pl[i] == ExtPktType.CMD_REPLY.value:
+                self._decode_cmd_reply_pkt()
+            elif pl[i] == ExtPktType.REQUEST.value:
+                self._decode_request_pkt()
+            else:
+                continue
+
+    def _decode_data_pkt(self, pkt):
+        """
+        Decodes a data paketc.
+
+        :param pkt: is the data packet to decode.
+
+        :return .
+        """
+        pass
+
+    def _decode_id_pkt(self, pkt):
+        """
+        Decodes an ID packet.
+
+        :param pkt: is the ID packet to decode.
+
+        :return .
+        """
+        res = {
+            "call_ssid":    self.decode_callsign(pkt[:-1]),
+            "sequence":     pkt[-1]
+            }
+
+        return res
+
+    def _decode_stat_pkt(self, pkt):
+        """
+        Decodes an status packet.
+
+        :param pkt: is the status packet to decode.
+
+        :return .
+        """
+        res = {
+            "hw_ver":       (pkt[0] << 8) | pkt[1],
+            "serial":       (pkt[2] << 8) | pkt[3],
+            "sw_ver":       (pkt[4] << 8) | pkt[5],
+            "uptime_s":     (pkt[6] << 24) | (pkt[7] << 16) | (pkt[8] << 8) | pkt[9],
+            "voltage":      pkt[10],
+            "temp":         pkt[11],
+            "signal":       pkt[12],
+            "noise":        pkt[13],
+            "cntr_rx_ok":   (pkt[14] << 8) | pkt[15],
+            "cntr_rx_fix":  (pkt[16] << 8) | pkt[17],
+            "cntr_rx_err":  (pkt[18] << 8) | pkt[19],
+            "cntr_tx":      (pkt[20] << 8) | pkt[21],
+            }
+
+        return res
+
+    def _decode_digi_pkt(self, pkt):
+        pass
+
+    def _decode_pos_pkt(self, pkt):
+        """
+        Decodes a position packet.
+
+        :param pkt: is the position packet to decode.
+
+        :return .
+        """
+        res = {
+            "latitude":     (pkt[0] << 24) | (pkt[1] << 16) | (pkt[2] << 8) | pkt[3],
+            "longitude":    (pkt[4] << 24) | (pkt[4] << 16) | (pkt[5] << 8) | pkt[6],
+            "altitude":     (pkt[7] << 24) | (pkt[8] << 16) | (pkt[9] << 8) | pkt[10],
+            "sog":          (pkt[11] << 8) | pkt[12],
+            "cog":          (pkt[13] << 8) | pkt[14],
+            "hdop":         pkt[15]
+            }
+
+        return res
+
+    def _decode_toh_pkt(self, pkt):
+        """
+        Decodes a TOH packet.
+
+        :param pkt: is the TOH packet to decode.
+
+        :return .
+        """
+        res = {
+            "toh_us":       (pkt[0] << 24) | (pkt[1] << 16) | (pkt[2] << 8) | pkt[3],
+            "toh_val":      pkt[4]
+            }
+
+        return res
+
+    def _decode_dest_pkt(self, pkt):
+        """
+        Decodes a destination packet.
+
+        :param pkt: is the destination packet to decode.
+
+        :return .
+        """
+        res = {
+            "call_ssid":    self.decode_callsign(pkt)
+            }
+
+        return res
+
+    def _decode_cmd_req_pkt(self, pkt):
+        pass
+
+    def _decode_cmd_reply_pkt(self, pkt):
+        pass
+
+    def _decode_request_pkt(self, pkt):
         pass
 
     def encode_callsign(self, callsign):
