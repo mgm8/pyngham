@@ -373,64 +373,33 @@ class PyNGHamExtension:
     def _decode_request_pkt(self, pkt):
         pass
 
-    def encode_callsign(self, callsign):
+    def encode_callsign(callsign, ssid):
         """
         Encodes a given callsign.
 
         :param callsign: is the callsign to encode (ASCII string).
+        :param ssid: is the SSID to encode with the callsign (integer).
 
         :return The encoded callsign as a list of integers (bytes).
         """
+        if (len(callsign) > 7) or (ssid >= 100):
+            return list()
+
+        # Convert to uppercase
+        callsign = callsign.upper()
+
+        # Convert to list of characters
         callsign = list(callsign)
+
         enc_callsign = list()
 
-        temp = int()
-        j = 0
-        copy = list(8*' ')
-        ssid = 0
+        for i in callsign:
+            enc_callsign.append(ord(i))
 
-        # Convert to DEC SIXBIT until length is 7, zero terminated, or dash (SSID start)
-        while(True):
-            # Lowercase converted to uppercase
-            if (ord(callsign[j]) >= 0x61) and (ord(callsign[j]) <= 0x7A):
-                copy[j] = chr(ord(callsign[j]) - 64)
-            else:
-                copy[j] = chr(ord(callsign[j]) - 32)
+        for i in range(7 - len(callsign)):
+            enc_callsign.append(ord(' '))
 
-            j += 1
-
-            if (j < 7) and ord(callsign[j]) and (callsign[j] != '-'):
-                break
-
-        if j < 7:
-            copy[j] = chr(0)    # Zero terminate if preliminary end
-
-        # Get SSID, if any
-        if callsign[j] == '-':
-            j += 1
-            # First number
-            if (ord(callsign[j]) >= 0x30) and (ord(callsign[j]) <= 0x39):
-                ssid += (ord(callsign[j]) - ord('0'))
-            else:
-                return list()
-            j += 1
-            # Second number
-            if (ord(callsign[j]) >= 0x30) and (ord(callsign[j]) <= 0x39):
-                ssid *= 10
-                ssid += (ord(callsign[j]) - ord('0'))
-                j += 1
-            elif ord(callsign[j]) != 0:
-                return list()
-
-        temp = ((ord(copy[0]) << 18) & 0xFC0000) | ((ord(copy[1]) << 12) & 0x3F000) | ((ord(copy[2]) << 6) & 0xFC0) | (ord(copy[3]) & 0x3F)
-        enc_callsign.append((temp >> 16) & 0xFF)
-        enc_callsign.append((temp >> 8) & 0xFF)
-        enc_callsign.append(temp & 0xFF)
-
-        temp = ((ord(copy[4]) << 18) & 0xFC0000) | ((ord(copy[5]) << 12) & 0x3F000) | ((ord(copy[6]) << 6) & 0xFC0) | (ssid & 0x3F)
-        enc_callsign.append((temp >> 16) & 0xFF)
-        enc_callsign.append((temp >> 8) & 0xFF)
-        enc_callsign.append(temp & 0xFF)
+        enc_callsign.append(ssid)
 
         return enc_callsign
 
@@ -442,37 +411,10 @@ class PyNGHamExtension:
 
         :return The decoded callsign as an string.
         """
-        callsign = list(8*' ')
+        callsign = str()
 
-        temp = ((enc_callsign[0] << 16) & 0xFF0000) | ((enc_callsign[1] << 8) & 0xFF00) | (enc_callsign[2] & 0xFF)
-        callsign[0] = (temp >> 18) & 0x3F
-        callsign[1] = (temp >> 12) & 0x3F
-        callsign[2] = (temp >> 6) & 0x3F
-        callsign[3] = temp & 0x3F
+        for i in range(7):
+            if enc_callsign[i] != ord(' '):
+                callsign = callsign + chr(enc_callsign[i])
 
-        temp = ((enc_callsign[3] << 16) & 0xFF0000) | ((enc_callsign[4] << 8) & 0xFF00) | (enc_callsign[5] & 0xFF)
-        callsign[4] = (temp >> 18) & 0x3F
-        callsign[5] = (temp >> 12) & 0x3F
-        callsign[6] = (temp >> 6) & 0x3F
-        callsign[7] = 0     # Zero terminate (needed if max length)
-
-        # Find end of callsign and convert from DEC SIXBIT
-        j = 0
-        while (j < 7) and callsign[j]:
-            callsign[j] = callsign[j] + 32
-            j += 1
-
-        # If non-zero SSID
-        ssid = temp & 0x3F
-        if ssid:
-            callsign[j] = '-'
-            j += 1
-            if ssid > 9:
-                callsign[j] = (ssid/10) + ord('0')
-                j += 1
-                ssid %= 10
-            callsign[j] = ssid + ord('0')
-            j += 1
-            callsign[j] = 0
-
-        return callsign
+        return callsign, enc_callsign[-1]

@@ -162,7 +162,21 @@ def test_extension_dest_pkt():
     assert pl == [6, 6] + call_ssid
 
 def test_extension_encode_callsign():
-    pass
+    ext = pyngham.PyNGHamExtension()
+
+    callsign = "PU5GMA"
+    ssid = 1
+
+    dec_callsign, dec_ssid = ext.decode_callsign(ext.encode_callsign(callsign, ssid))
+
+    assert (callsign == dec_callsign) and (ssid == dec_ssid)
 
 def test_extension_decode_callsign():
-    pass
+    ext = pyngham.PyNGHamExtension()
+
+    callsign = "PU5GMA"
+    ssid = 1
+
+    dec_callsign, dec_ssid = ext.decode_callsign(ext.encode_callsign(callsign, ssid))
+
+    assert (callsign == dec_callsign) and (ssid == dec_ssid)
