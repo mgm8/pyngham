@@ -373,7 +373,7 @@ class PyNGHamExtension:
     def _decode_request_pkt(self, pkt):
         pass
 
-    def encode_callsign(callsign, ssid):
+    def encode_callsign(self, callsign, ssid):
         """
         Encodes a given callsign.
 
