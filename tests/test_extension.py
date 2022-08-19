@@ -25,7 +25,27 @@ import pyngham
 from random import randrange
 
 def test_extension_get_numpkts():
-    pass
+    ext = pyngham.PyNGHamExtension()
+
+    pl = list()
+
+    print(ext.encode_callsign("PU5GMA", 0))
+    pl = ext.append_id_pkt(pl, ext.encode_callsign("PU5GMA", 0), 0)
+    print(pl)
+
+    assert ext.get_numpkts(pl) == 1
+
+    pl = ext.append_dest_pkt(pl, ext.encode_callsign("PU5GMA", 1))
+    print(pl)
+
+    assert ext.get_numpkts(pl) == 2
+
+    toh_us = randrange(2**16 - 1)
+    toh_val = randrange(2**8 - 1)
+
+    pl = ext.append_toh_pkt(pl, toh_us, toh_val)
+
+    assert ext.get_numpkts(pl) == 3
 
 def test_extension_toh_pkt():
     ext = pyngham.PyNGHamExtension()
