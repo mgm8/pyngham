@@ -42,7 +42,7 @@ class ExtPktType(Enum):
 
 _PYNGHAM_EXT_PKT_TYPES              = 10
 _PYNGHAM_EXT_PKT_SIZE_VARIABLE      = 0xFFFF
-_PYNGHAM_EXT_PKT_TYPE_SIZES         = [_PYNGHAM_EXT_PKT_SIZE_VARIABLE, 7, 22, 1, 17, 5, 6, _PYNGHAM_EXT_PKT_SIZE_VARIABLE, _PYNGHAM_EXT_PKT_SIZE_VARIABLE, 1]
+_PYNGHAM_EXT_PKT_TYPE_SIZES         = [_PYNGHAM_EXT_PKT_SIZE_VARIABLE, 9, 22, 1, 17, 5, 8, _PYNGHAM_EXT_PKT_SIZE_VARIABLE, _PYNGHAM_EXT_PKT_SIZE_VARIABLE, 1]
 
 class PyNGHamExtension:
     """
@@ -64,8 +64,6 @@ class PyNGHamExtension:
         :return The detected number of extension packets.
         """
         # Go through all sub packets
-        start = int()
-        packets = int()
         start = 0
         packets = 0
         d_len = len(d)
