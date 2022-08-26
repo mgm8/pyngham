@@ -45,7 +45,7 @@ This field indicates one of the seven possible packet sizes. It is a 24 bits tag
 
 +---------------+---------------+--------------------------+-------------------------+
 | **Size Num.** | **Tag**       | **Reed-Solomon Config.** | **Max. Data Size**      |
-+---------------+---------------+--------------------------+-------------------------+
++===============+===============+==========================+=========================+
 | 1             | 59, 73, 205   | RS(47, 31)               | up to 28 bytes of data  |
 +---------------+---------------+--------------------------+-------------------------+
 | 2             | 77, 218, 87   | RS(79, 63)               | up to 60 bytes of data  |
@@ -73,7 +73,7 @@ The header byte is the first data byte of the RS block. It is divided as present
 
 +----------+-------------------------+
 | **Bits** | **Purpose**             |
-+----------+-------------------------+
++==========+=========================+
 | 7 to 6   | Reserved                |
 +----------+-------------------------+
 | 5        | Extension on            |
@@ -82,10 +82,6 @@ The header byte is the first data byte of the RS block. It is divided as present
 +----------+-------------------------+
 
 The extension bit indicates if the extension frame is enabled or not. The padding size bits is the number padding bytes presented in the respective packet (0 to 31).
-
-.. note::
-
-   The extensions are not implemented yet on this library!
 
 Payload
 .......
@@ -117,7 +113,7 @@ This field is reserved for the computed parity bytes of the Reed-Solomon coding 
 
 +---------------+--------------------------+------------------+
 | **Size Num.** | **Reed-Solomon Config.** | **Parity bytes** |
-+---------------+--------------------------+------------------+
++===============+==========================+==================+
 | 1             | RS(47, 31)               | 16               |
 +---------------+--------------------------+------------------+
 | 2             | RS(79, 63)               | 16               |
@@ -146,7 +142,7 @@ Scrambling
 
 Before transmitting a packet, the RS code block is scrambled by making a byte xor operation with a pre-generated table based on the polynomial :math:`x^{8} + x^{7} + x^{5} + x^{3} + 1` (defined in the CCSDS 131.0-B-3 standard [7]_).
 
-When the receiver received a packet, it also perform the same operation to de-scramble the RS code block and get the original content of the RS part of the packet.
+When the receiver receives a packet, it also perform the same operation to de-scramble the RS code block and get the original content of the RS part of the packet.
 
 By scrambling the packets, long sequence of ones or zeros are avoided, by guarantying a good bit transition along the whole packet. More information about packet scrambling (or randomization) can be found in [7]_ (section 8.3).
 

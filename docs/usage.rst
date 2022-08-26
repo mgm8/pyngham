@@ -174,3 +174,8 @@ The sequence below exemplifies all the presented methods above:
     [36, 21, 158, 2, 6, 0, 0, 1, 2, 3, 4]
     >>> x.decode(local_pkt)
     {'type': 2, 'flags': 0, 'payload': [0, 1, 2, 3, 4]}
+
+Extension Packets
+=================
+
+TODO
