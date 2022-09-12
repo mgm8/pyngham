@@ -29,14 +29,11 @@ def test_extension_get_numpkts():
 
     pl = list()
 
-    print(ext.encode_callsign("PU5GMA", 0))
     pl = ext.append_id_pkt(pl, ext.encode_callsign("PU5GMA", 0), 0)
-    print(pl)
 
     assert ext.get_numpkts(pl) == 1
 
     pl = ext.append_dest_pkt(pl, ext.encode_callsign("PU5GMA", 1))
-    print(pl)
 
     assert ext.get_numpkts(pl) == 2
 
@@ -46,6 +43,19 @@ def test_extension_get_numpkts():
     pl = ext.append_toh_pkt(pl, toh_us, toh_val)
 
     assert ext.get_numpkts(pl) == 3
+
+def test_append_pkt():
+    ext = pyngham.PyNGHamExtension()
+
+    pl = list()
+
+    pl = ext.append_pkt(pl, 1, ext.encode_callsign("PU5GMA", 0) + [0])
+
+    assert ext.get_numpkts(pl) == 1
+
+    pl = ext.append_pkt(pl, 6, ext.encode_callsign("PU5GMA", 1))
+
+    assert ext.get_numpkts(pl) == 2
 
 def test_extension_toh_pkt():
     ext = pyngham.PyNGHamExtension()
@@ -180,6 +190,23 @@ def test_extension_dest_pkt():
     pl = ext.append_dest_pkt(pl, call_ssid)
 
     assert pl == [6, 6] + call_ssid
+
+def test_decode():
+    ext = pyngham.PyNGHamExtension()
+
+    callsign_src = "PU5GMA"
+    ssid = 0
+    sequence = 0
+
+    pl = list()
+
+    pl = ext.append_id_pkt(pl, ext.encode_callsign(callsign_src, ssid), sequence)
+
+    res = ext.decode(pl)
+
+    assert res[0]['call_ssid'][0] == callsign_src
+    assert res[0]['call_ssid'][1] == ssid
+    assert res[0]['sequence'] == sequence
 
 def test_extension_encode_callsign():
     ext = pyngham.PyNGHamExtension()
