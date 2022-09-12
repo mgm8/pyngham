@@ -178,4 +178,41 @@ The sequence below exemplifies all the presented methods above:
 Extension Packets
 =================
 
-TODO
+To handle extension packets, the procedure is also very similar, as can be seen below:
+
+1. Import the library:
+
+.. code-block:: python
+
+    import pyngham
+
+Or import only the SPP class:
+
+.. code-block:: python
+
+    from pyngham import PyNGHamExtension
+
+2. Extension initialization:
+
+.. code-block:: python
+
+    x = PyNGHamExtension()
+
+3. Before generating the extension packets, an empty list should be created. This list will be used to store the payload of the NGHam with the extensions.
+
+.. code-block:: python
+
+    pl = list()
+
+4. For example, to generate an extension packet with the ID of the transmitter, the line below can be used:
+
+.. code-block:: python
+
+    pl = ext.append_id_pkt(pl, x.encode_callsign("PU5GMA", 1), sequence)
+
+If successful, the generated extension packet will be stored in the *pl* variable. This can be used to encode a NGHam or SPP packet the same way as described before.
+
+The same procedure can be used to append other extension packets to the same payload.
+
+.. note::
+   Since the extension packets are not fully implemented and documented in the original NGHam implementation, the support for this resource is not complete yet. Some extension packet are already implemented and working, and some are not implemented because of lack of information about it. In the future, a definition of these packets are planned to be done.
