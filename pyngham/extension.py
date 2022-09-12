@@ -237,29 +237,40 @@ class PyNGHamExtension:
 
         :return All found extension packets as a list of dictionaries.
         """
-        for i in range(len(pl)):
+        res = list()
+
+        i = 0
+        while(i < len(pl)):
             if pl[i] == ExtPktType.DATA.value:
-                self._decode_data_pkt(pl[i + 2:i + pl[i+1]])
+                res.append(self._decode_data_pkt(pl[i + 2:i + pl[i+1] + 1]))
             elif pl[i] == ExtPktType.ID.value:
-                self._decode_id_pkt()
+                res.append(self._decode_id_pkt(pl[i + 2:i + pl[i+1] + 1]))
             elif pl[i] == ExtPktType.STAT.value:
-                self._decode_data_pkt()
+                res.append(self._decode_data_pkt(pl[i + 2:i + pl[i+1] + 1]))
             elif pl[i] == ExtPktType.SIMPLEDIGI.value:
-                self._decode_id_pkt()
+                #res.append(self._decode_id_pkt(pl[i + 2:i + pl[i+1] + 1]))
+                continue
             elif pl[i] == ExtPktType.POS.value:
-                self._decode_stat_pkt()
+                res.append(self._decode_stat_pkt(pl[i + 2:i + pl[i+1] + 1]))
             elif pl[i] == ExtPktType.TOH.value:
-                self._decode_digi_pkt()
+                res.append(self._decode_digi_pkt(pl[i + 2:i + pl[i+1] + 1]))
             elif pl[i] == ExtPktType.DEST.value:
-                self._decode_pos_pkt()
+                res.append(self._decode_pos_pkt(pl[i + 2:i + pl[i+1] + 1]))
             elif pl[i] == ExtPktType.CMD_REQ.value:
-                self._decode_cmd_req_pkt()
+                #res.append(self._decode_cmd_req_pkt(pl[i + 2:i + pl[i+1] + 1]))
+                continue
             elif pl[i] == ExtPktType.CMD_REPLY.value:
-                self._decode_cmd_reply_pkt()
+                #res.append(self._decode_cmd_reply_pkt(pl[i + 2:i + pl[i+1] + 1]))
+                continue
             elif pl[i] == ExtPktType.REQUEST.value:
-                self._decode_request_pkt()
+                #res.append(self._decode_request_pkt(pl[i + 2:i + pl[i+1] + 1]))
+                continue
             else:
                 continue
+
+            i = i + 2 + pl[i+1]
+
+        return res
 
     def _decode_data_pkt(self, pkt):
         """
@@ -280,7 +291,7 @@ class PyNGHamExtension:
         :return .
         """
         res = {
-            "call_ssid":    self.decode_callsign(pkt[:-1]),
+            "call_ssid":    self.decode_callsign(pkt),
             "sequence":     pkt[-1]
             }
 
