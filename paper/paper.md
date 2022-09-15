@@ -91,7 +91,7 @@ This Python implementation of the protocol was inspired in part by the structure
 
 # Conclusion
 
-The objective of this library is to offer an alternative purely written in Python for the original NGHam library. This way, this can be easily used in simulations, packet decoding and encoding software, telecommunication classes, and so on. Being useful especially for satellite communication and experiments running in space, and in general for the amateur radio community. This library is already being used in the development of the satellites of the SpaceLab, specifically in the ground station software [@spacelab-decoder, @spacelab-transmitter], that sends telecommand and receives data to/from the satellites. More information about the PyNGHam library can be found in its Sphinx documentation [@pyngham-doc].
+The objective of this library is to offer an alternative purely written in Python for the original NGHam library. This way, this can be easily used in simulations, packet decoding and encoding software, telecommunication classes, and so on. Being useful especially for satellite communication and experiments running in space, and in general for the amateur radio community. This library is already being used in the development of the satellites of the SpaceLab, specifically in the ground station software [@spacelab-decoder] [@spacelab-transmitter], that sends telecommand and receives data to/from the satellites. More information about the PyNGHam library can be found in its Sphinx documentation [@pyngham-doc].
 
 # Acknowledgement
 
