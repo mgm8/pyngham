@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Usage &mdash; pyngham 0.4 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <title>Usage &mdash; pyngham 1.0 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
@@ -40,9 +40,11 @@
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="protocol.html">Protocol Description</a></li>
 <li class="toctree-l1"><a class="reference internal" href="spp.html">Serial Port Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extension.html">Extension Packets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Usage</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#serial-port-protocol-spp">Serial Port Protocol (SPP)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#extension-packets">Extension Packets</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="packaging.html">Packaging the Project</a></li>
@@ -193,7 +195,7 @@
 </div>
 <p>If successful, the decode command will return a dictionary with the decoded fields of the given packet.</p>
 <p>The sequence below exemplifies all the presented methods above:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pyngham</span> <span class="kn">import</span> <span class="n">PyNGHam</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pyngham</span> <span class="kn">import</span> <span class="n">PyNGHamSPP</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">PyNGHamSPP</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rx_pkt</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">encode_rx_pkt</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">rx_pkt</span><span class="p">)</span>
@@ -216,6 +218,62 @@
 <span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">local_pkt</span><span class="p">)</span>
 <span class="go">{&#39;type&#39;: 2, &#39;flags&#39;: 0, &#39;payload&#39;: [0, 1, 2, 3, 4]}</span>
 </pre></div>
+</div>
+</div>
+<div class="section" id="extension-packets">
+<h2>Extension Packets<a class="headerlink" href="#extension-packets" title="Permalink to this headline"></a></h2>
+<p>To handle extension packets, the procedure is also very similar, as can be seen below:</p>
+<ol class="arabic simple">
+<li><p>Import the library:</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyngham</span>
+</pre></div>
+</div>
+<p>Or import only the SPP class:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyngham</span> <span class="kn">import</span> <span class="n">PyNGHamExtension</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Extension initialization:</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">PyNGHamExtension</span><span class="p">()</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Before generating the extension packets, an empty list should be created. This list will be used to store the payload of the NGHam with the extensions.</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pl</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>For example, to generate an extension packet with the ID of the transmitter, the line below can be used:</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pl</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">append_id_pkt</span><span class="p">(</span><span class="n">pl</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">encode_callsign</span><span class="p">(</span><span class="s2">&quot;PU5GMA&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If successful, the generated extension packet will be stored in the <em>pl</em> variable. This can be used to encode a NGHam or SPP packet the same way as described before.</p>
+<p>The same procedure can be used to append other extension packets to the same payload.</p>
+<ol class="arabic simple" start="5">
+<li><p>To decode an extension packet, the function below can be used:</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">res</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">pl</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This way, the decoded extension packet will be stored in the <em>res</em> variable as a dictionaty with the content of the packet.</p>
+<p>The sequence below exemplifies all the presented methods above:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pyngham</span> <span class="kn">import</span> <span class="n">PyNGHamExtension</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">PyNGHamExtension</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pl</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pl</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">append_id_pkt</span><span class="p">(</span><span class="n">pl</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">encode_callsign</span><span class="p">(</span><span class="s2">&quot;PU5GMA&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">pl</span><span class="p">)</span>
+<span class="go">[1, 9, 80, 85, 53, 71, 77, 65, 32, 1, 1]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">pl</span><span class="p">)</span>
+<span class="go">[{&#39;call_ssid&#39;: (&#39;PU5GMA&#39;, 1), &#39;sequence&#39;: 1}]</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Since the extension packets are not fully implemented and documented in the original NGHam implementation, the support for this resource is not complete yet. Some extension packet are already implemented and working, and some are not implemented because of lack of information about it. In the future, a definition of these packets are planned to be done.</p>
 </div>
 </div>
 </div>

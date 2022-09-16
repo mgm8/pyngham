@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Extension Packets &mdash; pyngham 1.0 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation" href="install.html" />
+    <link rel="prev" title="Serial Port Protocol" href="spp.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> pyngham
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="protocol.html">Protocol Description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spp.html">Serial Port Protocol</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Extension Packets</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#types-of-extension-packets">Types of Extension Packets</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data-packet">Data Packet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id-packet">ID Packet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#status-packet">Status Packet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#simple-digipeater-packet">Simple Digipeater Packet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#position-packet">Position Packet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#time-information-packet">Time Information Packet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#destination-packet">Destination Packet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#command-request-packet">Command Request Packet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#command-reply-packet">Command Reply Packet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#request-packet">Request Packet</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="packaging.html">Packaging the Project</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">pyngham</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Extension Packets</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/extension.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="extension-packets">
+<h1>Extension Packets<a class="headerlink" href="#extension-packets" title="Permalink to this headline"></a></h1>
+<p>If the NGHam extension flag is set, the Payload contains NGHam extension data. Each NGHam extension packet has a separate header, describing the type and size of the following data. A payload can contain multiple extension packets, each containing information such as position, callsign, timing information, statistics, destination, repeating information and others. Below there is a figure with a diagram illustrating the format of a NGHam Extension packet.</p>
+<div class="figure align-center" id="id1">
+<a class="reference internal image-reference" href="_images/ngham-ext-pkt.png"><img alt="NGHam Extension packet" src="_images/ngham-ext-pkt.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-text">Fig. Format of a NGHam Extension packet.</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Since the extension packets are not fully implemented and documented in the original NGHam implementation, the support for this resource is not complete yet. Some extension packet are already implemented and working, and some are not implemented because of lack of information about it. In the future, a definition of these packets are planned to be done.</p>
+</div>
+<div class="section" id="types-of-extension-packets">
+<h2>Types of Extension Packets<a class="headerlink" href="#types-of-extension-packets" title="Permalink to this headline"></a></h2>
+<p>Next, there is a description of each kind of extension packet provided by the NGHam protocol. All packets share the same structure:</p>
+<ul class="simple">
+<li><p>Type (1 byte), with a unique ID for each type of extension packet.</p></li>
+<li><p>Data length (1 byte), with the number of data bytes in the extension packet.</p></li>
+<li><p>Data (N bytes), with the data of the extension packet.</p></li>
+</ul>
+<div class="section" id="data-packet">
+<h3>Data Packet<a class="headerlink" href="#data-packet" title="Permalink to this headline"></a></h3>
+<p>The data extension packet is a packet with generic data (any sequence of bytes). It follows the structure below.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 31%" />
+<col style="width: 29%" />
+<col style="width: 41%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Size (bytes)</p></th>
+<th class="head"><p>Content</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Type</p></td>
+<td><p>1</p></td>
+<td><p>00h</p></td>
+</tr>
+<tr class="row-odd"><td><p>Packet length</p></td>
+<td><p>1</p></td>
+<td><p>01h to DAh</p></td>
+</tr>
+<tr class="row-even"><td><p>Data</p></td>
+<td><p>Variable</p></td>
+<td><p>Any bytes sequence</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id-packet">
+<h3>ID Packet<a class="headerlink" href="#id-packet" title="Permalink to this headline"></a></h3>
+<p>The ID extension packet is a packet with identification data of the transmitter. It follows the structure below.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 30%" />
+<col style="width: 37%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Size (bytes)</p></th>
+<th class="head"><p>Content</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Type</p></td>
+<td><p>1</p></td>
+<td><p>01h</p></td>
+</tr>
+<tr class="row-odd"><td><p>Packet length</p></td>
+<td><p>1</p></td>
+<td><p>09h</p></td>
+</tr>
+<tr class="row-even"><td rowspan="3"><p>Data</p></td>
+<td><p>7</p></td>
+<td><p>Callsign</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>SSID</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Sequence number</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Always first in a packet, except when resent by another station.</p>
+</div>
+</div>
+<div class="section" id="status-packet">
+<h3>Status Packet<a class="headerlink" href="#status-packet" title="Permalink to this headline"></a></h3>
+<p>The status extension packet is a packet statistic and telemetry data. It follows the structure below.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 16%" />
+<col style="width: 67%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Size (bytes)</p></th>
+<th class="head"><p>Content</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Type</p></td>
+<td><p>1</p></td>
+<td><p>02h</p></td>
+</tr>
+<tr class="row-odd"><td><p>Packet length</p></td>
+<td><p>1</p></td>
+<td><p>16h</p></td>
+</tr>
+<tr class="row-even"><td rowspan="12"><p>Data</p></td>
+<td><p>2</p></td>
+<td><p>Hardware version ID (10b for company, 6b for product)</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>Serial number</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>Software version (4b major, 4b minor, 8b build)</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>Uptime in seconds</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Input voltage in decivolts (0-25.5)</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>Temperature in Celsius (-128 to 127)</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Received signal strength (dBm - 200, -200 to 54 (0xFF=N/A)</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>Noise floor (same as above)</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>Number of packets successfully received</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>Number of packets with corrected errors</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>Number of packets with uncorrectable errors</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>Number of packets sent</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="simple-digipeater-packet">
+<h3>Simple Digipeater Packet<a class="headerlink" href="#simple-digipeater-packet" title="Permalink to this headline"></a></h3>
+<p>TODO</p>
+</div>
+<div class="section" id="position-packet">
+<h3>Position Packet<a class="headerlink" href="#position-packet" title="Permalink to this headline"></a></h3>
+<p>The position extension packet is a packet with position data. It follows the structure below.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 21%" />
+<col style="width: 56%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Size (bytes)</p></th>
+<th class="head"><p>Content</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Type</p></td>
+<td><p>1</p></td>
+<td><p>04h</p></td>
+</tr>
+<tr class="row-odd"><td><p>Packet length</p></td>
+<td><p>1</p></td>
+<td><p>11h</p></td>
+</tr>
+<tr class="row-even"><td rowspan="6"><p>Data</p></td>
+<td><p>4</p></td>
+<td><p>Latitude</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>Longitude</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>Altitude</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>SOG (hundreds of meters per second)</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>COG (tenths of degrees)</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>HDOP (tenths)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="time-information-packet">
+<h3>Time Information Packet<a class="headerlink" href="#time-information-packet" title="Permalink to this headline"></a></h3>
+<p>The time information extension packet is a packet with time data (TOH, or Time Of Hour). It follows the structure below.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 28%" />
+<col style="width: 42%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Size (bytes)</p></th>
+<th class="head"><p>Content</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Type</p></td>
+<td><p>1</p></td>
+<td><p>05h</p></td>
+</tr>
+<tr class="row-odd"><td><p>Packet length</p></td>
+<td><p>1</p></td>
+<td><p>05h</p></td>
+</tr>
+<tr class="row-even"><td rowspan="2"><p>Data</p></td>
+<td><p>4</p></td>
+<td><p>TOH in microseconds</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>TOH validity</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="destination-packet">
+<h3>Destination Packet<a class="headerlink" href="#destination-packet" title="Permalink to this headline"></a></h3>
+<p>The destination extension packet is a packet with destination data of the packet. It follows the structure below.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 32%" />
+<col style="width: 30%" />
+<col style="width: 38%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Size (bytes)</p></th>
+<th class="head"><p>Content</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Type</p></td>
+<td><p>1</p></td>
+<td><p>06h</p></td>
+</tr>
+<tr class="row-odd"><td><p>Packet length</p></td>
+<td><p>1</p></td>
+<td><p>08h</p></td>
+</tr>
+<tr class="row-even"><td rowspan="2"><p>Data</p></td>
+<td><p>7</p></td>
+<td><p>Callsign</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>SSID</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="command-request-packet">
+<h3>Command Request Packet<a class="headerlink" href="#command-request-packet" title="Permalink to this headline"></a></h3>
+<p>TODO</p>
+</div>
+<div class="section" id="command-reply-packet">
+<h3>Command Reply Packet<a class="headerlink" href="#command-reply-packet" title="Permalink to this headline"></a></h3>
+<p>TODO</p>
+</div>
+<div class="section" id="request-packet">
+<h3>Request Packet<a class="headerlink" href="#request-packet" title="Permalink to this headline"></a></h3>
+<p>TODO</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="spp.html" class="btn btn-neutral float-left" title="Serial Port Protocol" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="install.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Gabriel Mariano Marcelino - PU5GMA.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Protocol Description &mdash; pyngham 0.4 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <title>Protocol Description &mdash; pyngham 1.0 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
@@ -59,6 +59,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="spp.html">Serial Port Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extension.html">Extension Packets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="packaging.html">Packaging the Project</a></li>
@@ -125,12 +126,14 @@
 <col style="width: 32%" />
 <col style="width: 31%" />
 </colgroup>
-<tbody>
-<tr class="row-odd"><td><p><strong>Size Num.</strong></p></td>
-<td><p><strong>Tag</strong></p></td>
-<td><p><strong>Reed-Solomon Config.</strong></p></td>
-<td><p><strong>Max. Data Size</strong></p></td>
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Size Num.</strong></p></th>
+<th class="head"><p><strong>Tag</strong></p></th>
+<th class="head"><p><strong>Reed-Solomon Config.</strong></p></th>
+<th class="head"><p><strong>Max. Data Size</strong></p></th>
 </tr>
+</thead>
+<tbody>
 <tr class="row-even"><td><p>1</p></td>
 <td><p>59, 73, 205</p></td>
 <td><p>RS(47, 31)</p></td>
@@ -180,10 +183,12 @@
 <col style="width: 29%" />
 <col style="width: 71%" />
 </colgroup>
-<tbody>
-<tr class="row-odd"><td><p><strong>Bits</strong></p></td>
-<td><p><strong>Purpose</strong></p></td>
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Bits</strong></p></th>
+<th class="head"><p><strong>Purpose</strong></p></th>
 </tr>
+</thead>
+<tbody>
 <tr class="row-even"><td><p>7 to 6</p></td>
 <td><p>Reserved</p></td>
 </tr>
@@ -196,10 +201,6 @@
 </tbody>
 </table>
 <p>The extension bit indicates if the extension frame is enabled or not. The padding size bits is the number padding bytes presented in the respective packet (0 to 31).</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The extensions are not implemented yet on this library!</p>
-</div>
 </div>
 <div class="section" id="payload">
 <h4>Payload<a class="headerlink" href="#payload" title="Permalink to this headline"></a></h4>
@@ -229,11 +230,13 @@
 <col style="width: 44%" />
 <col style="width: 31%" />
 </colgroup>
-<tbody>
-<tr class="row-odd"><td><p><strong>Size Num.</strong></p></td>
-<td><p><strong>Reed-Solomon Config.</strong></p></td>
-<td><p><strong>Parity bytes</strong></p></td>
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Size Num.</strong></p></th>
+<th class="head"><p><strong>Reed-Solomon Config.</strong></p></th>
+<th class="head"><p><strong>Parity bytes</strong></p></th>
 </tr>
+</thead>
+<tbody>
 <tr class="row-even"><td><p>1</p></td>
 <td><p>RS(47, 31)</p></td>
 <td><p>16</p></td>
@@ -278,7 +281,7 @@
 <div class="section" id="scrambling">
 <h2>Scrambling<a class="headerlink" href="#scrambling" title="Permalink to this headline"></a></h2>
 <p>Before transmitting a packet, the RS code block is scrambled by making a byte xor operation with a pre-generated table based on the polynomial <span class="math notranslate nohighlight">\(x^{8} + x^{7} + x^{5} + x^{3} + 1\)</span> (defined in the CCSDS 131.0-B-3 standard <a class="footnote-reference brackets" href="#id15" id="id7">7</a>).</p>
-<p>When the receiver received a packet, it also perform the same operation to de-scramble the RS code block and get the original content of the RS part of the packet.</p>
+<p>When the receiver receives a packet, it also perform the same operation to de-scramble the RS code block and get the original content of the RS part of the packet.</p>
 <p>By scrambling the packets, long sequence of ones or zeros are avoided, by guarantying a good bit transition along the whole packet. More information about packet scrambling (or randomization) can be found in <a class="footnote-reference brackets" href="#id15" id="id8">7</a> (section 8.3).</p>
 </div>
 <div class="section" id="references">

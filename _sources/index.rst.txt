@@ -18,6 +18,7 @@ Contents
    overview
    protocol
    spp
+   extension
    install
    usage
    packaging
