@@ -70,6 +70,8 @@ print("Number of errors:", errors)
 print("Errors positions:", errors_pos)
 ```
 
+More usage examples can be found in the documentation [page](https://mgm8.github.io/pyngham/).
+
 ## License
 
 This project is licensed under LGPLv3 license.

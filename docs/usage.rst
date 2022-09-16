@@ -152,7 +152,7 @@ The sequence below exemplifies all the presented methods above:
 
 .. code-block:: python
 
-    >>> from pyngham import PyNGHam
+    >>> from pyngham import PyNGHamSPP
     >>> x = PyNGHamSPP()
     >>> rx_pkt = x.encode_rx_pkt(-50, -10, 4, 0, [0, 1, 2, 3, 4])
     >>> print(rx_pkt)
@@ -174,3 +174,66 @@ The sequence below exemplifies all the presented methods above:
     [36, 21, 158, 2, 6, 0, 0, 1, 2, 3, 4]
     >>> x.decode(local_pkt)
     {'type': 2, 'flags': 0, 'payload': [0, 1, 2, 3, 4]}
+
+Extension Packets
+=================
+
+To handle extension packets, the procedure is also very similar, as can be seen below:
+
+1. Import the library:
+
+.. code-block:: python
+
+    import pyngham
+
+Or import only the SPP class:
+
+.. code-block:: python
+
+    from pyngham import PyNGHamExtension
+
+2. Extension initialization:
+
+.. code-block:: python
+
+    x = PyNGHamExtension()
+
+3. Before generating the extension packets, an empty list should be created. This list will be used to store the payload of the NGHam with the extensions.
+
+.. code-block:: python
+
+    pl = list()
+
+4. For example, to generate an extension packet with the ID of the transmitter, the line below can be used:
+
+.. code-block:: python
+
+    pl = x.append_id_pkt(pl, x.encode_callsign("PU5GMA", 1), 1)
+
+If successful, the generated extension packet will be stored in the *pl* variable. This can be used to encode a NGHam or SPP packet the same way as described before.
+
+The same procedure can be used to append other extension packets to the same payload.
+
+5. To decode an extension packet, the function below can be used:
+
+.. code-block:: python
+
+    res = x.decode(pl)
+
+This way, the decoded extension packet will be stored in the *res* variable as a dictionaty with the content of the packet.
+
+The sequence below exemplifies all the presented methods above:
+
+.. code-block:: python
+
+    >>> from pyngham import PyNGHamExtension
+    >>> x = PyNGHamExtension()
+    >>> pl = list()
+    >>> pl = x.append_id_pkt(pl, x.encode_callsign("PU5GMA", 1), 1)
+    >>> print(pl)
+    [1, 9, 80, 85, 53, 71, 77, 65, 32, 1, 1]
+    >>> x.decode(pl)
+    [{'call_ssid': ('PU5GMA', 1), 'sequence': 1}]
+
+.. note::
+   Since the extension packets are not fully implemented and documented in the original NGHam implementation, the support for this resource is not complete yet. Some extension packet are already implemented and working, and some are not implemented because of lack of information about it. In the future, a definition of these packets are planned to be done.
