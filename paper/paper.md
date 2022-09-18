@@ -22,11 +22,10 @@ bibliography: paper.bib
 
 The PyNGHam library is a Python version of the original NGHam protocol library written in C by Jon Petter Skagmo (LA3JPA) [@ngham]. The NGHam protocol is an amateur radio protocol developed to be a modern version of the AX.25 protocol, with the main improvement being the addition of a forward error correction (FEC) algorithm, which improves considerably the robustness of a communication link. Nowadays, one of the main uses of this protocol is on small satellite projects (specifically in CubeSats), as the protocol of the radio links between stations on Earth and a satellite. This Python implementation allows easier integration and use of this protocol in computers and embedded devices.
 
-# NGHam Protocol
 
-The NGHam protocol is a link protocol partly inspired by AX.25 [@ax25], with the idea to be used in ham radio packet communication. It was developed in the context of a CubeSat development at the Norwegian University of Science and Technology (NTNU) and is being used in a few CubeSat missions since then.
+# Statement of need
 
-A list of known satellites that used or plan to use the NGHam protocol is presented below:
+The NGHam protocol was developed in the context of a CubeSat development at the Norwegian University of Science and Technology (NTNU). After that, it was used by the SpaceLab team in the FloripaSat-1 CubeSat, and it's being used by all satellites of the group so far. A list of known satellites that used or plan to use the NGHam protocol is presented below:
 
 * **FloripaSat-1** [@marcelino2020]
 * **GOLDS-UFSC (a.k.a. FloripaSat-2)**
@@ -36,6 +35,14 @@ A list of known satellites that used or plan to use the NGHam protocol is presen
 * **NUTS-1**
 
 The top three satellites on the list above, are satellites developed (or in development) by the same research group: the *Space Technology Research Laboratory* (SpaceLab), from *Universidade Federal de Santa Catarina* (Brazil), which was the context where this library was developed.
+
+From the knowledge of the author, there is no Python implementation of the protocol so far. This way, an implementation with a high-level language is useful for developing user applications to communicate with objects in orbit.
+
+This library is already being used in the development of the satellites of the SpaceLab, specifically in the ground station software [@spacelab-decoder] [@spacelab-transmitter], that sends telecommand and receives data to/from the satellites.
+
+# NGHam Protocol
+
+The NGHam protocol is a link protocol partly inspired by AX.25 [@ax25], with the idea to be used in ham radio packet communication, but using an FEC algorithm and a well-defined packet structure.
 
 For the FEC algorithm, the Reed-Solomon code (RS) is used. Figure \ref{fig:ngham-pkt} presents a diagram with the fields of a NGHam packet.
 
@@ -91,7 +98,7 @@ This Python implementation of the protocol was inspired in part by the structure
 
 # Conclusion
 
-The objective of this library is to offer an alternative purely written in Python for the original NGHam library. This way, this can be easily used in simulations, packet decoding and encoding software, telecommunication classes, and so on. Being useful especially for satellite communication and experiments running in space, and in general for the amateur radio community. This library is already being used in the development of the satellites of the SpaceLab, specifically in the ground station software [@spacelab-decoder] [@spacelab-transmitter], that sends telecommand and receives data to/from the satellites. More information about the PyNGHam library can be found in its Sphinx documentation [@pyngham-doc].
+The objective of this library is to offer an alternative purely written in Python for the original NGHam library. This way, this can be easily used in simulations, packet decoding and encoding software, telecommunication classes, and so on. Being useful especially for satellite communication and experiments running in space, and in general for the amateur radio community. More information about the PyNGHam library can be found in its Sphinx documentation [@pyngham-doc].
 
 # Acknowledgement
 
