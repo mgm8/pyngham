@@ -25,7 +25,7 @@ The PyNGHam library is a Python version of the original NGHam protocol library w
 
 # Statement of need
 
-The NGHam protocol was developed in the context of a CubeSat development at the Norwegian University of Science and Technology (NTNU). After that, it was used by the SpaceLab team in the FloripaSat-1 CubeSat, and it's being used by all satellites of the group so far. A list of known satellites that used or plan to use the NGHam protocol is presented below:
+The NGHam protocol was developed in the context of a CubeSat development at the Norwegian University of Science and Technology (NTNU) [@lofaldi2016]. After that, it was used by the SpaceLab team in the FloripaSat-1 CubeSat, and it's being used by all satellites of the group so far. A list of known satellites that used or plan to use the NGHam protocol is presented below:
 
 * **FloripaSat-1** [@marcelino2020]
 * **GOLDS-UFSC (a.k.a. FloripaSat-2)**
@@ -44,7 +44,7 @@ This library is already being used in the development of the satellites of the S
 
 The NGHam protocol is a link protocol partly inspired by AX.25 [@ax25], with the idea to be used in ham radio packet communication, but using an FEC algorithm and a well-defined packet structure.
 
-For the FEC algorithm, the Reed-Solomon code (RS) is used. Figure \ref{fig:ngham-pkt} presents a diagram with the fields of a NGHam packet.
+For the FEC algorithm, the Reed-Solomon code (RS) is used [@reed1960]. Figure \ref{fig:ngham-pkt} presents a diagram with the fields of a NGHam packet.
 
 ![Fields of a NGHam packet.\label{fig:ngham-pkt}](../docs/ngham-pkt.png)
 
