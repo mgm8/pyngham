@@ -20,37 +20,36 @@ bibliography: paper.bib
 
 # Summary
 
-The PyNGHam library is a Python version of the original NGHam protocol library written in C by Jon Petter Skagmo (LA3JPA) [@ngham]. The NGHam protocol is an amateur radio protocol developed to be a modern version of the AX.25 protocol, with the main improvement being the addition of a forward error correction (FEC) algorithm, which improves considerably the robustness of a communication link. Nowadays, one of the main uses of this protocol is on small satellite projects (specifically in CubeSats), as the protocol of the radio links between stations on Earth and a satellite. This Python implementation allows easier integration and use of this protocol in computers and embedded devices.
-
+The PyNGHam library is a Python version of the original NGHam protocol library written in C by Jon Petter Skagmo (LA3JPA) [@ngham]. The NGHam protocol is an amateur radio protocol developed to be a modern version of the AX.25 protocol, with the main improvement being the addition of a forward error correction (FEC) algorithm, which considerably improves the robustness of the communication link. Nowadays, one of the main applications of this protocol is on small satellite projects (specifically CubeSats), supporting a reliable communication link between the ground station and the satellite. This Python implementation enables easier integration and use of this protocol in computers and embedded devices.
 
 # Statement of need
 
-The NGHam protocol was developed in the context of a CubeSat development at the Norwegian University of Science and Technology (NTNU) [@lofaldi2016]. After that, it was used by the SpaceLab team in the FloripaSat-1 CubeSat, and it's being used by all satellites of the group so far. A list of known satellites that used or plan to use the NGHam protocol is presented below:
+The NGHam protocol was originally developed in the context of a CubeSat development at the Norwegian University of Science and Technology (NTNU) [@lofaldi2016]. It was later on used by the SpaceLab team on the FloripaSat-1 CubeSat, and is being used by all satellites of the group so far. A list of known satellites that used or plan to use the NGHam protocol is presented below:
 
 * **FloripaSat-1** [@marcelino2020]
-* **GOLDS-UFSC (a.k.a. FloripaSat-2)**
-* **Catarina-A1**
-* **PION-BR1**
+* **GOLDS-UFSC (a.k.a. FloripaSat-2)** [@golds-ufsc]
+* **Catarina-A1** (Catarina Constellation) [@seman2022]
+* **PION-BR1** [@pion-br1]
 * **Aldebaran-1**
-* **NUTS-1**
+* **NUTS-1** [@lofaldi2016]
 
-The top three satellites on the list above, are satellites developed (or in development) by the same research group: the *Space Technology Research Laboratory* (SpaceLab), from *Universidade Federal de Santa Catarina* (Brazil), which was the context where this library was developed.
+The top three satellites of the above list, are satellites developed (or in development) by the same research group: the *Space Technology Research Laboratory* (SpaceLab), from *Universidade Federal de Santa Catarina* (Brazil), where this library was developed.
 
-From the knowledge of the author, there is no Python implementation of the protocol so far. This way, an implementation with a high-level language is useful for developing user applications to communicate with objects in orbit.
+From the knowledge of the author, there is no Python implementation of the protocol so far. An implementation with a high-level language facilitates the development of user applications to communicate with objects in orbit.
 
-This library is already being used in the development of the satellites of the SpaceLab, specifically in the ground station software [@spacelab-decoder] [@spacelab-transmitter], that sends telecommand and receives data to/from the satellites.
+This library is already being used in the design of satellites by SpaceLab, as part of the ground station software [@spacelab-decoder; @spacelab-transmitter] responsible for the uplink of telecommands and downlink of telemetry/payload data.
 
 # NGHam Protocol
 
-The NGHam protocol is a link protocol partly inspired by AX.25 [@ax25], with the idea to be used in ham radio packet communication, but using an FEC algorithm and a well-defined packet structure.
+The NGHam (Next Generation Ham Radio) protocol is a link protocol partly inspired by AX.25 [@ax25], with the intention to be used in ham radio packet communication, but using a FEC algorithm on a well-defined packet structure.
 
-For the FEC algorithm, the Reed-Solomon code (RS) is used [@reed1960]. Figure \ref{fig:ngham-pkt} presents a diagram with the fields of a NGHam packet.
+For the FEC algorithm, the Reed-Solomon code (RS) is employed [@reed1960]. Figure \ref{fig:ngham-pkt} presents a diagram with the fields of a NGHam packet.
 
 ![Fields of a NGHam packet.\label{fig:ngham-pkt}](../docs/ngham-pkt.png)
 
-For a GMSK modulation at 9600 bps, a typical preamble sequence would be 0xAAAAAAAA (a simple alternate of ones and zeros).
+For a GMSK (Gaussian Minimum-Shift Keying) modulation at 9600 bps, a typical preamble sequence would be `0xAAAAAAAA` (a simple alternate of ones and zeros).
 
-The size tag field has seven different options, indicating seven different packet sizes, as described below:
+The size tag field has seven different options, each corresponding to a unique packet size described in Table 1.
 
 ----------------------------------------------------------------------------
 Size Num.   Tag             Reed-Solomon Config.    Max. Data Size
