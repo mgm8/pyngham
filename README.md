@@ -37,6 +37,8 @@ Or, directly from the source files:
 
 The documentation page is available [here](https://mgm8.github.io/pyngham/). Instructions to build the documentation page are described below.
 
+Contributing instructions are also available [here](https://github.com/mgm8/pyngham/blob/main/CONTRIBUTING.md).
+
 ### Dependencies
 
 * [Sphinx](https://pypi.org/project/Sphinx/)
