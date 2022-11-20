@@ -35,7 +35,7 @@ The NGHam protocol was originally developed in the context of a CubeSat developm
 
 The top three satellites of the above list, are satellites developed (or in development) by the same research group: the *Space Technology Research Laboratory* (SpaceLab), from *Universidade Federal de Santa Catarina* (Brazil), where this library was developed.
 
-From the knowledge of the author, there is no Python implementation of the protocol so far. An implementation with a high-level language facilitates the development of user applications to communicate with objects in orbit.
+From the knowledge of the author, there is no Python implementation of the protocol so far. An implementation with a high-level language facilitates the development of user applications to communicate with objects in orbit. The intention is to use it in final user applications, like satellite decoders used in real satellite missions. It is an alternative to the GNURadio blocks such as the gr-nuts [@gr-nuts], but independent from the GNURadio ecosystem. It is also useful as a simulation or research/education tool, that can be used in simple Python scripts.
 
 This library is already being used in the design of satellites by SpaceLab, as part of the ground station software [@spacelab-decoder; @spacelab-transmitter] responsible for the uplink of telecommands and downlink of telemetry/payload data.
 
