@@ -22,7 +22,7 @@
 
 
 from enum import Enum
-from crc import CrcCalculator, Configuration
+from crc import Calculator, Configuration
 from pyngham.rs import RS
 
 # There are seven different sizes
@@ -162,7 +162,7 @@ class PyNGHam:
         pkt = pkt + pl
 
         # Insert checksum
-        checksum = CrcCalculator(Configuration(16, 0x1021, 0xFFFF, 0xFFFF, True, True)).calculate_checksum(pkt[codeword_start:])
+        checksum = Calculator(Configuration(16, 0x1021, 0xFFFF, 0xFFFF, True, True)).calculate_checksum(pkt[codeword_start:])
         pkt = pkt + [(checksum >> 8) & 0xFF, checksum & 0xFF]
 
         # Insert padding
@@ -242,7 +242,7 @@ class PyNGHam:
                 pl = pl[:_PYNGHAM_PL_SIZES[self._decoder_size_nr] - (self._decoder_buf[0] & _PYNGHAM_PADDING_BM)]
 
                 # Check if the packet is decodeable and then if CRC is OK
-                if CrcCalculator(Configuration(16, 0x1021, 0xFFFF, 0xFFFF, True, True)).verify_checksum(self._decoder_buf[:len(pl)+1], (self._decoder_buf[len(pl)+1] << 8) | self._decoder_buf[len(pl)+2]):
+                if Calculator(Configuration(16, 0x1021, 0xFFFF, 0xFFFF, True, True)).verify_checksum(self._decoder_buf[:len(pl)+1], (self._decoder_buf[len(pl)+1] << 8) | self._decoder_buf[len(pl)+2]):
                     return pl, errors, err_pos
                 else:
                     return list(), -1, list()
