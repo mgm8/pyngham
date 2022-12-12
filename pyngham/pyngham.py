@@ -131,6 +131,9 @@ class PyNGHam:
         return True
 
     def encode(self, pl, flags=0):
+        if isinstance(pl, str):
+            pl = [ord(x) for x in pl]
+        pl = list(pl)   # Ensure that the input is a list of ints
         pkt = list()
         size_nr = 0
         codeword_start = 0
@@ -178,6 +181,7 @@ class PyNGHam:
         return pkt
 
     def decode(self, pkt):
+        pkt = list(pkt)     # Ensure that the input is a list of ints
         # Remove preamble and sync word if present
         if pkt[:8] == _PYNGHAM_PREAMBLE + _PYNGHAM_SYNC_WORD:
             pkt = pkt[8:]

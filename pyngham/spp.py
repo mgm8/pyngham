@@ -77,6 +77,9 @@ class PyNGHamSPP:
         | Payload        |               n | This is the actual payload specified by the payload type.   |
         +----------------+-----------------+-------------------------------------------------------------+
         """
+        if isinstance(pl, str):
+            pl = [ord(x) for x in pl]
+        pl = list(pl)   # Ensure that the input is a list of ints
 
         if len(pl) > (8 + 220):
             return list()
@@ -187,6 +190,7 @@ below describes what is put into the payload of the general packet format.
         return self.encode(SPPType.LOCAL.value, [flags] + data)
 
     def decode(self, pkt):
+        pkt = list(pkt)     # Ensure that the input is a list of ints
         for byte in pkt:
             dec_pkt = self.decode_byte(byte)
             if dec_pkt:
