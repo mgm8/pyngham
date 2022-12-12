@@ -28,7 +28,17 @@ Or import only the main class:
 
     pkt = x.encode(payload)
 
-With the list of integers (*payload*) representing the data to encode into a packet.
+With the list of integers (*payload*) representing the data to encode into a packet. It is also possible to pass a byte array or an string containing the data to encode a packet:
+
+.. code-block:: python
+
+   pkt = x.encode(bytes([1, 2, 3]))
+
+Or:
+
+.. code-block:: python
+
+   pkt = x.encode("test")
 
 4. To decode a packet, the following command can be used:
 
