@@ -25,4 +25,4 @@ Contents
    extension
    install
    usage
-   packaging
+   development

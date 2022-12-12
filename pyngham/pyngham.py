@@ -131,6 +131,9 @@ class PyNGHam:
         return True
 
     def encode(self, pl, flags=0):
+        if isinstance(pl, str):
+            pl = [ord(x) for x in pl]
+        pl = list(pl)   # Ensure that the input is a list of ints
         pkt = list()
         size_nr = 0
         codeword_start = 0
@@ -162,7 +165,7 @@ class PyNGHam:
         pkt = pkt + pl
 
         # Insert checksum
-        checksum = Calculator(Configuration(16, 0x1021, 0xFFFF, 0xFFFF, True, True)).checksum(pkt[codeword_start:])
+        checksum = Calculator(Configuration(16, 0x1021, 0xFFFF, 0xFFFF, True, True)).checksum(bytes(pkt[codeword_start:]))
         pkt = pkt + [(checksum >> 8) & 0xFF, checksum & 0xFF]
 
         # Insert padding
@@ -178,6 +181,7 @@ class PyNGHam:
         return pkt
 
     def decode(self, pkt):
+        pkt = list(pkt)     # Ensure that the input is a list of ints
         # Remove preamble and sync word if present
         if pkt[:8] == _PYNGHAM_PREAMBLE + _PYNGHAM_SYNC_WORD:
             pkt = pkt[8:]
@@ -242,7 +246,7 @@ class PyNGHam:
                 pl = pl[:_PYNGHAM_PL_SIZES[self._decoder_size_nr] - (self._decoder_buf[0] & _PYNGHAM_PADDING_BM)]
 
                 # Check if the packet is decodeable and then if CRC is OK
-                if Calculator(Configuration(16, 0x1021, 0xFFFF, 0xFFFF, True, True)).verify(self._decoder_buf[:len(pl)+1], (self._decoder_buf[len(pl)+1] << 8) | self._decoder_buf[len(pl)+2]):
+                if Calculator(Configuration(16, 0x1021, 0xFFFF, 0xFFFF, True, True)).verify(bytes(self._decoder_buf[:len(pl)+1]), (self._decoder_buf[len(pl)+1] << 8) | self._decoder_buf[len(pl)+2]):
                     return pl, errors, err_pos
                 else:
                     return list(), -1, list()

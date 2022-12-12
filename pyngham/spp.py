@@ -77,6 +77,9 @@ class PyNGHamSPP:
         | Payload        |               n | This is the actual payload specified by the payload type.   |
         +----------------+-----------------+-------------------------------------------------------------+
         """
+        if isinstance(pl, str):
+            pl = [ord(x) for x in pl]
+        pl = list(pl)   # Ensure that the input is a list of ints
 
         if len(pl) > (8 + 220):
             return list()
@@ -92,7 +95,7 @@ class PyNGHamSPP:
         # Payload
         pkt = pkt + pl
 
-        crc_val = Calculator(Configuration(16, 0x1021, 0xFFFF, 0xFFFF, True, True)).checksum(pkt)
+        crc_val = Calculator(Configuration(16, 0x1021, 0xFFFF, 0xFFFF, True, True)).checksum(bytes(pkt))
         checksum = [(crc_val >> 8) & 0xFF, crc_val & 0xFF]
 
         # Start byte and CRC
@@ -187,6 +190,7 @@ below describes what is put into the payload of the general packet format.
         return self.encode(SPPType.LOCAL.value, [flags] + data)
 
     def decode(self, pkt):
+        pkt = list(pkt)     # Ensure that the input is a list of ints
         for byte in pkt:
             dec_pkt = self.decode_byte(byte)
             if dec_pkt:
@@ -213,7 +217,7 @@ below describes what is put into the payload of the general packet format.
 			# If received length has met target length (set in STATE_HEADER)
             if len(self._rx_buffer) == (2 + 1 + 1 + self._rx_buffer[3]):
                 # Check checksum
-                crc_val = Calculator(Configuration(16, 0x1021, 0xFFFF, 0xFFFF, True, True)).checksum(self._rx_buffer[2:])
+                crc_val = Calculator(Configuration(16, 0x1021, 0xFFFF, 0xFFFF, True, True)).checksum(bytes(self._rx_buffer[2:]))
 
                 self._state = SPPState.START
 
