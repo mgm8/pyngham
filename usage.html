@@ -17,7 +17,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Packaging the Project" href="packaging.html" />
+    <link rel="next" title="Development Instructions and Information" href="development.html" />
     <link rel="prev" title="Installation" href="install.html" /> 
 </head>
 
@@ -47,7 +47,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#extension-packets">Extension Packets</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="packaging.html">Packaging the Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development Instructions and Information</a></li>
 </ul>
 
         </div>
@@ -99,7 +99,14 @@
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pkt</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>With the list of integers (<em>payload</em>) representing the data to encode into a packet.</p>
+<p>With the list of integers (<em>payload</em>) representing the data to encode into a packet. It is also possible to pass a byte array or an string containing the data to encode a packet:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pkt</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="nb">bytes</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]))</span>
+</pre></div>
+</div>
+<p>Or:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pkt</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
 <ol class="arabic simple" start="4">
 <li><p>To decode a packet, the following command can be used:</p></li>
 </ol>
@@ -283,7 +290,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="install.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="packaging.html" class="btn btn-neutral float-right" title="Packaging the Project" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="development.html" class="btn btn-neutral float-right" title="Development Instructions and Information" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
