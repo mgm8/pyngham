@@ -102,9 +102,9 @@ class PyNGHam:
 
         This method initializes the seven Reed-Solomon schemes used by the NGHam protocol. After that, the encode and decode functions are ready to be used.
 
-        :param mod:
+        :param mod: Modulation type (two or four level).
 
-        :return:
+        :return: None.
         """
         self._modulation = mod
 
@@ -134,10 +134,10 @@ class PyNGHam:
         """
         Verifies if a size tag is valid or not.
 
-        :param x:
-        :param y:
+        :param x: Tag reference to compare.
+        :param y: Tag sequence to verify.
 
-        :return:
+        :return: True/False if the tag comparison passed or not.
         """
         j = int()
         distance = int()
@@ -161,10 +161,10 @@ class PyNGHam:
         """
         Encodes a sequence of bytes as a NGHam packet.
 
-        :param pl:
-        :param flags:
+        :param pl: Data to encode as a NGHam packet (list of integeres, byte array or string).
+        :param flags: Packet flags.
 
-        :return: 
+        :return: An encoded NGHam packet.
         """
         if isinstance(pl, str):
             pl = [ord(x) for x in pl]
@@ -221,7 +221,7 @@ class PyNGHam:
 
         :param pkt: raw NGHam packet to decode.
 
-        :return:
+        :return: The decoded data, the number of corrected errors and a list with the bit position of the errors.
         """
         pkt = list(pkt)     # Ensure that the input is a list of ints
         # Remove preamble and sync word if present
@@ -245,7 +245,7 @@ class PyNGHam:
 
         :param byte: byte of a raw NGHam packet to decode.
 
-        :return:
+        :return: The decoded data, the number of corrected errors and a list with the bit position of the errors (empty data if the decoding process is not done).
         """
         if self._decoder_state == State.SIZE_TAG.value:
             self._decoder_size_tag = byte

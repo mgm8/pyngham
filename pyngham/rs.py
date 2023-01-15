@@ -24,8 +24,23 @@
 import math
 
 class RS:
+    """
+    Reed-Solomon class.
+    """
 
     def __init__(self, symsize, gfpoly, fcr, prim, nroots, pad):
+        """
+        Class constructor (Reed-Solomon coding configuration).
+
+        :param symsize: Symbol size.
+        :param gfpoly: Galois field polynomial.
+        :param fcr: First consecutive root (index form).
+        :param prim: Primitive element (index form).
+        :param nroots: Number of generator roots (number of parity symbols).
+        :param pad: Padding bytes in shortened block.
+
+        :return: None.
+        """
         self._mm = int()                        # Bits per symbol
         self._nn = int()                        # Symbols per block (= (1 << mm) - 1)
         self._alpha_to = [0] * (1 << symsize)   # log lookup table
@@ -109,9 +124,21 @@ class RS:
             self._genpoly[i] = self._index_of[self._genpoly[i]]
 
     def __str__(self):
+        """
+        Represents the class as a string.
+
+        :return: a brief description of the class.
+        """
         return 'Reed-Solomon coding library'
 
     def _modnn(self, x):
+        """
+        Computes the modulo of a given number.
+
+        :param x: is the integer to compute the modulo.
+
+        :return: The computed modulo value of the given number.
+        """
         while(x >= self._nn):
             x = x - self._nn
             x = (x >> self._mm) + (x & self._nn)
@@ -119,6 +146,13 @@ class RS:
         return x;
 
     def encode(self, data):
+        """
+        Encodes a generic byte sequence.
+
+        :param data: is the data to compute the parity sequence (list of integers).
+
+        :return: The computed parity data.
+        """
         feedback = int()
 
         parity = [0]*self._nroots
@@ -138,6 +172,15 @@ class RS:
         return parity
 
     def decode(self, data, eras_pos, no_eras):
+        """
+        Decode a Reed-Solomon coded byte sequence.
+
+        :param data: is the data to decode (data + parity, list of integers).
+        :param eras_pos: the error positions (list of index).
+        :param no_eras: the number of errors.
+
+        :return: The corrected data (if applicable), the number of detected errors and the error positions.
+        """
         retval = -1
 
         deg_lambda = int()
