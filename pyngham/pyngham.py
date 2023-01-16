@@ -90,8 +90,22 @@ _PYNGHAM_FLAGS_BP               = 5
 
 
 class PyNGHam:
+    """
+    PyNGHam main class.
+
+    This class is used to encode and/or decode a NGHam packet.
+    """
 
     def __init__(self, mod=0):
+        """
+        Class initialization.
+
+        This method initializes the seven Reed-Solomon schemes used by the NGHam protocol. After that, the encode and decode functions are ready to be used.
+
+        :param mod: Modulation type (two or four level).
+
+        :return: None.
+        """
         self._modulation = mod
 
         self._decoder_size_nr = int()
@@ -109,9 +123,22 @@ class PyNGHam:
         self._rsc.append(RS(8, 0x187, 112, 11, 32, _PYNGHAM_PL_PAR_SIZES[-1] - _PYNGHAM_PL_PAR_SIZES[6]))
 
     def __str__(self):
+        """
+        Represents the class as a string.
+
+        :return: a brief description of the class.
+        """
         return 'NGHam Protocol Handler'
 
     def _tag_check(self, x, y):
+        """
+        Verifies if a size tag is valid or not.
+
+        :param x: Tag reference to compare.
+        :param y: Tag sequence to verify.
+
+        :return: True/False if the tag comparison passed or not.
+        """
         j = int()
         distance = int()
         diff = x ^ y
@@ -131,6 +158,14 @@ class PyNGHam:
         return True
 
     def encode(self, pl, flags=0):
+        """
+        Encodes a sequence of bytes as a NGHam packet.
+
+        :param pl: Data to encode as a NGHam packet (list of integeres, byte array or string).
+        :param flags: Packet flags.
+
+        :return: An encoded NGHam packet.
+        """
         if isinstance(pl, str):
             pl = [ord(x) for x in pl]
         pl = list(pl)   # Ensure that the input is a list of ints
@@ -181,6 +216,13 @@ class PyNGHam:
         return pkt
 
     def decode(self, pkt):
+        """
+        Decodes a NGHam packet.
+
+        :param pkt: raw NGHam packet to decode.
+
+        :return: The decoded data, the number of corrected errors and a list with the bit position of the errors.
+        """
         pkt = list(pkt)     # Ensure that the input is a list of ints
         # Remove preamble and sync word if present
         if pkt[:8] == _PYNGHAM_PREAMBLE + _PYNGHAM_SYNC_WORD:
@@ -196,6 +238,15 @@ class PyNGHam:
         return list(), -1, list()   # -1 = Error! Impossible to decode the packet!
 
     def decode_byte(self, byte):
+        """
+        Decodes a single byte from a NGHam packet.
+
+        This function returns the decoded packet when the complete sequence of bytes is received.
+
+        :param byte: byte of a raw NGHam packet to decode.
+
+        :return: The decoded data, the number of corrected errors and a list with the bit position of the errors (empty data if the decoding process is not done).
+        """
         if self._decoder_state == State.SIZE_TAG.value:
             self._decoder_size_tag = byte
 

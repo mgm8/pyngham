@@ -21,7 +21,7 @@ The original implementation and a further description of the protocol can be fou
 
 ## Dependencies
 
-* [crc](https://pypi.org/project/crc/)
+* [crc](https://pypi.org/project/crc/) - v3.0.0
 
 ## Installing
 
