@@ -20,11 +20,11 @@ bibliography: paper.bib
 
 # Summary
 
-The PyNGHam library is a Python version of the original NGHam protocol library written in C by Jon Petter Skagmo (LA3JPA) [@ngham]. The NGHam protocol is an amateur radio protocol developed to be a modern version of the AX.25 protocol, with the main improvement being the addition of a forward error correction (FEC) algorithm, which considerably improves the robustness of the communication link. Nowadays, one of the main applications of this protocol is on small satellite projects (specifically CubeSats), supporting a reliable communication link between the ground station and the satellite. This Python implementation enables easier integration and use of this protocol in computers and embedded devices.
+The PyNGHam library is a Python version of the original NGHam protocol library written in C by Jon Petter Skagmo (LA3JPA) [@ngham]. The NGHam protocol is an amateur radio protocol developed to be a modern version of the AX.25 protocol, with the main improvement being the addition of a forward error correction (FEC) algorithm, which considerably improves the robustness of the communication link. One of the main applications of this protocol is on small satellite projects (specifically CubeSats), supporting a reliable communication link between the ground station and the satellite. This Python implementation enables easier integration and use of this protocol in computers and embedded devices.
 
 # Statement of Need
 
-The NGHam protocol was originally developed in the context of a CubeSat development at the Norwegian University of Science and Technology (NTNU) [@lofaldi2016]. It was later on used by the SpaceLab team on the FloripaSat-1 CubeSat, and is being used by all satellites of the group so far. A list of known satellites that used or plan to use the NGHam protocol is presented below:
+The NGHam protocol was originally developed in the context of a CubeSat development at the Norwegian University of Science and Technology (NTNU) [@lofaldi2016]. It was later on used by the Space Technology Research Laboratory (SpaceLab) team, from *Universidade Federal de Santa Catarina* (Brazil), on the FloripaSat-1 CubeSat, and is being used by all satellites of the group so far. A list of known satellites that used or plan to use the NGHam protocol is presented below:
 
 * **FloripaSat-1** [@marcelino2020]
 * **GOLDS-UFSC (a.k.a. FloripaSat-2)** [@golds-ufsc]
@@ -33,7 +33,7 @@ The NGHam protocol was originally developed in the context of a CubeSat developm
 * **Aldebaran-1**
 * **NUTS-1** [@lofaldi2016]
 
-The top three satellites of the above list, are satellites developed (or in development) by the same research group: the *Space Technology Research Laboratory* (SpaceLab), from *Universidade Federal de Santa Catarina* (Brazil), where this library was developed.
+The top three satellites of the above list, are satellites developed (or in development) by the same research group: the SpaceLab, where this library was developed.
 
 From the knowledge of the author, there is no Python implementation of the protocol so far. An implementation with a high-level language facilitates the development of user applications to communicate with objects in orbit. The intention is to use it in final user applications, like satellite decoders used in real satellite missions. It is an alternative to the GNU Radio [@gnu-radio] blocks such as the gr-nuts [@gr-nuts], but independent from the GNU Radio ecosystem. It is also useful as a simulation or research/education tool, that can be used in simple Python scripts.
 
@@ -83,7 +83,7 @@ When the receiver receives a packet, it also performs the same operation to de-s
 
 ## Serial Protocol
 
-While the NGHam protocol can be used to support wireless communications, there is also the possibility to use the protocol in physical serial interfaces with a slightly different packet structure. In the serial protocol, no FEC algorithm is involved, but merely a checksum field to indicate whether an error occurred during the transmission. Both wireless and serial options can be integrated into a node.
+While the NGHam protocol can be used to support wireless communications, there is also the possibility to use the protocol in physical serial interfaces with a slightly different packet structure. In the serial protocol, no FEC algorithm is involved, but merely a checksum field to indicate whether an error occurred during the transmission. Both wireless and serial options can be integrated into a device.
 
 ## Extensions
 
