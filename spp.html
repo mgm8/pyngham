@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Serial Port Protocol &mdash; pyngham 1.1 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <title>Serial Port Protocol &mdash; pyngham 1.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/doctools.js"></script>
-        <script src="_static/language_data.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -82,27 +82,24 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="serial-port-protocol">
-<h1>Serial Port Protocol<a class="headerlink" href="#serial-port-protocol" title="Permalink to this headline"></a></h1>
-<p>This section presents the Serial Port Protocol (SPP) of the NGHam <a class="footnote-reference brackets" href="#id2" id="id1">1</a>. It is a variation intended to be used over serial communications between radio and computer.</p>
-<div class="section" id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h2>
+  <section id="serial-port-protocol">
+<h1>Serial Port Protocol<a class="headerlink" href="#serial-port-protocol" title="Permalink to this heading"></a></h1>
+<p>This section presents the Serial Port Protocol (SPP) of the NGHam <a class="footnote-reference brackets" href="#id2" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>. It is a variation intended to be used over serial communications between radio and computer.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
 <p>This chapter describes the protocol used to transfer data and commands between the transceiver and the serial port host.</p>
-</div>
-<div class="section" id="packet-fields">
-<h2>Packet Fields<a class="headerlink" href="#packet-fields" title="Permalink to this headline"></a></h2>
+</section>
+<section id="packet-fields">
+<h2>Packet Fields<a class="headerlink" href="#packet-fields" title="Permalink to this heading"></a></h2>
 <p>In the diagram below, the fields of the SPP packets are illustrated.</p>
-<div class="figure align-center" id="id3">
+<figure class="align-center" id="id3">
 <a class="reference internal image-reference" href="_images/ngham-spp-pkt.png"><img alt="NGHam SPP packet format" src="_images/ngham-spp-pkt.png" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-text">Fig. Format of a NGHam SPP packet.</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
-</div>
+<figcaption>
+<p><span class="caption-text">Fig. Format of a NGHam SPP packet.</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
 <p>The packet fields are better described in the table below.</p>
 <table class="docutils align-default">
-<colgroup>
-<col style="width: 17%" />
-<col style="width: 18%" />
-<col style="width: 65%" />
-</colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p><strong>Name</strong></p></th>
 <th class="head"><p><strong>Size (Byte)</strong></p></th>
@@ -137,15 +134,10 @@ calculated of everything except start tag and CRC itself.</p></td>
 </tbody>
 </table>
 <p>Next, there is a description of the fields of each SPP type of packet.</p>
-<div class="section" id="rf-rx-packet">
-<h3>RF RX Packet<a class="headerlink" href="#rf-rx-packet" title="Permalink to this headline"></a></h3>
+<section id="rf-rx-packet">
+<h3>RF RX Packet<a class="headerlink" href="#rf-rx-packet" title="Permalink to this heading"></a></h3>
 <p>Data received from RF link (from radio to host). Length from 4 to 223. The table below describes what is put into the payload of the general packet format.</p>
 <table class="docutils align-default">
-<colgroup>
-<col style="width: 28%" />
-<col style="width: 16%" />
-<col style="width: 56%" />
-</colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p><strong>Name</strong></p></th>
 <th class="head"><p><strong>Size (Byte)</strong></p></th>
@@ -182,16 +174,11 @@ data field is a valid NGHam extension packet.</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="rf-tx-packet">
-<h3>RF TX Packet<a class="headerlink" href="#rf-tx-packet" title="Permalink to this headline"></a></h3>
+</section>
+<section id="rf-tx-packet">
+<h3>RF TX Packet<a class="headerlink" href="#rf-tx-packet" title="Permalink to this heading"></a></h3>
 <p>Data to be transmitted on RF link (from host to radio). Length from 1 to 220. The table below describes what is put into the payload of the general packet format.</p>
 <table class="docutils align-default">
-<colgroup>
-<col style="width: 15%" />
-<col style="width: 26%" />
-<col style="width: 58%" />
-</colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p><strong>Name</strong></p></th>
 <th class="head"><p><strong>Size (Byte)</strong></p></th>
@@ -209,16 +196,11 @@ data field is a valid NGHam extension packet.</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="local-packet">
-<h3>Local Packet<a class="headerlink" href="#local-packet" title="Permalink to this headline"></a></h3>
+</section>
+<section id="local-packet">
+<h3>Local Packet<a class="headerlink" href="#local-packet" title="Permalink to this heading"></a></h3>
 <p>Packet generated by the radio (not received over the air, from radio to host). For example a status report. The table below describes what is put into the payload of the general packet format.</p>
 <table class="docutils align-default">
-<colgroup>
-<col style="width: 15%" />
-<col style="width: 26%" />
-<col style="width: 58%" />
-</colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p><strong>Name</strong></p></th>
 <th class="head"><p><strong>Size (Byte)</strong></p></th>
@@ -236,16 +218,11 @@ data field is a valid NGHam extension packet.</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="command-cmd-packet">
-<h3>Command (CMD) Packet<a class="headerlink" href="#command-cmd-packet" title="Permalink to this headline"></a></h3>
+</section>
+<section id="command-cmd-packet">
+<h3>Command (CMD) Packet<a class="headerlink" href="#command-cmd-packet" title="Permalink to this heading"></a></h3>
 <p>This type of packet is used to enter commands. On the Owl VHF, this command will do the same as typing into the command-line interpreter, except the commands and replies are not terminated by LF/CR/CRLF. The table below describes what is put into the payload of the general packet format.</p>
 <table class="docutils align-default">
-<colgroup>
-<col style="width: 12%" />
-<col style="width: 20%" />
-<col style="width: 68%" />
-</colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p><strong>Name</strong></p></th>
 <th class="head"><p><strong>Size (Byte)</strong></p></th>
@@ -259,17 +236,18 @@ data field is a valid NGHam extension packet.</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-</div>
-<div class="section" id="references">
-<h2>References<a class="headerlink" href="#references" title="Permalink to this headline"></a></h2>
-<dl class="footnote brackets">
-<dt class="label" id="id2"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
-<dd><p><a class="reference external" href="https://github.com/skagmo/ngham">https://github.com/skagmo/ngham</a></p>
-</dd>
-</dl>
-</div>
-</div>
+</section>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading"></a></h2>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id2" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://github.com/skagmo/ngham">https://github.com/skagmo/ngham</a></p>
+</aside>
+</aside>
+</section>
+</section>
 
 
            </div>

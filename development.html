@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Development Instructions and Information &mdash; pyngham 1.1 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <title>Development Instructions and Information &mdash; pyngham 1.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/doctools.js"></script>
-        <script src="_static/language_data.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -78,10 +78,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="development-instructions-and-information">
-<h1>Development Instructions and Information<a class="headerlink" href="#development-instructions-and-information" title="Permalink to this headline"></a></h1>
-<div class="section" id="automated-tests">
-<h2>Automated Tests<a class="headerlink" href="#automated-tests" title="Permalink to this headline"></a></h2>
+  <section id="development-instructions-and-information">
+<h1>Development Instructions and Information<a class="headerlink" href="#development-instructions-and-information" title="Permalink to this heading"></a></h1>
+<section id="automated-tests">
+<h2>Automated Tests<a class="headerlink" href="#automated-tests" title="Permalink to this heading"></a></h2>
 <p>The project contains some automated tests for improve the correctness and the confiability of the source code, by testing key functional aspects of the code.</p>
 <p>All tests are presented in the “tests” folder, and are divided in three parts:</p>
 <ul class="simple">
@@ -89,30 +89,31 @@
 <li><p><strong>RF tests</strong>: The RF tests contains the main test of the library. This test ensure the proper functioning of the encoding and decoding of NGHam packets, by generating packets with random data and with all possible quantity of bytes (1 to 220).</p></li>
 <li><p><strong>SPP tests</strong>: The Serial Port Protocol tests (SPP) tests the encoding and decoding of SPP packets, similarly to the RF tests.</p></li>
 </ul>
-<p>The tests are executed using the PyTests tool <a class="footnote-reference brackets" href="#id2" id="id1">1</a> and are integrated into the GitHub repository, using GitHub Actions. This way, at every new commit or merge to the main branch, the tests are performed automatically.</p>
+<p>The tests are executed using the PyTests tool <a class="footnote-reference brackets" href="#id2" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> and are integrated into the GitHub repository, using GitHub Actions. This way, at every new commit or merge to the main branch, the tests are performed automatically.</p>
 <p>Together with the code tests, the documentation is also built and deployed automatically when a merge to the main branch is made.</p>
-</div>
-<div class="section" id="packaging-the-project">
-<h2>Packaging the Project<a class="headerlink" href="#packaging-the-project" title="Permalink to this headline"></a></h2>
+</section>
+<section id="packaging-the-project">
+<h2>Packaging the Project<a class="headerlink" href="#packaging-the-project" title="Permalink to this heading"></a></h2>
 <p>This page presents the instructions to packaging the source files of the project.</p>
-<div class="section" id="generating-a-rpm-package">
-<h3>Generating a RPM Package<a class="headerlink" href="#generating-a-rpm-package" title="Permalink to this headline"></a></h3>
+<section id="generating-a-rpm-package">
+<h3>Generating a RPM Package<a class="headerlink" href="#generating-a-rpm-package" title="Permalink to this heading"></a></h3>
 <p>To generate an RPM package, execute the command below:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">bdist_rpm</span>
 </pre></div>
 </div>
 <p>If successful, the generated RPM package will be available in <em>dist/</em>.</p>
-</div>
-</div>
-<div class="section" id="references">
-<h2>References<a class="headerlink" href="#references" title="Permalink to this headline"></a></h2>
-<dl class="footnote brackets">
-<dt class="label" id="id2"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
-<dd><p><a class="reference external" href="https://pytest.org/">https://pytest.org/</a></p>
-</dd>
-</dl>
-</div>
-</div>
+</section>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading"></a></h2>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id2" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://pytest.org/">https://pytest.org/</a></p>
+</aside>
+</aside>
+</section>
+</section>
 
 
            </div>

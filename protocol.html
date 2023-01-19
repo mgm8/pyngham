@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Protocol Description &mdash; pyngham 1.1 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <title>Protocol Description &mdash; pyngham 1.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/doctools.js"></script>
-        <script src="_static/language_data.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -90,43 +91,39 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="protocol-description">
-<h1>Protocol Description<a class="headerlink" href="#protocol-description" title="Permalink to this headline"></a></h1>
-<p>This section presents a description of the NGHam protocol, like packet format, data fields, configuration parameters and others. More information can also be found in the original documentation <a class="footnote-reference brackets" href="#id9" id="id1">1</a>.</p>
-<div class="section" id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h2>
-<p>The NGHam protocol stands for <em>Next Generation Ham Radio</em>, being a protocol designed for packet communication. It is similar to the classical AX.25 <a class="footnote-reference brackets" href="#id10" id="id2">2</a> protocol, but with the idea of using a FEC (<em>Forwared Error Correction</em>) algorithm to increase the robustness, as defined in <a class="footnote-reference brackets" href="#id11" id="id3">3</a>:</p>
+  <section id="protocol-description">
+<h1>Protocol Description<a class="headerlink" href="#protocol-description" title="Permalink to this heading"></a></h1>
+<p>This section presents a description of the NGHam protocol, like packet format, data fields, configuration parameters and others. More information can also be found in the original documentation <a class="footnote-reference brackets" href="#id9" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p>The NGHam protocol stands for <em>Next Generation Ham Radio</em>, being a protocol designed for packet communication. It is similar to the classical AX.25 <a class="footnote-reference brackets" href="#id10" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> protocol, but with the idea of using a FEC (<em>Forwared Error Correction</em>) algorithm to increase the robustness, as defined in <a class="footnote-reference brackets" href="#id11" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a>:</p>
 <blockquote>
 <div><p>“<em>…a link protocol partly inspired by AX.25. In order to improve the link reliability, it features Reed Solomon codes for Forward Error Correction (FEC). This makes the data transmission more robust compared to i.e. AX.25, which does not implement FEC on the link layer directly.</em>”</p>
 </div></blockquote>
-<p>It was originally developed in the context of the CubeSat NUTS-1 (<em>NTNU Test Satellite</em>) development, by the Norwegian University of Science and Technology (NTNU). This library is based on the implementation of Jon Petter Skagmo (LA3JPA), available in <a class="footnote-reference brackets" href="#id12" id="id4">4</a>.</p>
-</div>
-<div class="section" id="packet-fields">
-<h2>Packet Fields<a class="headerlink" href="#packet-fields" title="Permalink to this headline"></a></h2>
+<p>It was originally developed in the context of the CubeSat NUTS-1 (<em>NTNU Test Satellite</em>) development, by the Norwegian University of Science and Technology (NTNU). This library is based on the implementation of Jon Petter Skagmo (LA3JPA), available in <a class="footnote-reference brackets" href="#id12" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a>.</p>
+</section>
+<section id="packet-fields">
+<h2>Packet Fields<a class="headerlink" href="#packet-fields" title="Permalink to this heading"></a></h2>
 <p>The figure below presents a diagram with packet format and the data fields of the NGHam protocol.</p>
-<div class="figure align-center" id="id16">
+<figure class="align-center" id="id16">
 <a class="reference internal image-reference" href="_images/ngham-pkt.png"><img alt="NGHam packet format" src="_images/ngham-pkt.png" style="width: 100%;" /></a>
-<p class="caption"><span class="caption-text">Fig. Format of a NGHam packet.</span><a class="headerlink" href="#id16" title="Permalink to this image"></a></p>
-</div>
+<figcaption>
+<p><span class="caption-text">Fig. Format of a NGHam packet.</span><a class="headerlink" href="#id16" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
 <p>Next, there is a brief description of each one of those fields.</p>
-<div class="section" id="preamble">
-<h3>Preamble<a class="headerlink" href="#preamble" title="Permalink to this headline"></a></h3>
+<section id="preamble">
+<h3>Preamble<a class="headerlink" href="#preamble" title="Permalink to this heading"></a></h3>
 <p>Considering a data rate of 9600 bps, 4 bytes is typically used for the preamble. This sequence is an alternation of ones and zeros: <span class="math notranslate nohighlight">\(4 \times\)</span> 0xAA (0b10101010).</p>
-</div>
-<div class="section" id="sync-word">
-<h3>Sync. Word<a class="headerlink" href="#sync-word" title="Permalink to this headline"></a></h3>
+</section>
+<section id="sync-word">
+<h3>Sync. Word<a class="headerlink" href="#sync-word" title="Permalink to this heading"></a></h3>
 <p>The sync. word is a sequence of bits used for packet synchronization. With this sequence, the receiver can detect the start of a new packet. In NGHam, the sync. word is composed by 32 bits, following the pattern: 0x5D, 0xE6, 0x2A, 0x7E.</p>
-</div>
-<div class="section" id="size-tag">
-<h3>Size Tag<a class="headerlink" href="#size-tag" title="Permalink to this headline"></a></h3>
+</section>
+<section id="size-tag">
+<h3>Size Tag<a class="headerlink" href="#size-tag" title="Permalink to this heading"></a></h3>
 <p>This field indicates one of the seven possible packet sizes. It is a 24 bits tag and is made very robust by keeping a hamming distance of 13 bits between all vectors. The seven possible tags are listed below:</p>
 <table class="docutils align-default">
-<colgroup>
-<col style="width: 19%" />
-<col style="width: 19%" />
-<col style="width: 32%" />
-<col style="width: 31%" />
-</colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p><strong>Size Num.</strong></p></th>
 <th class="head"><p><strong>Tag</strong></p></th>
@@ -172,18 +169,14 @@
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="reed-solomon-block">
-<h3>Reed-Solomon Block<a class="headerlink" href="#reed-solomon-block" title="Permalink to this headline"></a></h3>
+</section>
+<section id="reed-solomon-block">
+<h3>Reed-Solomon Block<a class="headerlink" href="#reed-solomon-block" title="Permalink to this heading"></a></h3>
 <p>The Reed-Solomon code block (or just RS block), is the field with packet payload and parity data. It is divided in two parts: data and parity bytes. The data bytes is subdivided in four different fields: header, payload, checksum and padding. Each one of these fields are described below.</p>
-<div class="section" id="header">
-<h4>Header<a class="headerlink" href="#header" title="Permalink to this headline"></a></h4>
+<section id="header">
+<h4>Header<a class="headerlink" href="#header" title="Permalink to this heading"></a></h4>
 <p>The header byte is the first data byte of the RS block. It is divided as presented in the table below.</p>
 <table class="docutils align-default">
-<colgroup>
-<col style="width: 29%" />
-<col style="width: 71%" />
-</colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p><strong>Bits</strong></p></th>
 <th class="head"><p><strong>Purpose</strong></p></th>
@@ -202,14 +195,14 @@
 </tbody>
 </table>
 <p>The extension bit indicates if the extension frame is enabled or not. The padding size bits is the number padding bytes presented in the respective packet (0 to 31).</p>
-</div>
-<div class="section" id="payload">
-<h4>Payload<a class="headerlink" href="#payload" title="Permalink to this headline"></a></h4>
+</section>
+<section id="payload">
+<h4>Payload<a class="headerlink" href="#payload" title="Permalink to this heading"></a></h4>
 <p>The payload field is where the “useful” data of the packet is stored. As presented in the Size Tag field description above, each one of the seven size groups allow a certain maximum number of bytes in the packet payload. The maximum possible length of the payload for a NGHam packet is 220 bytes. If more data need to be transmitted, it should be divided in multiples chunks of 220 bytes, and transmitted in separated packets.</p>
-</div>
-<div class="section" id="checksum">
-<h4>Checksum<a class="headerlink" href="#checksum" title="Permalink to this headline"></a></h4>
-<p>To ensure data correctness and a first stage before running the Reed-Solomon correction algorithm, there is a checksum field after the payload data. The used checksum algorithm is the CRC16-CCITT <a class="footnote-reference brackets" href="#id13" id="id5">5</a>, with the following configuration:</p>
+</section>
+<section id="checksum">
+<h4>Checksum<a class="headerlink" href="#checksum" title="Permalink to this heading"></a></h4>
+<p>To ensure data correctness and a first stage before running the Reed-Solomon correction algorithm, there is a checksum field after the payload data. The used checksum algorithm is the CRC16-CCITT <a class="footnote-reference brackets" href="#id13" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a>, with the following configuration:</p>
 <ul class="simple">
 <li><p><strong>Polynomial</strong>: 0x1021</p></li>
 <li><p><strong>Initial value</strong>: 0xFFFF</p></li>
@@ -217,20 +210,15 @@
 </ul>
 <p>The CRC16 value is computed from the header and the payload fields.</p>
 <p>If the CRC16 value is correct, the Reed-Solomon chain is skipped and the packet is directly considered valid. This way, the checksum field also allows a performance improvement.</p>
-</div>
-<div class="section" id="padding">
-<h4>Padding<a class="headerlink" href="#padding" title="Permalink to this headline"></a></h4>
+</section>
+<section id="padding">
+<h4>Padding<a class="headerlink" href="#padding" title="Permalink to this heading"></a></h4>
 <p>To ensure the right packet length for the Reed-Solomon coding in use, if the payload content is less than the maximum allowed, the data field of the RS block is padded with zeros. The number of padding bytes is declared in the header byte (bits 4-0).</p>
-</div>
-<div class="section" id="parity-data">
-<h4>Parity Data<a class="headerlink" href="#parity-data" title="Permalink to this headline"></a></h4>
-<p>This field is reserved for the computed parity bytes of the Reed-Solomon coding algorithm. The used implementation of the RS algorithm is based on the famous FEC library developed by Phil Karn (KA9Q) <a class="footnote-reference brackets" href="#id14" id="id6">6</a>. This field can be 16 or 32 bytes long, depending on the payload length, and consequently, the adopted RS scheme:</p>
+</section>
+<section id="parity-data">
+<h4>Parity Data<a class="headerlink" href="#parity-data" title="Permalink to this heading"></a></h4>
+<p>This field is reserved for the computed parity bytes of the Reed-Solomon coding algorithm. The used implementation of the RS algorithm is based on the famous FEC library developed by Phil Karn (KA9Q) <a class="footnote-reference brackets" href="#id14" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></a>. This field can be 16 or 32 bytes long, depending on the payload length, and consequently, the adopted RS scheme:</p>
 <table class="docutils align-default">
-<colgroup>
-<col style="width: 25%" />
-<col style="width: 44%" />
-<col style="width: 31%" />
-</colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p><strong>Size Num.</strong></p></th>
 <th class="head"><p><strong>Reed-Solomon Config.</strong></p></th>
@@ -276,42 +264,50 @@
 <li><p><strong>Primitive element</strong>: 11</p></li>
 <li><p><strong>Number of roots</strong>: 16 or 32 (table above)</p></li>
 </ul>
-</div>
-</div>
-</div>
-<div class="section" id="scrambling">
-<h2>Scrambling<a class="headerlink" href="#scrambling" title="Permalink to this headline"></a></h2>
-<p>Before transmitting a packet, the RS code block is scrambled by making a byte xor operation with a pre-generated table based on the polynomial <span class="math notranslate nohighlight">\(x^{8} + x^{7} + x^{5} + x^{3} + 1\)</span> (defined in the CCSDS 131.0-B-3 standard <a class="footnote-reference brackets" href="#id15" id="id7">7</a>).</p>
+</section>
+</section>
+</section>
+<section id="scrambling">
+<h2>Scrambling<a class="headerlink" href="#scrambling" title="Permalink to this heading"></a></h2>
+<p>Before transmitting a packet, the RS code block is scrambled by making a byte xor operation with a pre-generated table based on the polynomial <span class="math notranslate nohighlight">\(x^{8} + x^{7} + x^{5} + x^{3} + 1\)</span> (defined in the CCSDS 131.0-B-3 standard <a class="footnote-reference brackets" href="#id15" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></a>).</p>
 <p>When the receiver receives a packet, it also perform the same operation to de-scramble the RS code block and get the original content of the RS part of the packet.</p>
-<p>By scrambling the packets, long sequence of ones or zeros are avoided, by guarantying a good bit transition along the whole packet. More information about packet scrambling (or randomization) can be found in <a class="footnote-reference brackets" href="#id15" id="id8">7</a> (section 8.3).</p>
-</div>
-<div class="section" id="references">
-<h2>References<a class="headerlink" href="#references" title="Permalink to this headline"></a></h2>
-<dl class="footnote brackets">
-<dt class="label" id="id9"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
-<dd><p><a class="reference external" href="https://github.com/skagmo/ngham/blob/master/documentation/ngham_manual.pdf">https://github.com/skagmo/ngham/blob/master/documentation/ngham_manual.pdf</a></p>
-</dd>
-<dt class="label" id="id10"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
-<dd><p><a class="reference external" href="http://www.ax25.net/">http://www.ax25.net/</a></p>
-</dd>
-<dt class="label" id="id11"><span class="brackets"><a class="fn-backref" href="#id3">3</a></span></dt>
-<dd><p>Løfaldli, André; Birkeland, Roger. <em>Implementation of a Software Defined Radio Prototype Ground Station for CubeSats</em>. The 4S Symposium 2016.</p>
-</dd>
-<dt class="label" id="id12"><span class="brackets"><a class="fn-backref" href="#id4">4</a></span></dt>
-<dd><p><a class="reference external" href="https://github.com/skagmo/ngham">https://github.com/skagmo/ngham</a></p>
-</dd>
-<dt class="label" id="id13"><span class="brackets"><a class="fn-backref" href="#id5">5</a></span></dt>
-<dd><p><a class="reference external" href="https://en.wikipedia.org/wiki/ITU-T">https://en.wikipedia.org/wiki/ITU-T</a></p>
-</dd>
-<dt class="label" id="id14"><span class="brackets"><a class="fn-backref" href="#id6">6</a></span></dt>
-<dd><p><a class="reference external" href="http://www.ka9q.net/code/fec/">http://www.ka9q.net/code/fec/</a></p>
-</dd>
-<dt class="label" id="id15"><span class="brackets">7</span><span class="fn-backref">(<a href="#id7">1</a>,<a href="#id8">2</a>)</span></dt>
-<dd><p><a class="reference external" href="https://public.ccsds.org/Pubs/132x0b3.pdf">https://public.ccsds.org/Pubs/132x0b3.pdf</a></p>
-</dd>
-</dl>
-</div>
-</div>
+<p>By scrambling the packets, long sequence of ones or zeros are avoided, by guarantying a good bit transition along the whole packet. More information about packet scrambling (or randomization) can be found in <a class="footnote-reference brackets" href="#id15" id="id8" role="doc-noteref"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></a> (section 8.3).</p>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading"></a></h2>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id9" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://github.com/skagmo/ngham/blob/master/documentation/ngham_manual.pdf">https://github.com/skagmo/ngham/blob/master/documentation/ngham_manual.pdf</a></p>
+</aside>
+<aside class="footnote brackets" id="id10" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="http://www.ax25.net/">http://www.ax25.net/</a></p>
+</aside>
+<aside class="footnote brackets" id="id11" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">3</a><span class="fn-bracket">]</span></span>
+<p>Løfaldli, André; Birkeland, Roger. <em>Implementation of a Software Defined Radio Prototype Ground Station for CubeSats</em>. The 4S Symposium 2016.</p>
+</aside>
+<aside class="footnote brackets" id="id12" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">4</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://github.com/skagmo/ngham">https://github.com/skagmo/ngham</a></p>
+</aside>
+<aside class="footnote brackets" id="id13" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">5</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/ITU-T">https://en.wikipedia.org/wiki/ITU-T</a></p>
+</aside>
+<aside class="footnote brackets" id="id14" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id6">6</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="http://www.ka9q.net/code/fec/">http://www.ka9q.net/code/fec/</a></p>
+</aside>
+<aside class="footnote brackets" id="id15" role="note">
+<span class="label"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id7">1</a>,<a role="doc-backlink" href="#id8">2</a>)</span>
+<p><a class="reference external" href="https://public.ccsds.org/Pubs/132x0b3.pdf">https://public.ccsds.org/Pubs/132x0b3.pdf</a></p>
+</aside>
+</aside>
+</section>
+</section>
 
 
            </div>

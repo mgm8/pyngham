@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Reference &mdash; pyngham 1.1 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <title>Reference &mdash; pyngham 1.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/doctools.js"></script>
-        <script src="_static/language_data.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -44,9 +44,48 @@
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#main-module">Main Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#spp-module">SPP Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#extension-module">Extension Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pyngham.pyngham">Main Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pyngham.pyngham.PyNGHam"><code class="docutils literal notranslate"><span class="pre">PyNGHam</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pyngham.pyngham.PyNGHam.decode"><code class="docutils literal notranslate"><span class="pre">PyNGHam.decode()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pyngham.pyngham.PyNGHam.decode_byte"><code class="docutils literal notranslate"><span class="pre">PyNGHam.decode_byte()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pyngham.pyngham.PyNGHam.encode"><code class="docutils literal notranslate"><span class="pre">PyNGHam.encode()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#pyngham.pyngham.State"><code class="docutils literal notranslate"><span class="pre">State</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pyngham.spp">SPP Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pyngham.spp.PyNGHamSPP"><code class="docutils literal notranslate"><span class="pre">PyNGHamSPP</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pyngham.spp.PyNGHamSPP.decode"><code class="docutils literal notranslate"><span class="pre">PyNGHamSPP.decode()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pyngham.spp.PyNGHamSPP.decode_byte"><code class="docutils literal notranslate"><span class="pre">PyNGHamSPP.decode_byte()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pyngham.spp.PyNGHamSPP.encode"><code class="docutils literal notranslate"><span class="pre">PyNGHamSPP.encode()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pyngham.spp.PyNGHamSPP.encode_cmd_pkt"><code class="docutils literal notranslate"><span class="pre">PyNGHamSPP.encode_cmd_pkt()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pyngham.spp.PyNGHamSPP.encode_local_pkt"><code class="docutils literal notranslate"><span class="pre">PyNGHamSPP.encode_local_pkt()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pyngham.spp.PyNGHamSPP.encode_rx_pkt"><code class="docutils literal notranslate"><span class="pre">PyNGHamSPP.encode_rx_pkt()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pyngham.spp.PyNGHamSPP.encode_tx_pkt"><code class="docutils literal notranslate"><span class="pre">PyNGHamSPP.encode_tx_pkt()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#pyngham.spp.SPPState"><code class="docutils literal notranslate"><span class="pre">SPPState</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyngham.spp.SPPType"><code class="docutils literal notranslate"><span class="pre">SPPType</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pyngham.extension">Extension Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pyngham.extension.ExtPktType"><code class="docutils literal notranslate"><span class="pre">ExtPktType</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyngham.extension.PyNGHamExtension"><code class="docutils literal notranslate"><span class="pre">PyNGHamExtension</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pyngham.extension.PyNGHamExtension.append_dest_pkt"><code class="docutils literal notranslate"><span class="pre">PyNGHamExtension.append_dest_pkt()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pyngham.extension.PyNGHamExtension.append_id_pkt"><code class="docutils literal notranslate"><span class="pre">PyNGHamExtension.append_id_pkt()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pyngham.extension.PyNGHamExtension.append_pkt"><code class="docutils literal notranslate"><span class="pre">PyNGHamExtension.append_pkt()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pyngham.extension.PyNGHamExtension.append_pos_pkt"><code class="docutils literal notranslate"><span class="pre">PyNGHamExtension.append_pos_pkt()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pyngham.extension.PyNGHamExtension.append_stat_pkt"><code class="docutils literal notranslate"><span class="pre">PyNGHamExtension.append_stat_pkt()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pyngham.extension.PyNGHamExtension.append_toh_pkt"><code class="docutils literal notranslate"><span class="pre">PyNGHamExtension.append_toh_pkt()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pyngham.extension.PyNGHamExtension.decode"><code class="docutils literal notranslate"><span class="pre">PyNGHamExtension.decode()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pyngham.extension.PyNGHamExtension.decode_callsign"><code class="docutils literal notranslate"><span class="pre">PyNGHamExtension.decode_callsign()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pyngham.extension.PyNGHamExtension.encode_callsign"><code class="docutils literal notranslate"><span class="pre">PyNGHamExtension.encode_callsign()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pyngham.extension.PyNGHamExtension.get_numpkts"><code class="docutils literal notranslate"><span class="pre">PyNGHamExtension.get_numpkts()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="development.html">Development Instructions and Information</a></li>
@@ -76,19 +115,611 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="reference">
-<h1>Reference<a class="headerlink" href="#reference" title="Permalink to this headline"></a></h1>
+  <section id="reference">
+<h1>Reference<a class="headerlink" href="#reference" title="Permalink to this heading"></a></h1>
 <p>On this page, there is a reference to the functions, classes and methods of the PyNGHam library, including a description of each one, and the inputs and outputs.</p>
-<div class="section" id="main-module">
-<h2>Main Module<a class="headerlink" href="#main-module" title="Permalink to this headline"></a></h2>
-</div>
-<div class="section" id="spp-module">
-<h2>SPP Module<a class="headerlink" href="#spp-module" title="Permalink to this headline"></a></h2>
-</div>
-<div class="section" id="extension-module">
-<h2>Extension Module<a class="headerlink" href="#extension-module" title="Permalink to this headline"></a></h2>
-</div>
-</div>
+<section id="module-pyngham.pyngham">
+<span id="main-module"></span><h2>Main Module<a class="headerlink" href="#module-pyngham.pyngham" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyngham.pyngham.PyNGHam">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyngham.pyngham.</span></span><span class="sig-name descname"><span class="pre">PyNGHam</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mod</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyngham.pyngham.PyNGHam" title="Permalink to this definition"></a></dt>
+<dd><p>PyNGHam main class.</p>
+<p>This class is used to encode and/or decode a NGHam packet.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyngham.pyngham.PyNGHam.decode">
+<span class="sig-name descname"><span class="pre">decode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pkt</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyngham.pyngham.PyNGHam.decode" title="Permalink to this definition"></a></dt>
+<dd><p>Decodes a NGHam packet.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>pkt</strong> (<em>list</em><em>[</em><em>int</em><em>]</em><em>, </em><em>bytearray</em><em> or </em><em>str</em>) – raw NGHam packet to decode.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The decoded data, the number of corrected errors and a list with the bit position of the errors.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[int], int, list[int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyngham.pyngham.PyNGHam.decode_byte">
+<span class="sig-name descname"><span class="pre">decode_byte</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">byte</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyngham.pyngham.PyNGHam.decode_byte" title="Permalink to this definition"></a></dt>
+<dd><p>Decodes a single byte from a NGHam packet.</p>
+<p>This function returns the decoded packet when the complete sequence of bytes is received.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>byte</strong> (<em>int</em>) – byte of a raw NGHam packet to decode.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The decoded data, the number of corrected errors and a list with the bit position of the errors (empty data if the decoding process is not done).</p>
+</dd>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[int], int, list[int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyngham.pyngham.PyNGHam.encode">
+<span class="sig-name descname"><span class="pre">encode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyngham.pyngham.PyNGHam.encode" title="Permalink to this definition"></a></dt>
+<dd><p>Encodes a sequence of bytes as a NGHam packet.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pl</strong> (<em>list</em><em>[</em><em>int</em><em>]</em><em>, </em><em>bytearray</em><em> or </em><em>str</em>) – Data to encode as a NGHam packet (list of integeres, byte array or string).</p></li>
+<li><p><strong>flags</strong> (<em>int</em><em>, </em><em>optional</em>) – Packet flags, default 0.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An encoded NGHam packet.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyngham.pyngham.State">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyngham.pyngham.</span></span><span class="sig-name descname"><span class="pre">State</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyngham.pyngham.State" title="Permalink to this definition"></a></dt>
+<dd><p>Decoder states:</p>
+<ul class="simple">
+<li><p><strong>SIZE_TAG</strong></p></li>
+<li><p><strong>SIZE_TAG_2</strong></p></li>
+<li><p><strong>SIZE_TAG_3</strong></p></li>
+<li><p><strong>SIZE_KNOWN</strong></p></li>
+<li><p><strong>STATUS</strong></p></li>
+<li><p><strong>STATUS_2</strong></p></li>
+</ul>
+</dd></dl>
+
+</section>
+<section id="module-pyngham.spp">
+<span id="spp-module"></span><h2>SPP Module<a class="headerlink" href="#module-pyngham.spp" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyngham.spp.PyNGHamSPP">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyngham.spp.</span></span><span class="sig-name descname"><span class="pre">PyNGHamSPP</span></span><a class="headerlink" href="#pyngham.spp.PyNGHamSPP" title="Permalink to this definition"></a></dt>
+<dd><p>The protocol is used to transfer data and commands between the transceiver and the serial port host.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyngham.spp.PyNGHamSPP.decode">
+<span class="sig-name descname"><span class="pre">decode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pkt</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyngham.spp.PyNGHamSPP.decode" title="Permalink to this definition"></a></dt>
+<dd><p>Decodes an SPP packet.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>pkt</strong> – is the SPP packet to decode.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The decoded packet as a dictionary.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyngham.spp.PyNGHamSPP.decode_byte">
+<span class="sig-name descname"><span class="pre">decode_byte</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyngham.spp.PyNGHamSPP.decode_byte" title="Permalink to this definition"></a></dt>
+<dd><p>Decodes a single byte from a SPP packet.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>c</strong> (<em>int</em>) – is the byte from a SPP packet to decode.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An empty dictionary while the decoding is not done yet, and a dictionay with the decoded data when the decoding is ready.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyngham.spp.PyNGHamSPP.encode">
+<span class="sig-name descname"><span class="pre">encode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pkt_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pl</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyngham.spp.PyNGHamSPP.encode" title="Permalink to this definition"></a></dt>
+<dd><p>Encodes a generic SPP packet from a given payload data. The SPP packets have the following fields:</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>Name</strong></p></td>
+<td><p><strong>Size (Byte)</strong></p></td>
+<td><p><strong>Notes</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>Start tag</p></td>
+<td><p>1</p></td>
+<td><p>Fixed as ’$’.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CRC Size</p></td>
+<td><p>2</p></td>
+<td><p>16-bit CRC CCITT (start=0xffff, polynomial=0x1021 reversed,
+Xorout=0xffff). Notice the use of little endian, as
+everything on this layer and up use little endian. CRC is
+calculated of everything except start tag and CRC itself.</p></td>
+</tr>
+<tr class="row-even"><td><p>Payload type</p></td>
+<td><p>1</p></td>
+<td><p>0x00=RF receive packet, 0x01=RF transmit packet,
+0x02=Local packet, 0x03=Command.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Payload length</p></td>
+<td><p>1</p></td>
+<td><p>Length of payload field.</p></td>
+</tr>
+<tr class="row-even"><td><p>Payload</p></td>
+<td><p>n</p></td>
+<td><p>This is the actual payload specified by the payload type.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pkt_type</strong> (<em>int</em>) – The SPP packet type (SPPType.RX.value, SPPType.TX.value, SPPType.LOCAL.value or SPPType.CMD.value).</p></li>
+<li><p><strong>pl</strong> (<em>list</em><em>[</em><em>int</em><em>]</em>) – The payload of the desired SPP packet.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The encoded SPP packet.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyngham.spp.PyNGHamSPP.encode_cmd_pkt">
+<span class="sig-name descname"><span class="pre">encode_cmd_pkt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyngham.spp.PyNGHamSPP.encode_cmd_pkt" title="Permalink to this definition"></a></dt>
+<dd><p>Encodes a command packet.</p>
+<p>This type of packet is used to enter commands. On the Owl VHF, this command will do the same
+as typing into the command-line interpreter, except the commands and replies are not terminated
+by LF/CR/CRLF. The table below describes what is put into the payload of the general packet format.</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>Name</strong></p></td>
+<td><p><strong>Size (Byte)</strong></p></td>
+<td><p><strong>Notes</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>Command</p></td>
+<td><p>n B</p></td>
+<td><p>Non-terminated command, 144800000”.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cmd</strong> (<em>int</em>) – A list with command content of the packet.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The encoded SPP command packet.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyngham.spp.PyNGHamSPP.encode_local_pkt">
+<span class="sig-name descname"><span class="pre">encode_local_pkt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flags</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyngham.spp.PyNGHamSPP.encode_local_pkt" title="Permalink to this definition"></a></dt>
+<dd><p>Encodes a local packet.</p>
+<p>Packet generated by the radio (not received over the air). For example a status report. The table below describes what is put into the payload of the general packet format.</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>Name</strong></p></td>
+<td><p><strong>Size (Byte)</strong></p></td>
+<td><p><strong>Notes</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>Flags</p></td>
+<td><p>1</p></td>
+<td><p>Bit 0: NGHam extension enabled flag.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Data</p></td>
+<td><p>n-1 B</p></td>
+<td><p>Data to be transmitted.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>flags</strong> (<em>int</em>) – Local packet flags (see table above).</p></li>
+<li><p><strong>data</strong> (<em>list</em><em>[</em><em>int</em><em>]</em>) – The data of the local packet.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The encoded SPP local packet.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyngham.spp.PyNGHamSPP.encode_rx_pkt">
+<span class="sig-name descname"><span class="pre">encode_rx_pkt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">noise_floor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rssi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symbol_errors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyngham.spp.PyNGHamSPP.encode_rx_pkt" title="Permalink to this definition"></a></dt>
+<dd><p>Encodes an RX packet from the given data.</p>
+<p>Data received from RF link. Length from 4 to 223. The table below describes what is put into the
+payload of the general packet format.</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>Name</strong></p></td>
+<td><p><strong>Size</strong></p></td>
+<td><p><strong>Notes</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>Time of hour in microseconds</p></td>
+<td><p>4</p></td>
+<td><p>Local time of hour timestamp of the incoming packet.
+Wraps from 3599999999 (one step before 3600 seconds)
+to 0. N/A-value is 0xffffffff.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Noise floor</p></td>
+<td><p>1</p></td>
+<td><p>Subtract 200 to get dBm. Eg. 0x50 = -120 dBm. N/A is 0xff.</p></td>
+</tr>
+<tr class="row-even"><td><p>RSSI</p></td>
+<td><p>1</p></td>
+<td><p>Same as above.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Symbol errors</p></td>
+<td><p>1</p></td>
+<td><p>Number of corrected Reed-Solomon symbols.</p></td>
+</tr>
+<tr class="row-even"><td><p>Flags</p></td>
+<td><p>1</p></td>
+<td><p>Bit 0: NGHam extension enabled. If this bit is set, the
+data field is a valid NGHam extension packet.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Data</p></td>
+<td><p>n-8</p></td>
+<td><p>Received data.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>noise_floor</strong> (<em>int</em>) – Noise floor value (see table above).</p></li>
+<li><p><strong>rssi</strong> (<em>int</em>) – RSSI value (see table above).</p></li>
+<li><p><strong>symbol_errors</strong> (<em>int</em>) – The number of corrected Reed-Solomon symbols.</p></li>
+<li><p><strong>flags</strong> (<em>int</em>) – RX packet flags (see table above).</p></li>
+<li><p><strong>data</strong> (<em>list</em><em>[</em><em>int</em><em>]</em>) – The data of the packet.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The encoded SPP RX packet.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyngham.spp.PyNGHamSPP.encode_tx_pkt">
+<span class="sig-name descname"><span class="pre">encode_tx_pkt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flags</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyngham.spp.PyNGHamSPP.encode_tx_pkt" title="Permalink to this definition"></a></dt>
+<dd><p>Encodes a TX packet from the given data.</p>
+<p>Data to be transmitted on RF link. Length from 1 to 220. The table below describes what is put
+into the payload of the general packet format.</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>Name</strong></p></td>
+<td><p><strong>Size (Byte)</strong></p></td>
+<td><p><strong>Notes</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>Flags</p></td>
+<td><p>1</p></td>
+<td><p>Bit 0: NGHam extension enabled flag.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Data</p></td>
+<td><p>n-1 B</p></td>
+<td><p>Data to be transmitted.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>flags</strong> (<em>int</em>) – TX paket flags (see table above).</p></li>
+<li><p><strong>data</strong> (<em>list</em><em>[</em><em>int</em><em>]</em>) – The data of the packet.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The encoded SPP TX packet.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyngham.spp.SPPState">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyngham.spp.</span></span><span class="sig-name descname"><span class="pre">SPPState</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyngham.spp.SPPState" title="Permalink to this definition"></a></dt>
+<dd><p>States:</p>
+<ul class="simple">
+<li><p><strong>START</strong>: Decoder in start flag field</p></li>
+<li><p><strong>HEADER</strong>: Decoder in header field</p></li>
+<li><p><strong>PAYLOAD</strong>: Decoder in payload field</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyngham.spp.SPPType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyngham.spp.</span></span><span class="sig-name descname"><span class="pre">SPPType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyngham.spp.SPPType" title="Permalink to this definition"></a></dt>
+<dd><p>Serial Port Protocol packets types:</p>
+<ul class="simple">
+<li><p><strong>RX</strong>: RF RX packet</p></li>
+<li><p><strong>TX</strong>: RF TX packet</p></li>
+<li><p><strong>LOCAL</strong>: Local packet</p></li>
+<li><p><strong>CMD</strong>: Command packet</p></li>
+</ul>
+</dd></dl>
+
+</section>
+<section id="module-pyngham.extension">
+<span id="extension-module"></span><h2>Extension Module<a class="headerlink" href="#module-pyngham.extension" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyngham.extension.ExtPktType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyngham.extension.</span></span><span class="sig-name descname"><span class="pre">ExtPktType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyngham.extension.ExtPktType" title="Permalink to this definition"></a></dt>
+<dd><p>Extension packets types.</p>
+<ul class="simple">
+<li><p><strong>DATA</strong>: Generic data packet</p></li>
+<li><p><strong>ID</strong>: ID packet</p></li>
+<li><p><strong>STAT</strong>: Status packet</p></li>
+<li><p><strong>SIMPLEDIGI</strong>: Simple digi packet</p></li>
+<li><p><strong>POS</strong>: Position data packet</p></li>
+<li><p><strong>TOH</strong>: Time info packet</p></li>
+<li><p><strong>DEST</strong>: Destination/receiver callsign</p></li>
+<li><p><strong>CMD_REQ</strong>: Command request packet</p></li>
+<li><p><strong>CMD_REPLY</strong>: Command reply packet</p></li>
+<li><p><strong>REQUEST</strong>: Request packet</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyngham.extension.PyNGHamExtension">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyngham.extension.</span></span><span class="sig-name descname"><span class="pre">PyNGHamExtension</span></span><a class="headerlink" href="#pyngham.extension.PyNGHamExtension" title="Permalink to this definition"></a></dt>
+<dd><p>Class to handle NGHam extension packets.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyngham.extension.PyNGHamExtension.append_dest_pkt">
+<span class="sig-name descname"><span class="pre">append_dest_pkt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">call_ssid</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyngham.extension.PyNGHamExtension.append_dest_pkt" title="Permalink to this definition"></a></dt>
+<dd><p>Adds a destination extension packet to a NGHam payload.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pl</strong> (<em>list</em><em>[</em><em>int</em><em>]</em>) – is the packet payload to append a destination packet.</p></li>
+<li><p><strong>call_ssid</strong> (<em>list</em><em>[</em><em>int</em><em>]</em>) – 7 x 6 bit (SIXBIT DEC, which is ASCII-32 and limited to 0-64) empty characters padded with 0, 6 bit SSID.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The given payload with the new destination extension packet.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyngham.extension.PyNGHamExtension.append_id_pkt">
+<span class="sig-name descname"><span class="pre">append_id_pkt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">call_ssid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sequence</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyngham.extension.PyNGHamExtension.append_id_pkt" title="Permalink to this definition"></a></dt>
+<dd><p>Adds a ID extension packet to a NGHam payload.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Note<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Always first in a packet, except when resent by another station.</p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>pl</strong> (<em>list</em><em>[</em><em>int</em><em>]</em>) – is the packet payload to append an ID packet.</p></li>
+<li><p><strong>call_ssid</strong> (<em>list</em><em>[</em><em>int</em><em>]</em>) – 7 x 6 bit (SIXBIT DEC, which is ASCII-32 and limited to 0-64) empty characters padded with 0, 6 bit SSID.</p></li>
+<li><p><strong>sequence</strong> (<em>int</em>) – is the packet sequence number, wraps around from 255 to 0.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The given payload with the new ID extension packet.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyngham.extension.PyNGHamExtension.append_pkt">
+<span class="sig-name descname"><span class="pre">append_pkt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">typ</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyngham.extension.PyNGHamExtension.append_pkt" title="Permalink to this definition"></a></dt>
+<dd><p>Appends a new extension packet to a NGHam payload.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pl</strong> (<em>list</em><em>[</em><em>int</em><em>]</em>) – is the packet payload to append an extension packet.</p></li>
+<li><p><strong>typ</strong> (<em>int</em>) – is the type of extension packet.</p></li>
+<li><p><strong>data</strong> (<em>list</em><em>[</em><em>int</em><em>]</em>) – is the content of the extension packet.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The given payload with the extension packet.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyngham.extension.PyNGHamExtension.append_pos_pkt">
+<span class="sig-name descname"><span class="pre">append_pos_pkt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">latitude</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">longitude</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">altitude</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sog</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cog</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hdop</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyngham.extension.PyNGHamExtension.append_pos_pkt" title="Permalink to this definition"></a></dt>
+<dd><p>Adds a position extension packet to a NGHam payload.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pl</strong> (<em>list</em><em>[</em><em>int</em><em>]</em>) – is the packet payload to append a position packet.</p></li>
+<li><p><strong>latitude</strong> (<em>int</em>) – Latitude in degrees * 10^7</p></li>
+<li><p><strong>longitude</strong> (<em>int</em>) – Longitude in degrees * 10^7</p></li>
+<li><p><strong>altitude</strong> (<em>int</em>) – Altitude in centimeters</p></li>
+<li><p><strong>sog</strong> (<em>int</em>) – Hundreds of meters per second</p></li>
+<li><p><strong>cog</strong> (<em>int</em>) – Tenths of degrees</p></li>
+<li><p><strong>hdop</strong> (<em>int</em>) – In tenths</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The given payload with the new position extension packet.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyngham.extension.PyNGHamExtension.append_stat_pkt">
+<span class="sig-name descname"><span class="pre">append_stat_pkt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hw_ver</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">serial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sw_ver</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uptime_s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">voltage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noise</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cntr_rx_ok</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cntr_rx_fix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cntr_rx_err</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cntr_tx</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyngham.extension.PyNGHamExtension.append_stat_pkt" title="Permalink to this definition"></a></dt>
+<dd><p>Adds an statistic extension packet to a NGHam payload.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pl</strong> (<em>list</em><em>[</em><em>int</em><em>]</em>) – is the packet payload to append an statistic packet.</p></li>
+<li><p><strong>hw_ver</strong> (<em>int</em>) – hardware version ID (10b for company, 6b for product).</p></li>
+<li><p><strong>serial</strong> (<em>int</em>) – Serial number.</p></li>
+<li><p><strong>sw_ver</strong> (<em>int</em>) – software version ID (4b major, 4b minor, 8b build).</p></li>
+<li><p><strong>uptime_s</strong> (<em>int</em>) – time in whole seconds since startup.</p></li>
+<li><p><strong>voltage</strong> (<em>int</em>) – input voltage in decivolts (0-25.5)</p></li>
+<li><p><strong>temp</strong> (<em>int</em>) – system temperature in degrees Celsius (-128 to 127).</p></li>
+<li><p><strong>signal</strong> (<em>int</em>) – received signal strength in dBm - 200, -200 to 54 (0xFF=N/A).</p></li>
+<li><p><strong>noise</strong> (<em>int</em>) – noise floor, same as above.</p></li>
+<li><p><strong>cntr_rx_ok</strong> (<em>int</em>) – packets successfully received.</p></li>
+<li><p><strong>cntr_rx_fix</strong> (<em>int</em>) – packets with corrected errors.</p></li>
+<li><p><strong>cntr_rx_err</strong> (<em>int</em>) – packets with uncorrectable errors.</p></li>
+<li><p><strong>cntr_tx</strong> (<em>int</em>) – packets sent.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The given payload with the new statistic extension packet.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyngham.extension.PyNGHamExtension.append_toh_pkt">
+<span class="sig-name descname"><span class="pre">append_toh_pkt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toh_us</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toh_val</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyngham.extension.PyNGHamExtension.append_toh_pkt" title="Permalink to this definition"></a></dt>
+<dd><p>Adds a TOH extension packet to a NGHam payload.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>packet</strong> (<em>pl is the packet payload to append a TOH</em>) – </p></li>
+<li><p><strong>toh_us</strong> (<em>int</em>) – time of hour in microseconds.</p></li>
+<li><p><strong>toh_val</strong> (<em>int</em>) – validity.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The given payload with the new TOH extension packet.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyngham.extension.PyNGHamExtension.decode">
+<span class="sig-name descname"><span class="pre">decode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pl</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyngham.extension.PyNGHamExtension.decode" title="Permalink to this definition"></a></dt>
+<dd><p>Decodes all extension packets in a given NGHam payload.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>pl</strong> (<em>list</em><em>[</em><em>int</em><em>]</em>) – is the NGHam payload to decode.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>All found extension packets as a list of dictionaries.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyngham.extension.PyNGHamExtension.decode_callsign">
+<span class="sig-name descname"><span class="pre">decode_callsign</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">enc_callsign</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyngham.extension.PyNGHamExtension.decode_callsign" title="Permalink to this definition"></a></dt>
+<dd><p>Decodes a given encoded callsign.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>enc_callsign</strong> (<em>list</em><em>[</em><em>int</em><em>]</em>) – the encoded callsign to decode.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The decoded callsign as an string.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyngham.extension.PyNGHamExtension.encode_callsign">
+<span class="sig-name descname"><span class="pre">encode_callsign</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">callsign</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ssid</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyngham.extension.PyNGHamExtension.encode_callsign" title="Permalink to this definition"></a></dt>
+<dd><p>Encodes a given callsign.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>callsign</strong> (<em>str</em>) – is the callsign to encode (ASCII string).</p></li>
+<li><p><strong>ssid</strong> (<em>int</em>) – is the SSID to encode with the callsign (integer).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The encoded callsign as a list of integers (bytes).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyngham.extension.PyNGHamExtension.get_numpkts">
+<span class="sig-name descname"><span class="pre">get_numpkts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyngham.extension.PyNGHamExtension.get_numpkts" title="Permalink to this definition"></a></dt>
+<dd><p>Gets the number of extension packets in a NGHam packet.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>d</strong> (<em>list</em><em>[</em><em>int</em><em>]</em>) – is the packet payload with extension packet(s).</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The detected number of extension packets.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
 
 
            </div>
