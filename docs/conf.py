@@ -1,7 +1,7 @@
 #
 # conf.py
 # 
-# Copyright (C) 2022, Gabriel Mariano Marcelino - PU5GMA <gabriel.mm8@gmail.com>
+# Copyright (C) 2023, Gabriel Mariano Marcelino - PU5GMA <gabriel.mm8@gmail.com>
 # 
 # This file is part of PyNGHam library.
 # 
@@ -32,14 +32,16 @@ import sys
 
 import sphinx_rtd_theme
 
+sys.path.insert(0, os.path.abspath('../'))  # Source code dir relative to this file
+
 # -- Project information -----------------------------------------------------
 
 project = 'pyngham'
-copyright = '2022, Gabriel Mariano Marcelino - PU5GMA'
+copyright = '2023, Gabriel Mariano Marcelino - PU5GMA'
 author = 'Gabriel Mariano Marcelino'
 
 # The full version, including alpha/beta/rc tags
-release = "1.0"
+release = "1.1"
 
 
 # -- General configuration ---------------------------------------------------
@@ -49,6 +51,7 @@ release = "1.0"
 # ones.
 extensions = [
     'sphinx_rtd_theme',
+    'sphinx.ext.autodoc',       # Core library for html generation from docstrings
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -73,8 +76,3 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 # a list of builtin themes.
 #
 html_theme = 'sphinx_rtd_theme'
-
-# Add any paths that contain custom static files (such as style sheets) here,
-# relative to this directory. They are copied after the builtin static files,
-# so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']

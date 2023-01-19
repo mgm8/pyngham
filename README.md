@@ -10,7 +10,7 @@
     <img src="https://img.shields.io/github/license/mgm8/pyngham?style=for-the-badge">
 </a>
 <a href="https://github.com/mgm8/pyngham/actions">
-    <img src="https://img.shields.io/github/workflow/status/mgm8/pyngham/Test?style=for-the-badge">
+    <img src="https://img.shields.io/github/actions/workflow/status/mgm8/pyngham/test.yml?style=for-the-badge">
 </a>
 
 ## Overview

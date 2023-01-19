@@ -35,7 +35,14 @@ _PYNGHAM_PAR_SIZES              = [16, 16, 16,  32,  32,  32,  32]
 
 class State(Enum):
     """
-    Decoder states.
+    Decoder states:
+
+    * **SIZE_TAG**
+    * **SIZE_TAG_2**
+    * **SIZE_TAG_3**
+    * **SIZE_KNOWN**
+    * **STATUS**
+    * **STATUS_2**
     """
     SIZE_TAG         = 0
     SIZE_TAG_2       = 1
@@ -102,9 +109,11 @@ class PyNGHam:
 
         This method initializes the seven Reed-Solomon schemes used by the NGHam protocol. After that, the encode and decode functions are ready to be used.
 
-        :param mod: Modulation type (two or four level).
+        :param mod: Modulation type (two=0 or four level=1, default 0).
+        :type mod: int, optional
 
         :return: None.
+        :rtype: None
         """
         self._modulation = mod
 
@@ -127,6 +136,7 @@ class PyNGHam:
         Represents the class as a string.
 
         :return: a brief description of the class.
+        :rtype: str
         """
         return 'NGHam Protocol Handler'
 
@@ -135,9 +145,13 @@ class PyNGHam:
         Verifies if a size tag is valid or not.
 
         :param x: Tag reference to compare.
+        :type x: int
+
         :param y: Tag sequence to verify.
+        :type y: int
 
         :return: True/False if the tag comparison passed or not.
+        :rtype: bool
         """
         j = int()
         distance = int()
@@ -162,9 +176,13 @@ class PyNGHam:
         Encodes a sequence of bytes as a NGHam packet.
 
         :param pl: Data to encode as a NGHam packet (list of integeres, byte array or string).
-        :param flags: Packet flags.
+        :type pl: list[int], bytearray or str
+
+        :param flags: Packet flags, default 0.
+        :type flags: int, optional
 
         :return: An encoded NGHam packet.
+        :rtype: list[int]
         """
         if isinstance(pl, str):
             pl = [ord(x) for x in pl]
@@ -220,8 +238,10 @@ class PyNGHam:
         Decodes a NGHam packet.
 
         :param pkt: raw NGHam packet to decode.
+        :type pkt: list[int], bytearray or str
 
         :return: The decoded data, the number of corrected errors and a list with the bit position of the errors.
+        :rtype: list[int], int, list[int]
         """
         pkt = list(pkt)     # Ensure that the input is a list of ints
         # Remove preamble and sync word if present
@@ -244,8 +264,10 @@ class PyNGHam:
         This function returns the decoded packet when the complete sequence of bytes is received.
 
         :param byte: byte of a raw NGHam packet to decode.
+        :type byte: int
 
         :return: The decoded data, the number of corrected errors and a list with the bit position of the errors (empty data if the decoding process is not done).
+        :type: list[int], int, list[int]
         """
         if self._decoder_state == State.SIZE_TAG.value:
             self._decoder_size_tag = byte

@@ -25,4 +25,5 @@ Contents
    extension
    install
    usage
+   reference
    development
