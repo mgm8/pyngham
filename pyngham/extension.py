@@ -28,6 +28,17 @@ from pyngham.pyngham import _PYNGHAM_PL_SIZES
 class ExtPktType(Enum):
     """
     Extension packets types.
+
+    * **DATA**: Generic data packet
+    * **ID**: ID packet
+    * **STAT**: Status packet
+    * **SIMPLEDIGI**: Simple digi packet
+    * **POS**: Position data packet
+    * **TOH**: Time info packet
+    * **DEST**: Destination/receiver callsign
+    * **CMD_REQ**: Command request packet
+    * **CMD_REPLY**: Command reply packet
+    * **REQUEST**: Request packet
     """
     DATA          = 0       # Generic data packet
     ID            = 1       # ID packet
@@ -60,8 +71,10 @@ class PyNGHamExtension:
         Gets the number of extension packets in a NGHam packet.
 
         :param d: is the packet payload with extension packet(s).
+        :type d: list[int]
 
-        :return The detected number of extension packets.
+        :return: The detected number of extension packets.
+        :rtype: int
         """
         # Go through all sub packets
         start = 0
@@ -82,10 +95,15 @@ class PyNGHamExtension:
         Appends a new extension packet to a NGHam payload.
 
         :param pl: is the packet payload to append an extension packet.
-        :param typ: is the type of extension packet.
-        :param data: is the content of the extension packet.
+        :type pl: list[int]
 
-        :return The given payload with the extension packet.
+        :param typ: is the type of extension packet.
+        :type typ: int
+
+        :param data: is the content of the extension packet.
+        :type data: list[int]
+
+        :return: The given payload with the extension packet.
         """
         if len(pl) + 2 + len(data) > _PYNGHAM_PL_SIZES[-1]:
             return pl
@@ -101,10 +119,16 @@ class PyNGHamExtension:
         Adds a TOH extension packet to a NGHam payload.
 
         :param pl is the packet payload to append a TOH packet:
-        :param toh_us: time of hour in microseconds.
-        :param toh_val: validity.
+        :type pl: list[int]
 
-        :return The given payload with the new TOH extension packet.
+        :param toh_us: time of hour in microseconds.
+        :type toh_us: int
+
+        :param toh_val: validity.
+        :type toh_val: int
+
+        :return: The given payload with the new TOH extension packet.
+        :rtype: list[int]
         """
         data = list()
 
@@ -121,20 +145,46 @@ class PyNGHamExtension:
         Adds an statistic extension packet to a NGHam payload.
 
         :param pl: is the packet payload to append an statistic packet.
-        :param hw_ver: hardware version ID (10b for company, 6b for product).
-        :param serial: Serial number.
-        :param sw_ver: software version ID (4b major, 4b minor, 8b build).
-        :param uptime_s: time in whole seconds since startup.
-        :param voltage: input voltage in decivolts (0-25.5)
-        :param temp: system temperature in degrees Celsius (-128 to 127).
-        :param signal: received signal strength in dBm - 200, -200 to 54 (0xFF=N/A).
-        :param noise: noise floor, same as above.
-        :param cntr_rx_ok: packets successfully received.
-        :param cntr_rx_fix: packets with corrected errors.
-        :param cntr_rx_err: packets with uncorrectable errors.
-        :param cntr_tx: packets sent.
+        :type pl: list[int]
 
-        :return The given payload with the new statistic extension packet.
+        :param hw_ver: hardware version ID (10b for company, 6b for product).
+        :type hw_ver: int
+
+        :param serial: Serial number.
+        :type serial: int
+
+        :param sw_ver: software version ID (4b major, 4b minor, 8b build).
+        :type sw_ver: int
+
+        :param uptime_s: time in whole seconds since startup.
+        :type uptime_s: int
+
+        :param voltage: input voltage in decivolts (0-25.5)
+        :type voltage: int
+
+        :param temp: system temperature in degrees Celsius (-128 to 127).
+        :type temp: int
+
+        :param signal: received signal strength in dBm - 200, -200 to 54 (0xFF=N/A).
+        :type signal: int
+
+        :param noise: noise floor, same as above.
+        :type noise: int
+
+        :param cntr_rx_ok: packets successfully received.
+        :type cntr_rx_ok: int
+
+        :param cntr_rx_fix: packets with corrected errors.
+        :type cntr_rx_fix: int
+
+        :param cntr_rx_err: packets with uncorrectable errors.
+        :type cntr_rx_err: int
+
+        :param cntr_tx: packets sent.
+        :type cntr_tx: int
+
+        :return: The given payload with the new statistic extension packet.
+        :rtype: list[int]
         """
         data = list()
 
@@ -168,14 +218,28 @@ class PyNGHamExtension:
         Adds a position extension packet to a NGHam payload.
 
         :param pl: is the packet payload to append a position packet.
-        :param latitude: Latitude in degrees * 10^7
-        :param longitude: Longitude in degrees * 10^7
-        :param altitude: Altitude in centimeters
-        :param sog: Hundreds of meters per second
-        :param cog: Tenths of degrees
-        :param hdop: In tenths
+        :type pl: list[int]
 
-        :return The given payload with the new position extension packet.
+        :param latitude: Latitude in degrees * 10^7
+        :type latitude: int
+
+        :param longitude: Longitude in degrees * 10^7
+        :type longitude: int
+
+        :param altitude: Altitude in centimeters
+        :type altitude: int
+
+        :param sog: Hundreds of meters per second
+        :type sog: int
+
+        :param cog: Tenths of degrees
+        :type cog: int
+
+        :param hdop: In tenths
+        :type hdop: int
+
+        :return: The given payload with the new position extension packet.
+        :rtype: list[int]
         """
         data = list()
 
@@ -206,10 +270,16 @@ class PyNGHamExtension:
         :note: Always first in a packet, except when resent by another station.
 
         :param pl: is the packet payload to append an ID packet.
-        :param call_ssid: 7 x 6 bit (SIXBIT DEC, which is ASCII-32 and limited to 0-64) empty characters padded with 0, 6 bit SSID.
-        :param sequence: is the packet sequence number, wraps around from 255 to 0.
+        :type pl: list[int]
 
-        :return The given payload with the new ID extension packet.
+        :param call_ssid: 7 x 6 bit (SIXBIT DEC, which is ASCII-32 and limited to 0-64) empty characters padded with 0, 6 bit SSID.
+        :type call_ssid: list[int]
+
+        :param sequence: is the packet sequence number, wraps around from 255 to 0.
+        :type sequence: int
+
+        :return: The given payload with the new ID extension packet.
+        :rtype: list[int]
         """
         data = list()
 
@@ -223,9 +293,13 @@ class PyNGHamExtension:
         Adds a destination extension packet to a NGHam payload.
 
         :param pl: is the packet payload to append a destination packet.
-        :param call_ssid: 7 x 6 bit (SIXBIT DEC, which is ASCII-32 and limited to 0-64) empty characters padded with 0, 6 bit SSID.
+        :type pl: list[int]
 
-        :return The given payload with the new destination extension packet.
+        :param call_ssid: 7 x 6 bit (SIXBIT DEC, which is ASCII-32 and limited to 0-64) empty characters padded with 0, 6 bit SSID.
+        :type call_ssid: list[int]
+
+        :return: The given payload with the new destination extension packet.
+        :rtype: list[int]
         """
         return self.append_pkt(pl, ExtPktType.DEST.value, call_ssid)
 
@@ -234,8 +308,10 @@ class PyNGHamExtension:
         Decodes all extension packets in a given NGHam payload.
 
         :param pl: is the NGHam payload to decode.
+        :type pl: list[int]
 
-        :return All found extension packets as a list of dictionaries.
+        :return: All found extension packets as a list of dictionaries.
+        :rtype: dict
         """
         res = list()
 
@@ -277,8 +353,10 @@ class PyNGHamExtension:
         Decodes a data paketc.
 
         :param pkt: is the data packet to decode.
+        :type pkt: list[int]
 
-        :return .
+        :return: None
+        :rtype: None
         """
         pass
 
@@ -287,8 +365,10 @@ class PyNGHamExtension:
         Decodes an ID packet.
 
         :param pkt: is the ID packet to decode.
+        :type pkt: list[int]
 
-        :return .
+        :return: None
+        :rtype: None
         """
         res = {
             "call_ssid":    self.decode_callsign(pkt),
@@ -302,8 +382,10 @@ class PyNGHamExtension:
         Decodes an status packet.
 
         :param pkt: is the status packet to decode.
+        :type pkt: list[int]
 
-        :return .
+        :return: A dictionary containing the fields of the decoded stat packet.
+        :rtype: dict
         """
         res = {
             "hw_ver":       (pkt[0] << 8) | pkt[1],
@@ -330,8 +412,10 @@ class PyNGHamExtension:
         Decodes a position packet.
 
         :param pkt: is the position packet to decode.
+        :type pkt: list[int]
 
-        :return .
+        :return: A dictionary containing the fields of the decoded pos packet.
+        :rtype: dict
         """
         res = {
             "latitude":     (pkt[0] << 24) | (pkt[1] << 16) | (pkt[2] << 8) | pkt[3],
@@ -349,8 +433,10 @@ class PyNGHamExtension:
         Decodes a TOH packet.
 
         :param pkt: is the TOH packet to decode.
+        :type pkt: list[int]
 
-        :return .
+        :return: A dictionary containing the fields of the decoded toh packet.
+        :rtype: dict
         """
         res = {
             "toh_us":       (pkt[0] << 24) | (pkt[1] << 16) | (pkt[2] << 8) | pkt[3],
@@ -364,8 +450,10 @@ class PyNGHamExtension:
         Decodes a destination packet.
 
         :param pkt: is the destination packet to decode.
+        :type pkt: list[int]
 
-        :return .
+        :return: A dictionary containing the fields of the decoded dest packet.
+        :rtype: dict
         """
         res = {
             "call_ssid":    self.decode_callsign(pkt)
@@ -387,9 +475,13 @@ class PyNGHamExtension:
         Encodes a given callsign.
 
         :param callsign: is the callsign to encode (ASCII string).
-        :param ssid: is the SSID to encode with the callsign (integer).
+        :type callsign: str
 
-        :return The encoded callsign as a list of integers (bytes).
+        :param ssid: is the SSID to encode with the callsign (integer).
+        :type ssid: int
+
+        :return: The encoded callsign as a list of integers (bytes).
+        :rtype: list[int]
         """
         if (len(callsign) > 7) or (ssid >= 100):
             return list()
@@ -417,8 +509,10 @@ class PyNGHamExtension:
         Decodes a given encoded callsign.
 
         :param enc_callsign: the encoded callsign to decode.
+        :type enc_callsign: list[int]
 
-        :return The decoded callsign as an string.
+        :return: The decoded callsign as an string.
+        :rtype: str
         """
         callsign = str()
 

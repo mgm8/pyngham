@@ -27,7 +27,12 @@ from crc import Calculator, Configuration
 
 class SPPType(Enum):
     """
-    Serial Port Protocol packets types.
+    Serial Port Protocol packets types:
+
+    * **RX**: RF RX packet
+    * **TX**: RF TX packet
+    * **LOCAL**: Local packet
+    * **CMD**: Command packet
     """
     RX      = 0             # RF RX packet
     TX      = 1             # RF TX packet
@@ -39,7 +44,11 @@ _PYNGHAM_SPP_START  = 0x24  # '$' in ASCII
 
 class SPPState(Enum):
     """
-    States.
+    States:
+
+    * **START**: Decoder in start flag field
+    * **HEADER**: Decoder in header field
+    * **PAYLOAD**: Decoder in payload field
     """
     START   = 0             # Decoder in start flag field
     HEADER  = 1             # Decoder in header field
@@ -58,13 +67,14 @@ class PyNGHamSPP:
         Class constructor.
 
         :return: None.
+        :rtype: None
         """
         self._state = SPPState.START
         self._rx_buffer = list()
 
     def encode(self, pkt_type, pl):
         """
-        Encodes a generic SPP packet from a given payload data.
+        Encodes a generic SPP packet from a given payload data. The SPP packets have the following fields:
 
         +----------------+-----------------+-------------------------------------------------------------+
         | **Name**       | **Size (Byte)** | **Notes**                                                   |
@@ -84,7 +94,14 @@ class PyNGHamSPP:
         | Payload        |               n | This is the actual payload specified by the payload type.   |
         +----------------+-----------------+-------------------------------------------------------------+
 
+        :param pkt_type: The SPP packet type (SPPType.RX.value, SPPType.TX.value, SPPType.LOCAL.value or SPPType.CMD.value).
+        :type pkt_type: int
+
+        :param pl: The payload of the desired SPP packet.
+        :type pl: list[int]
+
         :return: The encoded SPP packet.
+        :rtype: list[int]
         """
         if isinstance(pl, str):
             pl = [ord(x) for x in pl]
@@ -130,15 +147,31 @@ class PyNGHamSPP:
         +------------------------------+----------+------------------------------------------------------------+
         | RSSI                         |        1 | Same as above.                                             |
         +------------------------------+----------+------------------------------------------------------------+
-        | Symbol errors                |        1 | Number of corrected Reed Solomon symbols.                  |
+        | Symbol errors                |        1 | Number of corrected Reed-Solomon symbols.                  |
         +------------------------------+----------+------------------------------------------------------------+
         | Flags                        |        1 | Bit 0: NGHam extension enabled. If this bit is set, the    |
         |                              |          | data field is a valid NGHam extension packet.              |
         +------------------------------+----------+------------------------------------------------------------+
-        | Data                         |      n-8 | BReceived data.                                            |
+        | Data                         |      n-8 | Received data.                                             |
         +------------------------------+----------+------------------------------------------------------------+
 
+        :param noise_floor: Noise floor value (see table above).
+        :type noise_floor: int
+
+        :param rssi: RSSI value (see table above).
+        :type rssi: int
+
+        :param symbol_errors: The number of corrected Reed-Solomon symbols.
+        :type symbol_errors: int
+
+        :param flags: RX packet flags (see table above).
+        :type flags: int
+
+        :param data: The data of the packet.
+        :type data: list[int]
+
         :return: The encoded SPP RX packet.
+        :rtype: list[int]
         """
         pl = list()
 
@@ -169,7 +202,14 @@ class PyNGHamSPP:
         | Data     |           n-1 B | Data to be transmitted.              |
         +----------+-----------------+--------------------------------------+
 
+        :param flags: TX paket flags (see table above).
+        :type flags: int
+
+        :param data: The data of the packet.
+        :type data: list[int]
+
         :return: The encoded SPP TX packet.
+        :rtype: list[int]
         """
         return self.encode(SPPType.TX.value, [flags] + data)
 
@@ -187,7 +227,11 @@ class PyNGHamSPP:
         | Command  |             n B | Non-terminated command, 144800000”. |
         +----------+-----------------+-------------------------------------+
 
+        :param cmd: A list with command content of the packet.
+        :type cmd: int
+
         :return: The encoded SPP command packet.
+        :rtype: list[int]
         """
         return self.encode(SPPType.CMD.value, cmd)
 
@@ -195,8 +239,7 @@ class PyNGHamSPP:
         """
         Encodes a local packet.
 
-        Packet generated by the radio (not received over the air). For example a status report. The table
-below describes what is put into the payload of the general packet format.
+        Packet generated by the radio (not received over the air). For example a status report. The table below describes what is put into the payload of the general packet format.
 
         +----------+-----------------+--------------------------------------+
         | **Name** | **Size (Byte)** | **Notes**                            |
@@ -206,7 +249,14 @@ below describes what is put into the payload of the general packet format.
         | Data     |           n-1 B | Data to be transmitted.              |
         +----------+-----------------+--------------------------------------+
 
+        :param flags: Local packet flags (see table above).
+        :type flags: int
+
+        :param data: The data of the local packet.
+        :type data: list[int]
+
         :return: The encoded SPP local packet.
+        :rtype: list[int]
         """
         return self.encode(SPPType.LOCAL.value, [flags] + data)
 
@@ -214,9 +264,11 @@ below describes what is put into the payload of the general packet format.
         """
         Decodes an SPP packet.
 
-        :param pkt: is the SPP packet to decode (list of integers).
+        :param pkt: is the SPP packet to decode.
+        :type ptk: list[int]
 
         :return: The decoded packet as a dictionary.
+        :rtype: dict
         """
         pkt = list(pkt)     # Ensure that the input is a list of ints
         for byte in pkt:
@@ -231,8 +283,10 @@ below describes what is put into the payload of the general packet format.
         Decodes a single byte from a SPP packet.
 
         :param c: is the byte from a SPP packet to decode.
+        :type c: int
 
         :return: An empty dictionary while the decoding is not done yet, and a dictionay with the decoded data when the decoding is ready.
+        :rtype: dict
         """
         if self._state == SPPState.START:
             if c == _PYNGHAM_SPP_START:
