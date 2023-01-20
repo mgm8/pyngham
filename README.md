@@ -41,8 +41,9 @@ Contributing instructions are also available [here](https://github.com/mgm8/pyng
 
 ### Dependencies
 
-* [Sphinx](https://pypi.org/project/Sphinx/)
-* [sphinx-rtd-theme](https://pypi.org/project/sphinx-rtd-theme/)
+* [Sphinx](https://pypi.org/project/Sphinx/) - v6.1.3
+* [sphinx-rtd-theme](https://pypi.org/project/sphinx-rtd-theme/) - v1.1.1
+* [crc](https://pypi.org/project/crc/) - v3.0.0
 
 ### Building the Documentation
 
