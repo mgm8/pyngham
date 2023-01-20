@@ -41,7 +41,7 @@ This library is already being used in the design of satellites by SpaceLab, as a
 
 # NGHam Protocol
 
-The NGHam (Next Generation Ham Radio) protocol is a link protocol partly inspired by AX.25 [@ax25], with the intention to be used in ham radio packet communications, but using a FEC algorithm on a well-defined packet structure.
+The NGHam (Next Generation Ham Radio) protocol is a link protocol partly inspired by AX.25 [@ax25], with the intention to be used in Ham radio packet communications, but using a FEC algorithm on a well-defined packet structure.
 
 For the FEC algorithm, the Reed-Solomon code (RS) is employed [@reed1960]. Figure \ref{fig:ngham-pkt} presents a diagram with the fields of a NGHam packet.
 
@@ -77,7 +77,7 @@ The code block consists of two types of fields: packet data and parity data. The
 
 ## Scrambling
 
-Before transmitting a packet, the RS code block is scrambled by making a byte `xor` operation with a pre-generated table based on the polynomial $x^{8} + x^{7} + x^{5} + x^{3} + 1$ (defined in the CCSDS 131.0-B-4 standard, section 10.4.1 [@ccsds]).
+Before transmitting a packet, the RS code block is scrambled by making a logical `xor` operation with a pre-generated table based on the polynomial $x^{8} + x^{7} + x^{5} + x^{3} + 1$ (defined in the CCSDS 131.0-B-4 standard, section 10.4.1 [@ccsds]).
 
 When the receiver receives a packet, it also performs the same operation to descramble the RS code block, ultimately retrieving the original content of the RS part of the packet. By scrambling the packets using the bit transition, long sequences of ones or zeros are mitigated (section 8.3 of [@ccsds]).
 
