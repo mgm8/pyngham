@@ -41,7 +41,7 @@ copyright = '2023, Gabriel Mariano Marcelino - PU5GMA'
 author = 'Gabriel Mariano Marcelino'
 
 # The full version, including alpha/beta/rc tags
-release = "1.1"
+release = "1.1.1"
 
 
 # -- General configuration ---------------------------------------------------

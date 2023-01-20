@@ -1,7 +1,7 @@
 #
 # version.py
 # 
-# Copyright (C) 2022, Gabriel Mariano Marcelino - PU5GMA <gabriel.mm8@gmail.com>
+# Copyright (C) 2023, Gabriel Mariano Marcelino - PU5GMA <gabriel.mm8@gmail.com>
 # 
 # This file is part of PyNGHam library.
 # 
@@ -22,10 +22,10 @@
 
 
 __author__      = "Gabriel Mariano Marcelino - PU5GMA"
-__copyright__   = "Copyright (C) 2022, Gabriel Mariano Marcelino"
+__copyright__   = "Copyright (C) 2023, Gabriel Mariano Marcelino"
 __credits__     = ["Gabriel Mariano Marcelino - PU5GMA"]
 __license__     = "LGPLv3"
-__version__     = "1.1.0"
+__version__     = "1.1.1"
 __maintainer__  = "Gabriel Mariano Marcelino - PU5GMA"
 __email__       = "gabriel.mm8@gmail.com"
 __status__      = "Production"
