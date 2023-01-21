@@ -13,6 +13,13 @@
     <img src="https://img.shields.io/github/actions/workflow/status/mgm8/pyngham/test.yml?style=for-the-badge">
 </a>
 
+<a href="https://doi.org/10.5281/zenodo.7555428">
+    <img src="https://img.shields.io/badge/DOI-10.5281%2Fzenodo.7555428-blue?style=for-the-badge">
+</a>
+<a href="https://doi.org/10.21105/joss.04915">
+    <img src="https://img.shields.io/badge/JOSS-10.21105%2Fjoss.04915-brightgreen?style=for-the-badge">
+</a>
+
 ## Overview
 
 The PyNGHam library is a Python version of the original NGHam protocol library written in C by Jon Petter Skagmo (LA3JPA).
