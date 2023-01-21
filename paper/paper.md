@@ -24,18 +24,18 @@ The PyNGHam library is a Python implementation of the original NGHam protocol li
 
 # Statement of Need
 
-The NGHam protocol was originally developed in the context of a CubeSat development at the Norwegian University of Science and Technology (NTNU) [@lofaldi2016]. It was later used by the Space Technology Research Laboratory (SpaceLab) team, from *Universidade Federal de Santa Catarina* (Brazil), on the FloripaSat-1 CubeSat, and is being used by all satellites of the group so far. A list of known satellites that used or plan to use the NGHam protocol is presented below:
+The NGHam protocol was originally developed in the context of a CubeSat development at the Norwegian University of Science and Technology (NTNU) [@lofaldi2016]. It was later used by the Space Technology Research Laboratory (SpaceLab) team, from Universidade Federal de Santa Catarina (Brazil), on the FloripaSat-1 CubeSat, and is being used by all satellites of the group so far. The known satellites that have used or plan to use the NGHam protocol are:
 
 * **FloripaSat-1** [@marcelino2020]
-* **GOLDS-UFSC (a.k.a. FloripaSat-2)** [@golds-ufsc]
+* **GOLDS-UFSC** (a.k.a. **FloripaSat-2**) [@golds-ufsc]
 * **Catarina-A1** (Catarina Constellation) [@seman2022]
 * **PION-BR1** [@pion-br1]
 * **Aldebaran-1**
 * **NUTS-1** [@lofaldi2016]
 
-The top three satellites in the list given above are satellites developed (or in development) by the same research group: the SpaceLab, where this library was developed.
+The first three satellites in the list are satellites developed (or in development) by the same research group, the SpaceLab, where this library was developed.
 
-From the knowledge of the author, there is not a Python implementation of the protocol in the literature. An implementation with a high-level language facilitates the development of user applications to communicate with objects in orbit. The intention is to make PyNGHam usable in the end-user applications, like satellite decoders used in real satellite missions. It is an alternative to the GNU Radio [@gnu-radio] blocks such as the gr-nuts [@gr-nuts], but independent from the GNU Radio ecosystem. It is also useful as a simulation or research/education tool that can be used in simple Python scripts.
+From the knowledge of the author, there is no Python implementation of the protocol in the literature. An implementation in a high-level language facilitates the development of user applications to communicate with objects in orbit. The intention is to make PyNGHam usable in end-user applications, like satellite decoders used in real satellite missions. It is an alternative to the GNU Radio [@gnu-radio] blocks such as gr-nuts [@gr-nuts], but independent from the GNU Radio ecosystem. It is also useful as a simulation or research/education tool that can be used in simple Python scripts.
 
 This library is already being used in the design of satellites by SpaceLab, as a part of the ground station software [@spacelab-decoder; @spacelab-transmitter] responsible for the uplink of telecommands and downlink of telemetry/payload data.
 
@@ -77,9 +77,9 @@ The code block consists of two types of fields: packet data and parity data. The
 
 ## Scrambling
 
-Before transmitting a packet, the RS code block is scrambled by making a logical `xor` operation with a pre-generated table based on the polynomial $x^{8} + x^{7} + x^{5} + x^{3} + 1$ (defined in the CCSDS 131.0-B-4 standard, section 10.4.1 [@ccsds]).
+Before transmitting a packet, the RS code block is scrambled by making a logical `xor` operation with a pre-generated table based on the polynomial $x^{8} + x^{7} + x^{5} + x^{3} + 1$ (defined in the CCSDS 131.0-B-4 standard, Section 10.4.1 [@ccsds]).
 
-When the receiver receives a packet, it also performs the same operation to descramble the RS code block, ultimately retrieving the original content of the RS part of the packet. By scrambling the packets using the bit transition, long sequences of ones or zeros are mitigated (section 8.3 of [@ccsds]).
+When the receiver receives a packet, it also performs the same operation to descramble the RS code block, ultimately retrieving the original content of the RS part of the packet. By scrambling the packets using the bit transition, long sequences of ones or zeros are mitigated (Section 8.3 of @ccsds).
 
 ## Serial Protocol
 
@@ -91,12 +91,12 @@ The payload of an NGHam packet can also contain subpackets, called extension pac
 
 # The Python Implementation
 
-This Python implementation of the protocol was partly inspired by the structure of the original implementation in C, but with the main difference being the use of an object-oriented language. This way, a class for each of the three main possible uses of the protocol is available: the normal NGHam packets, the serial port packets, and the use of the extensions. All of these three classes are implemented with a similar approach, using at least two methods for packet encoding and decoding. The encoding and decoding processes generate a list of integers, representing the bytes of an NGHam packet/payload data. More information about the PyNGHam library can be found in the documentation [https://mgm8.github.io/pyngham/](https://mgm8.github.io/pyngham/).
+This Python implementation of the protocol was partly inspired by the structure of the original implementation in C, but with the main difference being the use of an object-oriented language. This way, a class for each of the three main possible uses of the protocol is available: the normal NGHam packets, the serial port packets, and the use of the extensions. All of these three classes are implemented with a similar approach, using at least two methods for packet encoding and decoding. The encoding and decoding processes generate a list of integers, representing the bytes of an NGHam packet/payload data. More information about the PyNGHam library can be found in the documentation: [https://mgm8.github.io/pyngham/](https://mgm8.github.io/pyngham/).
 
 
 # Conclusion
 
-The objective of this library is to offer an alternative to the original NGHam library, purely written in Python. In this manner, such package can easily be used to carry out simulations, develop packet encoding and decoding tools, introduce telecommunication concepts to students, among others. It is useful especially for satellite communications, space experiments, and for general use in the amateur radio community.
+The objective of this library is to offer an alternative to the original NGHam library, purely written in Python. In this manner, such a package can easily be used to carry out simulations, develop packet encoding and decoding tools, and introduce telecommunication concepts to students, among others. It is useful especially for satellite communications, space experiments, and for general use in the amateur radio community.
 
 # Acknowledgements
 
