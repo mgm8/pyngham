@@ -223,7 +223,7 @@ class RS:
 
         if (not syn_error):
             # if syndrome is zero, data[] is a codeword and there are no errors to correct. So return data[] unmodified
-            count = 0;
+            count = 0
         else:
             _lambda[0] = 1
 
@@ -235,7 +235,7 @@ class RS:
                     for j in range(i + 1, 0, -1):
                         tmp = self._index_of[_lambda[j - 1]]
                         if (tmp != self._nn):
-                            _lambda[j] = _lambda[j] ^ seld_.alpha_to[self._modnn(u + tmp)]
+                            _lambda[j] = _lambda[j] ^ self._alpha_to[self._modnn(u + tmp)]
             for i in range(self._nroots + 1):
                 b[i] = self._index_of[_lambda[i]]
 
