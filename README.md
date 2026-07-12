@@ -1,4 +1,6 @@
-# PyNGHam
+<h1 align="center">
+    <a href="https://mgm8.github.io/pyngham/"><img src="docs/logo.png" alt="PyNGHam" width="100%"></a>
+</h1>
 
 <a href="https://pypi.org/project/pyngham/">
     <img src="https://img.shields.io/pypi/v/pyngham?style=for-the-badge">

@@ -3,9 +3,9 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-=============================
-PyNGHam Library Documentation
-=============================
+.. figure:: logo.png
+   :width: 100%
+   :align: center
 
 The PyNGHam library is a Python version of the original NGHam protocol library written in C by Jon Petter Skagmo (LA3JPA).
 
